@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
+
+import 'package:collection/equality.dart';
 import 'package:pascaldart/src/common/Util.dart';
 
 /// A BC value as defined in PascalCoin. In essence its a wrapper for
@@ -69,8 +71,8 @@ class BC {
 
     if (hex.isNotEmpty) {
       for (int i = 0; i < hex.length; i++) {
-        if (!HEX_ALPHABET.contains(hex[i])) {
-          throw Exception('Invalid hex 3');
+        if (!HEX_ALPHABET.contains(hex[i].toLowerCase())) {
+          throw Exception('Invalid hex $hex');
         }
       }
     }
@@ -113,10 +115,9 @@ class BC {
   /// Gets the BC as a string.
   ///
   /// @returns {string}
-  /// // TODO: UTF8?
   @override
   String toString() {
-    return buffer.toString();
+    return utf8.decode(buffer.asUint8List());
   }
 
   /// Gets the BC as hex.
@@ -162,9 +163,11 @@ class BC {
   ///
   // @returns {BC}
   BC switchEndian() {
-    return BC.fromHex(
-      RegExp(r'/../g').allMatches(this.toHex()).toList().reversed.join(''),
-    );
+    String ret = "";
+    RegExp(r'..').allMatches(this.toHex()).forEach((match) {
+      ret = match.group(0) + ret;
+    });
+    return BC.fromHex(ret);
   }
 
   /// Switches the endianness of the BC.
@@ -185,10 +188,10 @@ class BC {
   /// @returns {BC}
   BC slice(int start, { int end }) {
     if (end == null) {
-      return BC(buffer.asUint8List(start));
+      return BC(buffer.asUint8List().sublist(start));
     }
 
-    return BC(buffer.asUint8List(start, end));
+    return BC(buffer.asUint8List().sublist(start, end));
   }
 
   /// Concatenates one or more BC instances and returns a new instance.
@@ -221,13 +224,8 @@ class BC {
     return BC.concat([BC.from(bytes), this]);
   }
 
-  /// Gets a value indicating the current bc equals the given bc.
-  ///
-  /// @param {BC|Buffer|Uint8Array|String} bc
-  /// @returns {boolean}
-  bool equals(dynamic bc) {
-    return BC.from(bc).buffer == buffer;
-  }
+  /// Override equals operator
+  bool operator == (bc) => IterableEquality().equals(bc.buffer.asUint8List(), buffer.asUint8List());
 
   /// Reads an 8 bit integer value from the bc from the given offset.
   ///
