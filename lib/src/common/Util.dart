@@ -22,4 +22,9 @@ class Util {
   static String binaryToHex(String binary) {
     return BigInt.parse(binary, radix: 2).toRadixString(16).toUpperCase();
   }
+
+  /// https://github.com/MauroJr/escape-regex/blob/master/index.js
+  static String escapeRegex(string) {
+    return ('' + string).replaceAllMapped(RegExp(r'([?!${}*:()|=^[\]\/\\.+])'), (match) => '\\${match.group(0)}');
+  }
 }
