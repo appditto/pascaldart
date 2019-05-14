@@ -26,7 +26,7 @@ void main() {
 
     test('Encode Base58', () {
       testData.forEach((v) {
-        expect(Base58.encode(BC.fromHex(v[0]).buffer.asUint8List()), v[1]);
+        expect(Base58.encode(Util.hexToBytes(v[0])), v[1]);
       });
     });
 
