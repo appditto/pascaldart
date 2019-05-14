@@ -1,5 +1,3 @@
-import 'package:decimal/decimal.dart';
-
 /// Pascal currency math/currency functions
 class Currency {
   BigInt pasc; // Amount
