@@ -8,6 +8,7 @@ export 'src/common/BC.dart';
 export 'src/common/Sha.dart';
 export 'src/common/Util.dart';
 export 'src/common/types/AccountName.dart';
+export 'src/common/types/AccountNumber.dart';
 export 'src/common/types/Currency.dart';
 
 // TODO: Export any libraries intended for clients of this package.
