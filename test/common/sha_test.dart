@@ -1,4 +1,4 @@
-import 'package:pascaldart/pascaldart.dart';
+import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -48,14 +48,14 @@ void main() {
     test('SHA256 Test', () {
       String result;
       sha256data.forEach((hash) {
-        result = Sha.sha256([BC.fromString(hash['input'])]).toHex();
+        result = Util.byteToHex(Sha.sha256([Util.stringToBytesUtf8(hash['input'])]));
         expect(result, hash['expected']);
       });
     });
     test('SHA512 Test', () {
       String result;
       sha512data.forEach((hash) {
-        result = Sha.sha512([BC.fromString(hash['input'])]).toHex();
+        result = Util.byteToHex(Sha.sha512([Util.stringToBytesUtf8(hash['input'])]));
 
         expect(result, hash['expected']);
       });

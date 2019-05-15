@@ -2,35 +2,33 @@ import 'dart:typed_data';
 
 import 'package:pointycastle/pointycastle.dart';
 
-import 'package:pascaldart/pascaldart.dart';
-
 class Sha {
   /// Calculates the sha256 hash from the given buffers.
   ///
-  /// @param {List<BC>} buffers
-  /// @returns {BC}
-  static BC sha256(List<BC> buffers) {
+  /// @param {List<Uint8List>} byte arrays
+  /// @returns {Uint8List}
+  static Uint8List sha256(List<Uint8List> byteArrays) {
     Digest digest = Digest("SHA-256");
     Uint8List hashed = Uint8List(32);
-    buffers.forEach((bc) {
-      digest.update(bc.buffer.asUint8List(), 0, bc.buffer.asUint8List().length);
+    byteArrays.forEach((byteArray) {
+      digest.update(byteArray, 0, byteArray.lengthInBytes);
     });
     digest.doFinal(hashed, 0);
-    return BC(hashed);
+    return hashed;
   }
 
   /// Calculates the sha512 hash from the given buffers.
   ///
-  /// @param {List<BC>} buffers
-  /// @returns {BC}
-  static BC sha512(List<BC> buffers) {
+  /// @param {List<Uint8List>} byte arrays
+  /// @returns {Uint8List}
+  static Uint8List sha512(List<Uint8List> byteArrays) {
     Digest digest = Digest("SHA-512");
     Uint8List hashed = Uint8List(64);
-    buffers.forEach((bc) {
-      digest.update(bc.buffer.asUint8List(), 0, bc.buffer.asUint8List().length);
+    byteArrays.forEach((byteArray) {
+      digest.update(byteArray, 0, byteArray.lengthInBytes);
     });
     digest.doFinal(hashed, 0);
 
-    return BC(hashed);
+    return hashed;
   }
 }

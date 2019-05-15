@@ -1,4 +1,4 @@
-
+import 'dart:convert';
 import 'dart:typed_data' show Uint8List;
 import 'package:hex/hex.dart';
 
@@ -26,5 +26,38 @@ class Util {
   /// https://github.com/MauroJr/escape-regex/blob/master/index.js
   static String escapeRegex(string) {
     return ('' + string).replaceAllMapped(RegExp(r'([?!${}*:()|=^[\]\/\\.+])'), (match) => '\\${match.group(0)}');
+  }
+
+  /// Concatenates one or more byte arrays
+  ///
+  /// @param {List<Uint8List>} bytes
+  /// @returns {Uint8List}
+  static Uint8List concat(List<Uint8List> bytes) {
+    String hex = '';
+    bytes.forEach((v) {
+      hex += Util.byteToHex(v);
+    });
+    return Util.hexToBytes(hex);
+  }
+
+  /// Get integer as byte array
+  static Uint8List intToBytes(int inNum) {
+    String hex = inNum.toRadixString(16);
+    return Util.hexToBytes(hex);
+  }
+
+  /// Get byte array as an integer
+  static int bytesToInt(Uint8List byteArray) {
+    return int.parse(Util.byteToHex(byteArray), radix: 16);
+  }
+
+  /// Convert string to byte array
+  static Uint8List stringToBytesUtf8(String str) {
+    return utf8.encode(str);
+  } 
+
+  /// Convert byte array to string utf-8
+  static String bytesToUtf8String(Uint8List bytes) {
+    return utf8.decode(bytes);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:pascaldart/pascaldart.dart';
+import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
 void main() {
