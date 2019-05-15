@@ -3,7 +3,7 @@ import 'package:pascaldart/pascaldart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('common.types.keys.Curves', () {
+  group('common.model.keys.Curves', () {
     test('can be created from a number', () {
       Curve c = Curve(714); // secp256k1
 

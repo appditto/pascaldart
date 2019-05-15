@@ -1,4 +1,4 @@
-import 'package:pascaldart/src/common/types/Currency.dart';
+import 'package:pascaldart/src/common/model/Currency.dart';
 
 /// Gets information about forks and features.
 class PascalCoinInfo {

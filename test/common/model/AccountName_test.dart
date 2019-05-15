@@ -3,7 +3,7 @@ import 'package:pascaldart/pascaldart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Common.Types.AccountName', () {
+  group('common.model.AccountName', () {
     test('can be initialized with a valid start pascal64 string', () {
       String startStr = r'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-+{}[]_:"|<>,.?/~';
       AccountName name = AccountName(startStr);

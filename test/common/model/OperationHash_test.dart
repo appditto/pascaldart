@@ -3,7 +3,7 @@ import 'package:pascaldart/pascaldart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('common.types.OperationHash', () {
+  group('common.model.OperationHash', () {
     test('can be created manually and returns correct initialization values', () {
       OperationHash oph = OperationHash(1, 2, 3, Util.hexToBytes(List.filled(20, 'AA').join()));
 

@@ -3,7 +3,7 @@ import 'package:pascaldart/pascaldart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('common.types.AccountNumber', () {
+  group('common.model.AccountNumber', () {
     test('can be created from a non-checksum pasa number', () {
       AccountNumber an = AccountNumber.fromInt(77);
 

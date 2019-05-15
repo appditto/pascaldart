@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/types/AccountNumber.dart';
+import 'package:pascaldart/src/common/model/AccountNumber.dart';
 
 /// Holds information about an operation hash.
 class OperationHash {

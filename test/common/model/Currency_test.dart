@@ -3,7 +3,7 @@ import 'package:pascaldart/pascaldart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Common.Types.Currency', () {
+  group('common.model.Currency', () {
     test('can be created from various types', () {
       Currency c = Currency('1');
       expect(c.toStringOpt(), '1');
