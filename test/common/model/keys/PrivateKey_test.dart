@@ -93,10 +93,10 @@ void main() {
     });
 
     test('cannot be created with wrong length values managed by the curve', () {
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(34, '00').join()), curve: Curve(714)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(50, '00').join()), curve: Curve(715)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(68, '00').join()), curve: Curve(716)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(38, '00').join()), curve: Curve(729)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(34, '00').join()), Curve(714)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(50, '00').join()), Curve(715)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(68, '00').join()), Curve(716)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(38, '00').join()), Curve(729)), throwsException);
     });
     test('returns key as ec', () {
       curve714.forEach((c) {

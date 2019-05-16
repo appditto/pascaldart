@@ -89,27 +89,6 @@ class Curve {
     return L_PRIVKEYS[this.id];
   }
 
-  /// Try to assume best curve for private key
-  static Curve guessCurveBasedOnPrivateKey(Uint8List key) {
-    L_PRIVKEYS.forEach((id, length) {
-      if (key.lengthInBytes <= length) {
-        return Curve(id);
-      }
-    });
-    return null;
-  }
-
-  /// Try to assume best curve for public key
-  static Curve guessCurveBasedOnPublicKey(int xOrYLength) {
-    XYL_PUBKEYS.forEach((id, xy) {
-      if (xOrYLength <= xy.y) {
-        return Curve(id);
-      }
-    });
-    return null;
-  }
-
-
   /// Gets a value indicating whether the key is supported for signing /
   ///generation etc.
   get supported {

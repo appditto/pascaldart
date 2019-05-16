@@ -11,16 +11,9 @@ class PublicKey {
   int yLength;
   Curve curve;
 
-  PublicKey(this.x, this.y, { this.curve }) {
+  PublicKey(this.x, this.y, this.curve) {
     this.xLength = x.lengthInBytes;
     this.yLength = y.lengthInBytes;
-    // Try to auto determine curve if not specified
-    if (this.curve == null) {
-      this.curve = Curve.guessCurveBasedOnPublicKey(this.xLength);
-      if (this.curve == null) {
-        throw Exception('Could not determine curve for public key');
-      }
-    }
     if (this.xLength > this.curve.xylPublicKey() || this.yLength > curve.xylPublicKey(getYLength: true)) {
       throw new Exception('Invalid x and/or y length for curve ${this.curve.name} - ' +
           'expected <= X${curve.xylPublicKey()}:Y${curve.xylPublicKey(getYLength: true)}, ' +

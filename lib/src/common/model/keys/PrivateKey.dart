@@ -7,14 +7,7 @@ class PrivateKey {
   Uint8List key;
   Curve curve;
 
-  PrivateKey(this.key, { this.curve }) {
-    // Try to assume curve based on length
-    if (this.curve == null) {
-      this.curve = Curve.guessCurveBasedOnPrivateKey(key);
-      if (this.curve == null) {
-        throw Exception('Could not determine curve for private key');
-      }
-    }
+  PrivateKey(this.key, this.curve) {
     if (this.key.lengthInBytes > this.curve.lPrivateKey()) {
       throw new Exception('Invalid private key length for ${this.curve.name} - expected <= ${this.key.lengthInBytes}, got ${this.key.length}');
     }
