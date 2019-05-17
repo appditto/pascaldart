@@ -4,7 +4,7 @@ import 'package:pascaldart/src/common/model/keys/Curves.dart';
 
 // Represents a PascalCoin private key
 class PrivateKey {
-  Uint16List key;
+  Uint8List key;
   Curve curve;
 
   PrivateKey(this.key, this.curve) {
@@ -13,7 +13,7 @@ class PrivateKey {
     }
   }
 
-  Uint16List ec() {
+  Uint8List ec() {
     return this.key;
   }
 }

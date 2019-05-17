@@ -95,15 +95,41 @@ void main() {
         }
       ];
     });
-
     test('can decode a pascalcoin private key', () {
       curve714.forEach((c) {
         PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
         expect(pk.curve.id, 714);
       });
+      curve715.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(pk.curve.id, 715);
+      });
+      curve716.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(pk.curve.id, 716);
+      });
+      curve729.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(pk.curve.id, 729);
+      });
     });
     test('can encode a pascalcoin private key', () {
       curve714.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(coder.encodeToHex(pk), c['enc_privkey']);
+        expect(Util.byteToHex(coder.encodeToBytes(pk)), c['enc_privkey']);
+      });
+      curve715.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(coder.encodeToHex(pk), c['enc_privkey']);
+        expect(Util.byteToHex(coder.encodeToBytes(pk)), c['enc_privkey']);
+      });
+      curve716.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(coder.encodeToHex(pk), c['enc_privkey']);
+        expect(Util.byteToHex(coder.encodeToBytes(pk)), c['enc_privkey']);
+      });
+      curve729.forEach((c) {
         PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
         expect(coder.encodeToHex(pk), c['enc_privkey']);
         expect(Util.byteToHex(coder.encodeToBytes(pk)), c['enc_privkey']);

@@ -28,10 +28,10 @@ final Map<int, XYPubKey> XYL_PUBKEYS = {
 };
 
 const Map<int, int> L_PRIVKEYS = {
-  714: 32,
-  715: 48,
-  716: 66,
-  729: 36
+  714: 34,
+  715: 50,
+  716: 68,
+  729: 38
 };
 
 const ID = Symbol('id');

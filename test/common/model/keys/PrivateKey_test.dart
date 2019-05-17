@@ -93,17 +93,15 @@ void main() {
     });
 
     test('cannot be created with wrong length values managed by the curve', () {
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(34, '00').join()).buffer.asUint16List(), Curve(714)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(50, '00').join()).buffer.asUint16List(), Curve(715)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(68, '00').join()).buffer.asUint16List(), Curve(716)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(38, '00').join()).buffer.asUint16List(), Curve(729)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(35, '00').join()), Curve(714)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(51, '00').join()), Curve(715)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(69, '00').join()), Curve(716)), throwsException);
+      expect(() => PrivateKey(Util.hexToBytes(List.filled(39, '00').join()), Curve(729)), throwsException);
     });
     test('returns key as ec', () {
       curve714.forEach((c) {
-        c.forEach((k, v) {
-          // TODO pk = let pk = PrivateKeyCoder().decodeFromBytes(BC.fromHex(keyInfo.enc_privkey));
-          //expect(pk.ec.toHex()).to.be.equal(pk.key.toHex());
-        });
+        PrivateKey pkey = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(Util.byteToHex(pkey.key), Util.byteToHex(pkey.ec()));
       });
     });
   });

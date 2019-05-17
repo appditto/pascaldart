@@ -7,7 +7,7 @@ class CurveCoder {
 
   /// Decode curve from given bytes
   Curve decodeFromBytes(Uint8List bytes) {
-    Uint16List bytesU16 = Uint16List.fromList(bytes);
+    Uint16List bytesU16 = Uint16List.fromList([bytes[0], bytes[1]]);
     ByteData bdView = ByteData.view(bytesU16.buffer);
     return Curve(bdView.getInt16(0, Endian.little) + bdView.getInt16(1, Endian.little));
   }
