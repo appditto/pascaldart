@@ -11,3 +11,4 @@ export 'src/common/model/keys/PrivateKey.dart';
 export 'src/common/model/keys/PublicKey.dart';
 export 'src/common/coding/pascal/keys/CurveCoder.dart';
 export 'src/common/coding/pascal/keys/PrivateKeyCoder.dart';
+export 'src/common/coding/pascal/keys/PublicKeyCoder.dart';

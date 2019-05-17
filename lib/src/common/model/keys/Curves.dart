@@ -20,10 +20,10 @@ class XYPubKey {
   int get hashCode => hash2(x.hashCode, x.hashCode);
 }
 final Map<int, XYPubKey> XYL_PUBKEYS = {
-  714: XYPubKey(32, 32),
-  715: XYPubKey(48, 48),
-  716: XYPubKey(66, 66),
-  729: XYPubKey(36, 36),
+  714: XYPubKey(34, 34),
+  715: XYPubKey(50, 50),
+  716: XYPubKey(68, 68),
+  729: XYPubKey(38, 38),
   0: XYPubKey(0, 0),
 };
 

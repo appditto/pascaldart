@@ -1,11 +1,8 @@
-
-import 'dart:typed_data';
-
 import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('common.coding.pascal.keys.PrivatKeyCoder', () {
+  group('common.coding.pascal.keys.PrivateKeyCoder', () {
     PrivateKeyCoder coder;
     List<Map<String, String>> curve714;
     List<Map<String, String>> curve715;
