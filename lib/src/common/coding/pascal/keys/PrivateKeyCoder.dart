@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:pascaldart/src/common/coding/pascal/keys/CurveCoder.dart';
 import 'package:pascaldart/src/common/model/keys/Curves.dart';
@@ -15,12 +16,13 @@ class PrivateKeyCoder {
 
   /// Decode private key from given bytes
   PrivateKey decodeFromBytes(Uint8List bytes) {
-    int offset = 0;
+    int sizeEncoded;
     Curve curve = curveCoder.decodeFromBytes(bytes);
-    offset += Util.intToBytes(curve.id).lengthInBytes;
-    Uint16List bytesU16 = Uint16List.fromList(bytes);
-    bytesU16 = bytesU16.sublist(offset + 2);
-    return PrivateKey(bytesU16, curve);
+    Uint8List key = bytes.sublist(2, bytes.length);
+    ByteData bdView = ByteData.view(key.buffer);
+    sizeEncoded = bdView.getInt16(0, Endian.little);// + bdView.getInt16(1, Endian.little);
+    Uint8List pkDec = bytes.sublist(2, sizeEncoded + 2);
+    return PrivateKey(pkDec.buffer.asUint16List(), curve);
   }
 
   /// Encode curve to bytes
