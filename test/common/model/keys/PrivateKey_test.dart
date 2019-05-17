@@ -103,6 +103,18 @@ void main() {
         PrivateKey pkey = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
         expect(Util.byteToHex(pkey.key), Util.byteToHex(pkey.ec()));
       });
+      curve715.forEach((c) {
+        PrivateKey pkey = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(Util.byteToHex(pkey.key), Util.byteToHex(pkey.ec()));
+      });
+      curve716.forEach((c) {
+        PrivateKey pkey = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(Util.byteToHex(pkey.key), Util.byteToHex(pkey.ec()));
+      });
+      curve729.forEach((c) {
+        PrivateKey pkey = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(Util.byteToHex(pkey.key), Util.byteToHex(pkey.ec()));
+      });            
     });
   });
 }
