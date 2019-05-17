@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/bc.dart';
+import 'package:pascaldart/src/common/BC.dart';
 import 'package:test/test.dart';
 
 void main() {

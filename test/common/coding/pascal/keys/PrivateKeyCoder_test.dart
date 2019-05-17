@@ -1,15 +1,19 @@
 
+import 'dart:typed_data';
+
 import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('common.model.keys.PrivateKey', () {
+  group('common.coding.pascal.keys.PrivatKeyCoder', () {
+    PrivateKeyCoder coder;
     List<Map<String, String>> curve714;
     List<Map<String, String>> curve715;
     List<Map<String, String>> curve716;
     List<Map<String, String>> curve729;
 
     setUp(() {
+      coder = PrivateKeyCoder();
       curve714 = [
         {
           "encrypted": "53616C7465645F5FED4A37ECAD2BF13FF24A66DDA299A57632520447B28B9E642C4B2A301CACC217FBD7713F6282C20CCCFDC5FFD2AB93A8E48D8C2C81704D36",
@@ -92,18 +96,17 @@ void main() {
       ];
     });
 
-    test('cannot be created with wrong length values managed by the curve', () {
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(34, '00').join()).buffer.asUint16List(), Curve(714)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(50, '00').join()).buffer.asUint16List(), Curve(715)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(68, '00').join()).buffer.asUint16List(), Curve(716)), throwsException);
-      expect(() => PrivateKey(Util.hexToBytes(List.filled(38, '00').join()).buffer.asUint16List(), Curve(729)), throwsException);
-    });
-    test('returns key as ec', () {
+    test('can decode a pascalcoin private key', () {
       curve714.forEach((c) {
-        c.forEach((k, v) {
-          // TODO pk = let pk = PrivateKeyCoder().decodeFromBytes(BC.fromHex(keyInfo.enc_privkey));
-          //expect(pk.ec.toHex()).to.be.equal(pk.key.toHex());
-        });
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(pk.curve.id, 714);
+      });
+    });
+    test('can encode a pascalcoin private key', () {
+      curve714.forEach((c) {
+        PrivateKey pk = coder.decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+        expect(coder.encodeToHex(pk), c['enc_privkey']);
+        expect(Util.byteToHex(coder.encodeToBytes(pk)), c['enc_privkey']);
       });
     });
   });
