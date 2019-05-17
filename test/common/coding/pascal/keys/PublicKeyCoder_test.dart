@@ -130,21 +130,33 @@ void main() {
         expect(key.curve.id, c['ec_nid']);
       });
     });
-/*
     test('can decode a pascalcoin pubkey from base58', () {
-      curves.forEach((c) => {
-        const keys = JSON.parse(fs.readFileSync(path.join(__dirname, '/../../../fixtures/public-keys/curve_' + c + '.json')));
-
-        keys.forEach((keyInfo) => {
-          let key = new PublicKeyCoder().decodeFromBase58(keyInfo.b58_pubkey);
-
-          expect(key.x.toHex()).to.be.equal(keyInfo.x);
-          expect(key.y.toHex()).to.be.equal(keyInfo.y);
-          expect(key.curve.id).to.be.equal(keyInfo.ec_nid);
-        });
+      curve714.forEach((c) {
+        PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
+        expect(Util.byteToHex(key.x), c['x']);
+        expect(Util.byteToHex(key.y), c['y']);
+        expect(key.curve.id, c['ec_nid']);
+      });
+      curve715.forEach((c) {
+        PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
+        expect(Util.byteToHex(key.x), c['x']);
+        expect(Util.byteToHex(key.y), c['y']);
+        expect(key.curve.id, c['ec_nid']);
+      });
+      curve716.forEach((c) {
+        PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
+        expect(Util.byteToHex(key.x), c['x']);
+        expect(Util.byteToHex(key.y), c['y']);
+        expect(key.curve.id, c['ec_nid']);
+      });
+      curve729.forEach((c) {
+        PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
+        expect(Util.byteToHex(key.x), c['x']);
+        expect(Util.byteToHex(key.y), c['y']);
+        expect(key.curve.id, c['ec_nid']);
       });
     });
-
+/*
     test('can encode a pascalcoin pubkey', () {
       curves.forEach((c) => {
         const keys = JSON.parse(fs.readFileSync(path.join(__dirname, '/../../../fixtures/public-keys/curve_' + c + '.json')));

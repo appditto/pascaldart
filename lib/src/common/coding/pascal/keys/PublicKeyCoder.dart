@@ -47,6 +47,6 @@ class PublicKeyCoder {
   PublicKey decodeFromBase58(String base58) {
     Uint8List decoded = Base58.decode(base58);
 
-    return this.decodeFromBytes(decoded.sublist(1, -4));
+    return this.decodeFromBytes(decoded.sublist(1, decoded.lengthInBytes - 4));
   }
 }
