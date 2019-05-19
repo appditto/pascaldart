@@ -60,4 +60,13 @@ class Util {
   static String bytesToUtf8String(Uint8List bytes) {
     return utf8.decode(bytes);
   }
+
+  /// Switch endianness of a hex string
+  static String switchEndian(String hexString) {
+    String ret = "";
+    RegExp(r'..').allMatches(hexString).forEach((match) {
+      ret = match.group(0) + ret;
+    });
+    return ret;
+  }
 }

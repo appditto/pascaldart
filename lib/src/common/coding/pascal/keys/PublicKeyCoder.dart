@@ -16,12 +16,17 @@ class PublicKeyCoder {
 
   /// Decode public key from given bytes
   PublicKey decodeFromBytes(Uint8List bytes) {
+    // First 2 bytes are curve
     Curve curve = curveCoder.decodeFromBytes(bytes);
-    int bl = bytes.lengthInBytes;
-    int xa = bl % 2 == 0 ? 1 : 2;
-    int ya = bl %2 == 0 ? 3 : 4;
-    Uint8List x = bytes.sublist(4, bl ~/ 2 + xa);
-    Uint8List y = bytes.sublist(bl ~/2 + ya, bytes.length);
+    // Next 2 bytes indicate length of X
+    int xPos = 4;
+    int xl = int.parse(Util.switchEndian(Util.byteToHex(bytes.sublist(2, 4))), radix: 16);
+    // Next 2 bytes after xLength + xPos indicate y length
+    int yl = int.parse(Util.switchEndian(Util.byteToHex(bytes.sublist(xPos + xl, xPos + xl + 2))), radix: 16);
+    int yPos = xPos + xl + 2;
+    // Read x and y
+    Uint8List x = bytes.sublist(xPos, xPos+xl);
+    Uint8List y = bytes.sublist(yPos, yPos+yl);
     return PublicKey(x, y, curve);
   }
   /// Encode public key to bytes
