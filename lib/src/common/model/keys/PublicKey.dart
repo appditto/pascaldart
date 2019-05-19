@@ -29,6 +29,14 @@ class PublicKey {
     this.curve = Curve(0);
   }
 
+  String xlHex() {
+    return Util.byteToHex(Util.intToBytes(xLength)).padRight(4, '0');
+  }
+
+  String ylHex() {
+    return Util.byteToHex(Util.intToBytes(yLength)).padRight(4, '0');
+  }
+
   /// Gets the ec key.
   Uint8List ec() {
     return Util.concat([this.x, this.y]);

@@ -156,30 +156,49 @@ void main() {
         expect(key.curve.id, c['ec_nid']);
       });
     });
-/*
     test('can encode a pascalcoin pubkey', () {
-      curves.forEach((c) => {
-        const keys = JSON.parse(fs.readFileSync(path.join(__dirname, '/../../../fixtures/public-keys/curve_' + c + '.json')));
+      curve714.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
 
-        keys.forEach((keyInfo) => {
-          let key = new PublicKeyCoder().decodeFromBytes(BC.fromHex(keyInfo.enc_pubkey));
+          expect(Util.byteToHex(coder.encodeToBytes(key)), c['enc_pubkey']);
+      });
+      curve715.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
 
-          expect(new PublicKeyCoder().encodeToBytes(key).toHex()).to.be.equal(keyInfo.enc_pubkey);
-        });
+          expect(Util.byteToHex(coder.encodeToBytes(key)), c['enc_pubkey']);
+      });
+      curve716.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
+
+          expect(Util.byteToHex(coder.encodeToBytes(key)), c['enc_pubkey']);
+      });
+      curve729.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
+
+          expect(Util.byteToHex(coder.encodeToBytes(key)), c['enc_pubkey']);
       });
     });
-
     test('can encode a pascalcoin pubkey to base58', () {
-      curves.forEach((c) => {
-        const keys = JSON.parse(fs.readFileSync(path.join(__dirname, '/../../../fixtures/public-keys/curve_' + c + '.json')));
+      curve714.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
 
-        keys.forEach((keyInfo) => {
-          let key = new PublicKeyCoder().decodeFromBytes(BC.fromHex(keyInfo.enc_pubkey));
+          expect(coder.encodeToBase58(key), c['b58_pubkey']);
+      });
+      curve715.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
 
-          expect(new PublicKeyCoder().encodeToBase58(key)).to.be.equal(keyInfo.b58_pubkey);
-        });
+          expect(coder.encodeToBase58(key), c['b58_pubkey']);
+      });
+      curve716.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
+
+          expect(coder.encodeToBase58(key), c['b58_pubkey']);
+      });
+      curve729.forEach((c) {
+          PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
+
+          expect(coder.encodeToBase58(key), c['b58_pubkey']);
       });
     });
-    */
   });
 }
