@@ -16,7 +16,7 @@ class PrivateKeyCoder {
   /// Decode private key from given bytes
   PrivateKey decodeFromBytes(Uint8List bytes) {
     Curve curve = curveCoder.decodeFromBytes(bytes);
-    Uint8List pkDec = bytes.sublist(2, bytes.length);
+    Uint8List pkDec = bytes.sublist(4, bytes.length);
     return PrivateKey(pkDec, curve);
   }
 
@@ -27,7 +27,8 @@ class PrivateKeyCoder {
 
   String encodeToHex(PrivateKey privKey) {
     Uint16List curveBytes = curveCoder.encodeToBytes(privKey.curve.id);
-    String hex = Util.byteToHex(curveBytes.buffer.asUint8List()) + Util.byteToHex(privKey.key);
+    String length = Util.byteToHex(Util.intToBytes(privKey.key.lengthInBytes)).padRight(4, '0');
+    String hex = Util.byteToHex(curveBytes.buffer.asUint8List()) + length + Util.byteToHex(privKey.key);
     return hex;
   }
 }
