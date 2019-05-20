@@ -4,7 +4,7 @@ import 'package:hex/hex.dart';
 
 class Util {
   /// Converts a Uint8List to a hex string
-  static String byteToHex(Uint8List bytes) {
+  static String byteToHex(List<int> bytes) {
     return HEX.encode(bytes).toUpperCase();
   }  
 
@@ -47,7 +47,7 @@ class Util {
   }
 
   /// Get byte array as an integer
-  static int bytesToInt(Uint8List byteArray) {
+  static int bytesToInt(List<int> byteArray) {
     return int.parse(Util.byteToHex(byteArray), radix: 16);
   }
 
