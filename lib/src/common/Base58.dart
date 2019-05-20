@@ -44,7 +44,7 @@ class Base58 {
   /// Decodes a base58 string into a byte-array
   static List<int> decode(String input) {
     if (input == null || input.isEmpty) {
-      return new Uint8List(0);
+      return Uint8List(0);
     }
  
     // generate base 58 index list from input string
@@ -52,7 +52,7 @@ class Base58 {
     for (int i = 0 ; i < input.length ; i++) {
       int charint = ALPHABET.indexOf(input[i]);
       if (charint < 0) {
-        throw new FormatException("Invalid input formatting for Base58 decoding.");
+        throw FormatException("Invalid input formatting for Base58 decoding.");
       }
       input58[i] = charint;
     }

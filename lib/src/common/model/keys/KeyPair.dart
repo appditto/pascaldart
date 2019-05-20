@@ -12,7 +12,7 @@ class KeyPair {
     this.curve = this.privateKey.curve;
 
     if (this.privateKey.curve.id != this.publicKey.curve.id) {
-      throw new Exception('Mixed up curves between private an public key');
+      throw Exception('Mixed up curves between private an public key');
     }
   }
 }

@@ -11,7 +11,7 @@ A simple usage example:
 import 'package:pascaldart/pascaldart.dart';
 
 main() {
-  var awesome = new Awesome();
+  var awesome = Awesome();
 }
 ```
 

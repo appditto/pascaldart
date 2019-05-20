@@ -15,3 +15,4 @@ export 'src/common/coding/pascal/keys/PublicKeyCoder.dart';
 export 'src/common/coding/pascal/AccountNameCoder.dart';
 export 'src/common/coding/pascal/AccountNumberCoder.dart';
 export 'src/common/coding/pascal/CurrencyCoder.dart';
+export 'src/common/coding/pascal/OpTypeCoder.dart';

@@ -27,9 +27,9 @@ class AccountName {
 
     for (int pos = 0; pos < value.length; pos++) {
       if (pos == 0 && !ALLOWED_START.contains(value[pos])) {
-        throw new Exception('Invalid AccountName encoding - character ${value[pos]} not allowed at position ');
+        throw Exception('Invalid AccountName encoding - character ${value[pos]} not allowed at position ');
       } else if (pos > 0 && !ALLOWED_ALL.contains(value[pos])) {
-        throw new Exception('Invalid AccountName encoding - character ${value[pos]} not allowed at position $pos');
+        throw Exception('Invalid AccountName encoding - character ${value[pos]} not allowed at position $pos');
       }
     }
 

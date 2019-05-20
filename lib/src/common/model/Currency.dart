@@ -17,7 +17,7 @@ class Currency {
     }
 
     if (value == '.') {
-      throw new Exception(
+      throw Exception(
         'Invalid value ${pasc} cannot be converted to base unit with 4 decimals.');
     }
 
@@ -28,7 +28,7 @@ class Currency {
     String fraction;
 
     if (comps.length > 2) { 
-      throw new Exception('Too many decimal points');
+      throw Exception('Too many decimal points');
     } else if (comps.length == 2) {
       fraction = comps[1];
     }
@@ -37,7 +37,7 @@ class Currency {
     if (whole == null) { whole = '0'; }
     if (fraction == null) { fraction = '0'; }
     if (fraction.length > 4) {
-      throw new Exception('Too many decimal places');
+      throw Exception('Too many decimal places');
     }
 
     while (fraction.length < 4) {
