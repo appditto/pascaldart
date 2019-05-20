@@ -15,20 +15,14 @@ class OpTypeCoder {
     if (byteSize == 1) {
       return Util.bytesToInt(bytes);
     }
+    int opType;
     ByteData bd = bytes.buffer.asByteData();
-    List<int> typeDigits = List();
-    for (int i = 0; i < bd.lengthInBytes / byteSize; i++) {
-      if (byteSize == 2) {
-        typeDigits.add(bd.getUint16(i, Endian.little));
-      } else {
-        typeDigits.add(bd.getUint32(i, Endian.little));        
-      }
+    if (byteSize == 2) {
+      opType = bd.getUint16(0, Endian.little);
+    } else {
+      opType = bd.getUint32(0, Endian.little);
     }
-    String digits = "";
-    typeDigits.forEach((i) {
-      digits = digits + i.toRadixString(10);
-    });
-    return int.parse(digits);
+    return opType;
   }
 
   Uint8List encodeToBytes(int opType) {

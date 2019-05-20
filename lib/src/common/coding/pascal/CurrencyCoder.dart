@@ -7,16 +7,8 @@ class CurrencyCoder {
   /// Decode account number from given bytes
   Currency decodeFromBytes(Uint8List bytes) {
     ByteData bd = bytes.buffer.asByteData();
-    List<int> molinaDigits = List();
-    print(bd.lengthInBytes);
-    for (int i = 0; i < bd.lengthInBytes / 8; i++) {
-      molinaDigits.add(bd.getUint64(i, Endian.little));
-    }
-    String digits = "";
-    molinaDigits.forEach((i) {
-      digits = digits + i.toRadixString(10);
-    });
-    return Currency.fromMolina(digits);
+    String molinaStr = bd.getUint64(0, Endian.little).toRadixString(10);
+    return Currency.fromMolina(molinaStr);
   }
 
   /// Encode an amount to bytes

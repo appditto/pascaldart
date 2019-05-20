@@ -8,15 +8,8 @@ class AccountNumberCoder {
   /// Decode account number from given bytes
   AccountNumber decodeFromBytes(Uint8List bytes) {
     ByteData bd = bytes.buffer.asByteData();
-    List<int> accountDigits = List();
-    for (int i = 0; i < bd.lengthInBytes / 4; i++) {
-      accountDigits.add(bd.getUint32(i, Endian.little));
-    }
-    String digits = "";
-    accountDigits.forEach((i) {
-      digits = digits + i.toRadixString(10);
-    });
-    return AccountNumber(digits);
+    String accountNum = bd.getUint32(0, Endian.little).toRadixString(10);
+    return AccountNumber(accountNum);
   }
 
   /// Encode an account number to bytes
