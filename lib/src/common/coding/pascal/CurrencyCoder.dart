@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:pascaldart/src/common/model/Currency.dart';
+import 'package:pascaldart/src/common/Util.dart';
 
 /// A special pascal type that can en/decode an amount
 class CurrencyCoder {
@@ -13,10 +14,15 @@ class CurrencyCoder {
 
   /// Encode an amount to bytes
   Uint8List encodeToBytes(Currency amount) {
-    Uint64List encoded = Uint64List(1);
-    ByteData bd = ByteData.view(encoded.buffer);
-    bd.setUint64(0, int.parse(amount.toMolina()), Endian.little);
-    return Uint8List.fromList([bd.getUint8(0), bd.getUint8(1), bd.getUint8(2), bd.getUint8(3),
-                               bd.getUint8(4), bd.getUint8(5), bd.getUint8(6), bd.getUint8(7)]);
+    Uint8List bigIntEncoded = Util.encodeBigInt(BigInt.parse(amount.toMolina()));
+    // Right pad to 8-byte (64-bit integer)
+    Uint8List rightPaddedEncoded = Uint8List(8);
+    for (int i = 0; i < bigIntEncoded.lengthInBytes; i++) {
+      rightPaddedEncoded[i] = bigIntEncoded[i];
+    }
+    for (int i = bigIntEncoded.lengthInBytes; i < 8; i++) {
+      rightPaddedEncoded[i] = 0;
+    }
+    return rightPaddedEncoded;
   }
 }
