@@ -39,4 +39,16 @@ class Keys {
       common.PublicKey(common.Util.encodeBigInt(publicKey.Q.x.toBigInteger()), common.Util.encodeBigInt(publicKey.Q.y.toBigInteger()), curve)
      );
   }
+
+  static common.KeyPair fromPrivateKey(common.PrivateKey privateKey) {
+    pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
+    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.Util.decodeBigInt(privateKey.ec()), domainParams);
+    pc.ECPoint Q = pKeyEC.parameters.G * pKeyEC.d;   
+    return common.KeyPair(
+            privateKey,
+            common.PublicKey(common.Util.encodeBigInt(Q.x.toBigInteger()),
+                             common.Util.encodeBigInt(Q.y.toBigInteger()),
+                             privateKey.curve)
+    );
+  }
 }
