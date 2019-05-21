@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data' show Uint8List;
+import 'dart:typed_data';
 import 'package:hex/hex.dart';
 
 class Util {
@@ -70,21 +70,21 @@ class Util {
     return ret;
   }
 
-  /// Decode a BigInt from bytes in little-endian encoding.
-  static BigInt decodeBigInt(List<int> bytes) {
+  /// Decode a BigInt from bytes using specified endianness
+  static BigInt decodeBigInt(List<int> bytes, {Endian endian = Endian.little}) {
     BigInt result = BigInt.from(0);
     for (int i = 0; i < bytes.length; i++) {
-      result += BigInt.from(bytes[i]) << (8 * i);
+      result += BigInt.from(bytes[endian == Endian.little ? i : bytes.length - i - 1]) << (8 * i);
     }
     return result;
   }
 
-  /// Encode a BigInt into bytes using little-endian encoding.
-  static Uint8List encodeBigInt(BigInt number) {
+  /// Encode a BigInt into bytes using specified endianness.
+  static Uint8List encodeBigInt(BigInt number, {Endian endian = Endian.little}) {
     int size = (number.bitLength + 7) >> 3;
     var result = Uint8List(size);
     for (int i = 0; i < size; i++) {
-      result[i] = (number & BigInt.from(0xff)).toInt();
+      result[endian == Endian.little ? i : size - i - 1] = (number & BigInt.from(0xff)).toInt();
       number = number >> 8;
     }
     return result;
