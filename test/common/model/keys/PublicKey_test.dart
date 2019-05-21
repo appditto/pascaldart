@@ -9,8 +9,8 @@ void main() {
     const List<int> curves = [
       Curve.CI_SECP256K1,
       Curve.CI_SECT283K1,
-      Curve.CI_P521,
-      Curve.CI_P384
+      Curve.CI_SECP521R1,
+      Curve.CI_SECP384R1
     ];
     PublicKeyFixtures fixtures;
     PublicKeyCoder coder;

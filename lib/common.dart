@@ -7,6 +7,7 @@ export 'src/common/model/AccountNumber.dart';
 export 'src/common/model/Currency.dart';
 export 'src/common/model/OperationHash.dart';
 export 'src/common/model/keys/Curves.dart';
+export 'src/common/model/keys/KeyPair.dart';
 export 'src/common/model/keys/PrivateKey.dart';
 export 'src/common/model/keys/PublicKey.dart';
 export 'src/common/coding/pascal/keys/CurveCoder.dart';

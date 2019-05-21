@@ -25,6 +25,13 @@ void main() {
 
       expect(Util.bytesToInt(h), 714);
     });
+    test('can decode and encode a bigint to little-endian byte array', () {
+      BigInt a = BigInt.from(1000);
+      Uint8List encoded = Util.encodeBigInt(a);
+      String hex = 'E803';
+      expect(Util.byteToHex(encoded), hex);
+      expect(Util.decodeBigInt(encoded), a);
+    });
 
   });
 }

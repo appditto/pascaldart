@@ -1,6 +1,5 @@
 
 import 'package:pascaldart/common.dart';
-import 'package:pascaldart/src/common/model/keys/KeyPair.dart';
 import 'package:test/test.dart';
 
 import '../../fixtures/PrivateKey.dart';

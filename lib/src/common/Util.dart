@@ -69,4 +69,24 @@ class Util {
     });
     return ret;
   }
+
+  /// Decode a BigInt from bytes in little-endian encoding.
+  static BigInt decodeBigInt(List<int> bytes) {
+    BigInt result = BigInt.from(0);
+    for (int i = 0; i < bytes.length; i++) {
+      result += BigInt.from(bytes[i]) << (8 * i);
+    }
+    return result;
+  }
+
+  /// Encode a BigInt into bytes using little-endian encoding.
+  static Uint8List encodeBigInt(BigInt number) {
+    int size = (number.bitLength + 7) >> 3;
+    var result = Uint8List(size);
+    for (int i = 0; i < size; i++) {
+      result[i] = (number & BigInt.from(0xff)).toInt();
+      number = number >> 8;
+    }
+    return result;
+  }
 }

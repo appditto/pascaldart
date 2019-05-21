@@ -6,9 +6,9 @@ import 'package:quiver/core.dart';
 const Map<int,String> CURVES = {
   0: 'empty',
   714: 'secp256k1',
-  715: 'p384',
+  715: 'secp384r1',
   729: 'sect283k1',
-  716: 'p521'
+  716: 'secp521r1'
 };
 
 class XYPubKey {
@@ -40,14 +40,14 @@ const NAME = Symbol('name');
 /// Simple elliptic curve representation of keys in pascalcoin.
 class Curve {
   static const String CN_SECP256K1 = 'secp256k1'; // secp256k1 curve
-  static const String CN_P384 = 'p384'; // p384 curve
+  static const String CN_SECP384R1 = 'secp384r1'; // secp384r1 curve
   static const String CN_SECT283K1 = 'sect283k1'; // sect283k1 curve
-  static const String CN_P521 = 'p521'; // p521 curve
+  static const String CN_SECP521R1 = 'secp521r1'; // secp521r1 curve
 
   static const int CI_SECP256K1 = 714; // secp256k1 curve ID
-  static const int CI_P384 = 715; // p384 curve ID
+  static const int CI_SECP384R1 = 715; // secp384r1 curve ID
   static const int CI_SECT283K1 = 729; // sect283k1 curve ID
-  static const int CI_P521 = 716; // p521 curve ID
+  static const int CI_SECP521R1 = 716; // secp521r1 curve ID
 
   int id;
   String name;
