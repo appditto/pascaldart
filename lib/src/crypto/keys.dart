@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:pointycastle/pointycastle.dart' as pc;
 
 import 'package:pascaldart/common.dart' as common;
+import 'package:pascaldart/src/crypto/model/Signature.dart';
 
 /// Handling of cryptographic keys
 class Keys {
@@ -50,5 +51,16 @@ class Keys {
                              common.Util.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
                              privateKey.curve)
     );
+  }
+
+  /// Sign bytes using sha256 with ecdsa
+  static Signature sign(common.PrivateKey privateKey, Uint8List bytes) {
+    pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
+    BigInt d = common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
+    pc.CipherParameters signParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
+    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA"); 
+    signer.init(true, signParams);
+    pc.ECSignature ecsig = signer.generateSignature(bytes);
+    return Signature(r: ecsig.r, s: ecsig.s);
   }
 }

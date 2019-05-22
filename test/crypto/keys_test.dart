@@ -1,4 +1,6 @@
 
+import 'dart:typed_data';
+
 import 'package:pascaldart/common.dart';
 import 'package:pascaldart/crypto.dart';
 import 'package:test/test.dart';
@@ -80,5 +82,15 @@ void main() {
         }
       });  
     });
+    test('can sign a value', () {
+        fixtures.curve714.forEach((c) {
+          if (Curve(714).supported) {
+            PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+            Signature sig = Keys.sign(pk, Util.stringToBytesUtf8('test123'));
+            expect(Util.byteToHex(Util.encodeBigInt(sig.r)), '4C3492DC3FB565D9D4C132575BCEAA55571491A983A82A5460E341198E38C250');
+            expect(Util.byteToHex(Util.encodeBigInt(sig.s)), '7FA6FF43CD3B13F6E91F810FEF9BE6359CA355C53272C841D2BF934217EE53DE');
+          }    
+        });
+    });    
   });
 }
