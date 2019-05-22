@@ -26,8 +26,6 @@ void main() {
             KeyPair kp = Keys.generate(curve: curve);
             expect(kp is KeyPair, true);
             expect(kp.curve.id, curve.id);
-            print(PrivateKeyCoder().encodeToHex(kp.privateKey));
-            print(PublicKeyCoder().encodeToBase58(kp.publicKey));
             expect(Util.byteToHex(Keys.fromPrivateKey(kp.privateKey).publicKey.ec()), Util.byteToHex(kp.publicKey.ec()));
           }
         }
@@ -46,8 +44,6 @@ void main() {
           KeyPair kp = Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey'])));
           expect(kp.curve.id, 714);
           expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
-          //print(Util.byteToHex(Base58.decode(PublicKeyCoder().encodeToBase58(kp.publicKey))));
-          //print(Util.byteToHex(Base58.decode(c['b58_pubkey'])));
           expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
         } else {
           expect(() => Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']))), throwsException);
@@ -62,7 +58,27 @@ void main() {
         } else {
           expect(() => Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']))), throwsException);
         }
-      });      
+      });
+      fixtures.curve716.forEach((c) {
+        if (Curve(716).supported) {
+          KeyPair kp = Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey'])));
+          expect(kp.curve.id, 716);
+          expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
+          expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
+        } else {
+          expect(() => Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']))), throwsException);
+        }
+      });        
+      fixtures.curve729.forEach((c) {
+        if (Curve(729).supported) {
+          KeyPair kp = Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey'])));
+          expect(kp.curve.id, 729);
+          expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
+          expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
+        } else {
+          expect(() => Keys.fromPrivateKey(PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']))), throwsException);
+        }
+      });  
     });
   });
 }

@@ -14,7 +14,7 @@ void main() {
     });
     test('can decode a pascalcoin pubkey', () {
       fixtures.curve714.forEach((c) {
-        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
+        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));      
         expect(Util.byteToHex(key.x), c['x']);
         expect(Util.byteToHex(key.y), c['y']);
         expect(key.curve.id, c['ec_nid']);
@@ -67,7 +67,6 @@ void main() {
     test('can encode a pascalcoin pubkey', () {
       fixtures.curve714.forEach((c) {
           PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey']));
-
           expect(Util.byteToHex(coder.encodeToBytes(key)), c['enc_pubkey']);
       });
       fixtures.curve715.forEach((c) {

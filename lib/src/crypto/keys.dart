@@ -35,19 +35,19 @@ class Keys {
     pc.ECPrivateKey privateKey = keyPair.privateKey;
     pc.ECPublicKey publicKey = keyPair.publicKey;
     return common.KeyPair(
-      common.PrivateKey(common.Util.encodeBigInt(privateKey.d), curve),
-      common.PublicKey(common.Util.encodeBigInt(publicKey.Q.x.toBigInteger()), common.Util.encodeBigInt(publicKey.Q.y.toBigInteger()), curve)
+      common.PrivateKey(common.Util.encodeBigInt(privateKey.d, endian: Endian.big), curve),
+      common.PublicKey(common.Util.encodeBigInt(publicKey.Q.x.toBigInteger(), endian: Endian.big), common.Util.encodeBigInt(publicKey.Q.y.toBigInteger(), endian: Endian.big), curve)
      );
   }
 
   static common.KeyPair fromPrivateKey(common.PrivateKey privateKey) {
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
-    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.Util.decodeBigInt(privateKey.ec()), domainParams);
-    pc.ECPoint Q = pKeyEC.parameters.G * pKeyEC.d;   
+    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big), domainParams);
+    pc.ECPoint Q = domainParams.G * pKeyEC.d;
     return common.KeyPair(
             privateKey,
-            common.PublicKey(common.Util.encodeBigInt(Q.x.toBigInteger()),
-                             common.Util.encodeBigInt(Q.y.toBigInteger()),
+            common.PublicKey(common.Util.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
+                             common.Util.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
                              privateKey.curve)
     );
   }
