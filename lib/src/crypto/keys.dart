@@ -63,15 +63,13 @@ class Keys {
       seeds.add(random.nextInt(255));
     }
     secureRandom.seed(pc.KeyParameter(Uint8List.fromList(seeds)));
-    // Setup non-deterministic signer
+    // Setup deterministic signer
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
     BigInt d = common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
     pc.PrivateKeyParameter privKeyParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
-    pc.ParametersWithRandom signParams =
-        pc.ParametersWithRandom(privKeyParams, secureRandom);
-    pc.Signer signer = pc.Signer("SHA-256/ECDSA"); 
+    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA"); 
     // Sign
-    signer.init(true, signParams);
+    signer.init(true, privKeyParams);
     pc.ECSignature ecsig = signer.generateSignature(msgBytes);
     // Verify
     pc.Signer verifier = pc.Signer("SHA-256/ECDSA"); 
