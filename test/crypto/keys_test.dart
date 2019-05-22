@@ -87,6 +87,30 @@ void main() {
           if (Curve(714).supported) {
             PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
             Signature sig = Keys.sign(pk, Util.stringToBytesUtf8('test123'));
+            expect(Util.byteToHex(Util.encodeBigInt(sig.r)).length == 64, true);
+            expect(Util.byteToHex(Util.encodeBigInt(sig.s)).length == 64, true);
+          }    
+        });
+        fixtures.curve715.forEach((c) {
+          if (Curve(715).supported) {
+            PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+            Signature sig = Keys.sign(pk, Util.stringToBytesUtf8('test123'));
+            expect(Util.byteToHex(Util.encodeBigInt(sig.r)).length == 96, true);
+            expect(Util.byteToHex(Util.encodeBigInt(sig.s)).length == 96, true);
+          }    
+        });
+        fixtures.curve716.forEach((c) {
+          if (Curve(716).supported) {
+            PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+            Signature sig = Keys.sign(pk, Util.stringToBytesUtf8('test123'));
+            expect(Util.byteToHex(Util.encodeBigInt(sig.r)).isNotEmpty, true);
+            expect(Util.byteToHex(Util.encodeBigInt(sig.s)).isNotEmpty, true);
+          }    
+        });
+        fixtures.curve729.forEach((c) {
+          if (Curve(729).supported) {
+            PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(c['enc_privkey']));
+            Signature sig = Keys.sign(pk, Util.stringToBytesUtf8('test123'));
             expect(Util.byteToHex(Util.encodeBigInt(sig.r)).isNotEmpty, true);
             expect(Util.byteToHex(Util.encodeBigInt(sig.s)).isNotEmpty, true);
           }    
