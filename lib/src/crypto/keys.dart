@@ -54,13 +54,33 @@ class Keys {
   }
 
   /// Sign bytes using sha256 with ecdsa
-  static Signature sign(common.PrivateKey privateKey, Uint8List bytes) {
+  static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes) {
+    /// Entropy
+    pc.SecureRandom secureRandom = pc.SecureRandom("Fortuna");
+    Random random = Random.secure();
+    List<int> seeds = [];
+    for (int i = 0; i < 32; i++) {
+      seeds.add(random.nextInt(255));
+    }
+    secureRandom.seed(pc.KeyParameter(Uint8List.fromList(seeds)));
+    // Setup non-deterministic signer
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
     BigInt d = common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
-    pc.CipherParameters signParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
-    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA"); 
+    pc.PrivateKeyParameter privKeyParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
+    pc.ParametersWithRandom signParams =
+        pc.ParametersWithRandom(privKeyParams, secureRandom);
+    pc.Signer signer = pc.Signer("SHA-256/ECDSA"); 
+    // Sign
     signer.init(true, signParams);
-    pc.ECSignature ecsig = signer.generateSignature(bytes);
-    return Signature(r: ecsig.r, s: ecsig.s);
+    pc.ECSignature ecsig = signer.generateSignature(msgBytes);
+    // Verify
+    pc.Signer verifier = pc.Signer("SHA-256/ECDSA"); 
+    pc.ECPoint Q = domainParams.G * d;
+    pc.PublicKeyParameter pubKeyParams = pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
+    verifier.init(false, pubKeyParams);
+    if (verifier.verifySignature(msgBytes, ecsig)) {
+      return Signature(r: ecsig.r, s: ecsig.s);
+    }
+    throw Exception("Couldn't verify signature");
   }
 }
