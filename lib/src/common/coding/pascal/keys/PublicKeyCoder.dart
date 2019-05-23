@@ -31,8 +31,8 @@ class PublicKeyCoder {
   }
   /// Encode public key to bytes
   Uint8List encodeToBytes(PublicKey pubKey) {
-    Uint16List curveBytes = curveCoder.encodeToBytes(pubKey.curve.id);
-    String hex = Util.byteToHex(curveBytes.buffer.asUint8List()) + pubKey.xlHex() + Util.byteToHex(pubKey.x) + pubKey.ylHex() + Util.byteToHex(pubKey.y);
+    Uint8List curveBytes = curveCoder.encodeToBytes(pubKey.curve.id);
+    String hex = Util.byteToHex(curveBytes) + pubKey.xlHex() + Util.byteToHex(pubKey.x) + pubKey.ylHex() + Util.byteToHex(pubKey.y);
     return Util.hexToBytes(hex);
   }
 

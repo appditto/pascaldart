@@ -11,8 +11,8 @@ void main() {
       curveCoder = CurveCoder();
     });
     test('can encode a pascalcoin key curve', () {
-      Uint16List encoded = curveCoder.encodeToBytes(Curve.fromString(Curve.CN_SECP256K1).id);
-      expect(Util.byteToHex(encoded.buffer.asUint8List()), 'CA02');
+      Uint8List encoded = curveCoder.encodeToBytes(Curve.fromString(Curve.CN_SECP256K1).id);
+      expect(Util.byteToHex(encoded), 'CA02');
     });
     test('can decode a pascalcoin key curve', () {
       expect(curveCoder.decodeFromBytes(Util.hexToBytes('CA02')) is Curve,  true);
