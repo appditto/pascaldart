@@ -14,6 +14,7 @@ export 'src/common/coding/core/Int8.dart';
 export 'src/common/coding/core/Int16.dart';
 export 'src/common/coding/core/Int32.dart';
 export 'src/common/coding/core/Int64.dart';
+export 'src/common/coding/core/StringWithLength.dart';
 export 'src/common/coding/pascal/keys/CurveCoder.dart';
 export 'src/common/coding/pascal/keys/PrivateKeyCoder.dart';
 export 'src/common/coding/pascal/keys/PublicKeyCoder.dart';

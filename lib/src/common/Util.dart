@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:hex/hex.dart';
+import 'package:pointycastle/export.dart';
 
 class Util {
   /// Converts a Uint8List to a hex string
@@ -88,5 +89,10 @@ class Util {
       number = number >> 8;
     }
     return result;
+  }
+
+  static Uint8List hmacMd5(Uint8List data, Uint8List key) {
+    HMac mac = HMac(new MD5Digest(), 64)..init(KeyParameter(key));
+    return mac.process(data);
   }
 }

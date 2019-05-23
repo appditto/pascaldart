@@ -7,4 +7,7 @@ export 'src/crypto/encrypt/aes/CBCPKSC7.dart';
 export 'src/crypto/encrypt/aes/CBCZeroPadding.dart';
 export 'src/crypto/encrypt/pascal/KDF.dart';
 export 'src/crypto/encrypt/pascal/PrivateKeyCrypt.dart';
+export 'src/crypto/encrypt/pascal/EciesCrypt.dart';
+export 'src/crypto/encrypt/pascal/ecies/EciesCoding.dart';
+export 'src/crypto/encrypt/pascal/ecies/EciesData.dart';
 export 'src/crypto/encrypt/ECDHCrypt.dart';
