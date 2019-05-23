@@ -13,7 +13,7 @@ void main() {
       expect(data.iv is Uint8List, true);
 
       expect(data.key.length == 32, true);
-      expect(data.iv.length == 32, true);
+      expect(data.iv.length == 16, true);
     });
 
     test('generates key and iv with salt', () {
@@ -22,7 +22,7 @@ void main() {
       expect(data.iv is Uint8List, true);
 
       expect(data.key.length == 32, true);
-      expect(data.iv.length == 32, true);
+      expect(data.iv.length == 16, true);
     });
   });
 }

@@ -28,8 +28,6 @@ class AesCbcPkcs7 {
     if (iv == null) {
       iv = Uint8List(1);
     }
-    print(Util.byteToHex(iv));
-    print(Util.byteToHex(key));
     CipherParameters params = PaddedBlockCipherParameters(
         ParametersWithIV(KeyParameter(key), iv), null);
     BlockCipher decryptionCipher = PaddedBlockCipher("AES/CBC/PKCS7");

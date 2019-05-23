@@ -15,7 +15,7 @@ class KDF {
     // Key = sha256 (password + salt);
     Uint8List key = Sha.sha256([pwBytes, saltBytes]);
     // iv = sha256 (KEY + password + salt);
-    Uint8List iv = Sha.sha256([key, pwBytes, saltBytes]);
+    Uint8List iv = Sha.sha256([key, pwBytes, saltBytes]).sublist(0, 16);
 
     return KeyIV(key, iv);
   }
