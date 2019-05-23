@@ -119,56 +119,56 @@ void main() {
     test('can retrieve a keypair from an encrypted private key', () {
       fixtures.curve714.forEach((c) {
         if (Curve(714).supported) {
-          PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+          PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
           KeyPair kp = Keys.fromPrivateKey(pKey);
           expect(kp.curve.id, 714);
           expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
           expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
         } else {
           expect(() {
-            PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+            PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
             Keys.fromPrivateKey(pKey);
           }, throwsException);
         }
       });     
       fixtures.curve715.forEach((c) {
         if (Curve(715).supported) {
-          PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+          PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
           KeyPair kp = Keys.fromPrivateKey(pKey);
           expect(kp.curve.id, 715);
           expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
           expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
         } else {
           expect(() {
-            PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+            PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
             Keys.fromPrivateKey(pKey);
           }, throwsException);
         }
       }); 
       fixtures.curve716.forEach((c) {
         if (Curve(716).supported) {
-          PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+          PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
           KeyPair kp = Keys.fromPrivateKey(pKey);
           expect(kp.curve.id, 716);
           expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
           expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
         } else {
           expect(() {
-            PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+            PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
             Keys.fromPrivateKey(pKey);
           }, throwsException);
         }
       });     
       fixtures.curve729.forEach((c) {
         if (Curve(729).supported) {
-          PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+          PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
           KeyPair kp = Keys.fromPrivateKey(pKey);
           expect(kp.curve.id, 729);
           expect(Util.byteToHex(PrivateKeyCoder().encodeToBytes(kp.privateKey)), c['enc_privkey']);
           expect(PublicKeyCoder().encodeToBase58(kp.publicKey), c['b58_pubkey']);
         } else {
           expect(() {
-            PrivateKey pKey = PrivateKeyCrypter.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
+            PrivateKey pKey = PrivateKeyCrypt.decrypt(Util.hexToBytes(c['encrypted']), c['password']);
             Keys.fromPrivateKey(pKey);
           }, throwsException);
         }

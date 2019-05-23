@@ -9,7 +9,7 @@ import 'package:pascaldart/src/crypto/encrypt/pascal/KDF.dart';
 import 'package:pascaldart/src/crypto/model/encrypt/KeyIV.dart';
 
 /// Crypter for pascal coin private keys
-class PrivateKeyCrypter {
+class PrivateKeyCrypt {
   /// Decrypts a private key
   static PrivateKey decrypt(Uint8List value, String password) {
     Uint8List salt = value.sublist(8, 16);
