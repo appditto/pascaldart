@@ -55,14 +55,6 @@ class Keys {
 
   /// Sign bytes using sha256 with ecdsa
   static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes) {
-    /// Entropy
-    pc.SecureRandom secureRandom = pc.SecureRandom("Fortuna");
-    Random random = Random.secure();
-    List<int> seeds = [];
-    for (int i = 0; i < 32; i++) {
-      seeds.add(random.nextInt(255));
-    }
-    secureRandom.seed(pc.KeyParameter(Uint8List.fromList(seeds)));
     // Setup deterministic signer
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
     BigInt d = common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
