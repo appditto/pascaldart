@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:pascaldart/src/common/Util.dart';
 import 'package:pascaldart/src/common/coding/core/Int32.dart';
 import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 import 'package:pascaldart/src/signing/operations/TransactionOperation.dart';
@@ -14,5 +15,19 @@ class RawOperationCoder {
       case 1:
         return TransactionOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
     }
+  }
+
+  static Uint8List encodeToBytes(BaseOperation operation) {
+    // TODO - multi-op support
+    Uint8List count = Int32.encodeToBytes(1);
+    // Type
+    Uint8List type = Int32.encodeToBytes(operation.opType());
+    // Op
+    Uint8List op = operation.encodeToBytes();
+    return Util.concat([
+      count,
+      type,
+      op
+    ]);
   }
 }

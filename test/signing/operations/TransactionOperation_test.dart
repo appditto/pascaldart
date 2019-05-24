@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:pascaldart/common.dart';
+import 'package:pascaldart/crypto.dart';
 import 'package:pascaldart/signing.dart';
 import 'package:test/test.dart';
 
@@ -36,6 +37,28 @@ void main() {
       expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
       expect(decoded.nOperation, fixture['n_operation']);
       expect(Util.bytesToUtf8String(decoded.payload), fixture['payload']);
+    });
+    test('can be decode signed operation and encode it again', () {
+      TransactionOperation decoded = RawOperationCoder.decodeFromBytes(Util.hexToBytes(fixture['raw']));
+
+      expect(Util.byteToHex(RawOperationCoder.encodeToBytes(decoded)), fixture['raw']);
+    });
+    test('can be built by hand', () {
+      TransactionOperation op = 
+        TransactionOperation(
+          sender: AccountNumber.fromInt(fixture['sender']),
+          target: AccountNumber.fromInt(fixture['target']),
+          amount: Currency(fixture['amount'].toString())
+      )
+      ..withNOperation(fixture['n_operation'])
+      ..withPayload(Util.stringToBytesUtf8(fixture['payload']))
+      ..withFee(Currency(fixture['fee'].toString()))
+      ..withSign(Signature(r: Util.decodeBigInt(Util.hexToBytes(fixture['r'])),
+                           s: Util.decodeBigInt(Util.hexToBytes(fixture['s']))));
+
+      Uint8List encoded = RawOperationCoder.encodeToBytes(op);
+
+      expect(Util.byteToHex(encoded), fixture['raw']);
     });
   });
 }
