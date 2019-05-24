@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
-import 'package:pascaldart/crypto.dart';
 import 'package:pascaldart/src/common/Util.dart';
 import 'package:pascaldart/src/common/coding/core/Int32.dart';
 import 'package:pascaldart/src/common/coding/pascal/AccountNumberCoder.dart';
@@ -11,43 +10,33 @@ import 'package:pascaldart/src/common/coding/pascal/keys/PublicKeyCoder.dart';
 import 'package:pascaldart/src/common/model/AccountNumber.dart';
 import 'package:pascaldart/src/common/model/Currency.dart';
 import 'package:pascaldart/src/common/model/keys/PublicKey.dart';
+import 'package:pascaldart/src/crypto/model/Signature.dart';
 import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 
-/// Representation of a signable Transaction operation.
-class TransactionOperation extends BaseOperation {
-  AccountNumber sender;
-  AccountNumber target;
-  Currency amount;
+class ChangeKeyOperation extends BaseOperation {
+  AccountNumber signer;
+  PublicKey newPublicKey;
 
   int opType() {
-    return 1;
+    return 2;
   }
 
-  /// Creates a new Transaction instance with the given data. The payload is
-  /// empty by default and not encoded.
-  TransactionOperation({@required this.sender, @required this.target, @required this.amount}) : super();
+  /// Creates a new Change Key operation
+  ChangeKeyOperation({@required this.signer, @required this.newPublicKey}) : super();
 
   /// Decode this operation from raw bytes
-  static TransactionOperation decodeFromBytes(Uint8List bytes) {
+  static ChangeKeyOperation decodeFromBytes(Uint8List bytes) {
     // Decode byte-by-byte
     int offset = 0;
-    // Sender
+    // Signer
     AccountNumberCoder acctNumCoder = AccountNumberCoder();
-    Uint8List senderBytes = bytes.sublist(offset, offset + 4);
-    AccountNumber sender = acctNumCoder.decodeFromBytes(senderBytes);
+    Uint8List signerBytes = bytes.sublist(offset, offset + 4);
+    AccountNumber signer = acctNumCoder.decodeFromBytes(signerBytes);
     offset += 4;
     // nOp
     Uint8List nOperationBytes = bytes.sublist(offset, offset + 4);
     int nOperation = Int32.decodeFromBytes(nOperationBytes);
     offset += 4;
-    // Receiver
-    Uint8List targetBytes = bytes.sublist(offset, offset + 4);
-    AccountNumber target = acctNumCoder.decodeFromBytes(targetBytes);
-    offset += 4;
-    // Amount
-    Uint8List amountBytes = bytes.sublist(offset, offset + 8);
-    Currency amount = CurrencyCoder().decodeFromBytes(amountBytes);
-    offset += 8;
     // Fee
     Uint8List feeBytes = bytes.sublist(offset, offset + 8);
     Currency fee = CurrencyCoder().decodeFromBytes(feeBytes);
@@ -60,6 +49,12 @@ class TransactionOperation extends BaseOperation {
     // Skip curve bytes
     // 6 zero-bytes are always here
     offset += 6;
+    // New public key
+    int newPublicKeyLength = Util.decodeLength(bytes.sublist(offset, offset + 2));
+    offset += 2;
+    Uint8List newPublicKeyBytes = bytes.sublist(offset, offset + newPublicKeyLength);
+    PublicKey newPublicKey = PublicKeyCoder().decodeFromBytes(newPublicKeyBytes);
+    offset += newPublicKeyLength;
     // Signature
     int rLength = Util.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
@@ -71,10 +66,9 @@ class TransactionOperation extends BaseOperation {
     Signature signature = Signature(r: r, s: s);
 
     // Return op
-    return TransactionOperation(
-      sender: sender,
-      target: target,
-      amount: amount
+    return ChangeKeyOperation(
+      signer: signer,
+      newPublicKey: newPublicKey
     )..withNOperation(nOperation)
      ..withFee(fee)
      ..withPayload(payload)
@@ -83,28 +77,28 @@ class TransactionOperation extends BaseOperation {
 
   /// Encode this operation into raw bytes
   Uint8List encodeToBytes() {
-    Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
+    Uint8List signer = AccountNumberCoder().encodeToBytes(this.signer);
     Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
-    Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payloadLength = Util.encodeLength(this.payload.length);
     Uint8List payload = this.payload;
     // Not used in modern pascal coin?
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    Uint8List newPublicKeyLength = Util.encodeLength(newPublicKey.length);
     Uint8List r = Util.encodeBigInt(signature.r);
     Uint8List rLength = Util.encodeLength(r.length);
     Uint8List s = Util.encodeBigInt(signature.s);
     Uint8List sLength = Util.encodeLength(s.length);
     return Util.concat([
-      sender,
+      signer,
       nOperation,
-      target,
-      amount,
       fee,
       payloadLength,
       payload,
       v2publickey,
+      newPublicKeyLength,
+      newPublicKey,
       rLength,
       r,
       sLength,
@@ -114,24 +108,22 @@ class TransactionOperation extends BaseOperation {
 
   /// Gets the digest of this operation
   Uint8List digest() {
-    Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
+    Uint8List signer = AccountNumberCoder().encodeToBytes(this.signer);
     Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
-    Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payload = this.payload;
     // Not used in modern pascal coin?
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
     return Util.concat([
-      sender,
+      signer,
       nOperation,
-      target,
-      amount,
       fee,
       payload,
       v2publickey,
+      newPublicKey,
       type
     ]);
-  }
+  }  
 }

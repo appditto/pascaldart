@@ -13,10 +13,6 @@ class CurveCoder {
 
   /// Encode curve to bytes
   Uint8List encodeToBytes(int value) {
-    // There's a 6-byte empty value in raw operations for some reason
-    if (value == 0) {
-      return Uint8List.fromList([0, 0, 0, 0, 0, 0]);
-    }
     return Int16.encodeToBytes(value);
   }
 }

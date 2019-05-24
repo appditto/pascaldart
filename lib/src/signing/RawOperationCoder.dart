@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:pascaldart/src/common/Util.dart';
 import 'package:pascaldart/src/common/coding/core/Int32.dart';
 import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
+import 'package:pascaldart/src/signing/operations/ChangeKeyOperation.dart';
 import 'package:pascaldart/src/signing/operations/TransactionOperation.dart';
 
 class RawOperationCoder {
@@ -14,6 +15,8 @@ class RawOperationCoder {
     switch (type) {
       case 1:
         return TransactionOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
+      case 2:
+        return ChangeKeyOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
     }
   }
 
