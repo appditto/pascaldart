@@ -10,7 +10,7 @@ import 'package:pascaldart/src/crypto/encrypt/pascal/ecies/EciesData.dart';
 import 'package:pascaldart/src/crypto/model/encrypt/ECDHResult.dart';
 
 /// A class that can en-/decrypt payloads based on a public key / private key.
-class ECIES {
+class EciesCrypt {
   /// Decrypts the given encrypted value using the given key pair.
   /*
    * @param {Buffer|Uint8Array|BC|String} value
@@ -21,7 +21,7 @@ class ECIES {
   static Uint8List decrypt(Uint8List value, PrivateKey privateKey) {
     EciesData keyData = EciesCoding.decodeFromBytes(value);  
 
-    ECDHResult dec = ECDHCrypt.decrypt(value, privateKey, publicKey: PublicKeyCoder().decodeFromBytes(keyData.publicKey), origMsgLength: keyData.originalDataLength);
+    ECDHResult dec = ECDHCrypt.decrypt(value, privateKey, publicKey: keyData.publicKey, origMsgLength: keyData.originalDataLength);
 
     Uint8List mac = Util.hmacMd5(keyData.encryptedData, dec.key);
 

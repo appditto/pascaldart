@@ -8,12 +8,18 @@ import 'package:pascaldart/src/crypto/encrypt/pascal/ecies/EciesData.dart';
 class EciesCoding {
   static EciesData decodeFromBytes(Uint8List bytes) {
     int publicKeyLength = Int8.decodeFromBytes(bytes.sublist(0, 1));
+    print(publicKeyLength);
     int macLength = Int8.decodeFromBytes(bytes.sublist(1, 2));
+    print(macLength);
     int originalDataLength = Int16.decodeFromBytes(bytes.sublist(2, 4));
+    print(originalDataLength);
     int originaDataLengthIncPadding = Int16.decodeFromBytes(bytes.sublist(4, 6));
-    Uint8List pubKey = bytes.sublist(6, publicKeyLength);
-    Uint8List mac = bytes.sublist(publicKeyLength, macLength);
-    Uint8List encryptedData = bytes.sublist(macLength);
+    print(originaDataLengthIncPadding);
+    Uint8List pubKey = bytes.sublist(6, 6+publicKeyLength);
+    print(Util.byteToHex(pubKey));
+    Uint8List mac = bytes.sublist(publicKeyLength, 6+publicKeyLength+macLength);
+    Uint8List encryptedData = bytes.sublist(6+publicKeyLength+macLength);
+    print(Util.byteToHex(encryptedData));
 
     return EciesData(
       publicKey: pubKey,

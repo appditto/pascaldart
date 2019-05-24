@@ -31,13 +31,14 @@ class ECDHCrypt {
   }
 
   /// Decrypts the given data.
-  static ECDHResult decrypt(Uint8List value, pdp.PrivateKey privateKey, { pd.PublicKey publicKey, int origMsgLength = 0}) {
-    publicKey = publicKey == null ? pd.PublicKey.empty() : publicKey;
-    ECDomainParameters domainParams = ECDomainParameters(publicKey.curve.name);
-    ECPoint Q = domainParams.curve.createPoint(Util.decodeBigInt(publicKey.x, endian: Endian.big), Util.decodeBigInt(publicKey.y, endian: Endian.big));
+  static ECDHResult decrypt(Uint8List value, pdp.PrivateKey privateKey, { Uint8List publicKey, int origMsgLength = 0}) {
+    publicKey = publicKey == null ? Uint8List(1) : publicKey;
+    ECDomainParameters domainParams = ECDomainParameters(privateKey.curve.name);
+    ECPoint Q = domainParams.curve.decodePoint(publicKey);
     BigInt d = Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
     Uint8List sharedSecret = Util.encodeBigInt((Q * d).x.toBigInteger(), endian: Endian.big);
     Uint8List secretKey = Sha.sha512([sharedSecret]);
+    print(Util.byteToHex(value));
     Uint8List decryptedData = AesCbcZeroPadding.decrypt(value, key:secretKey.sublist(0, 32), iv: Uint8List(16));
 
     Uint8List decryptedDataWithPaddingRemoved = decryptedData.sublist(0, origMsgLength);
