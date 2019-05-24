@@ -16,14 +16,4 @@ class Signer {
     static Signature signDigest(PrivateKey privateKey, Uint8List digest) {
       return Keys.sign(privateKey, digest);
     }
-
-    /// Sign an operation
-    static Signature signOperation(PrivateKey privateKey, BaseOperation operation) {
-      Uint8List digest = operation.digest();
-
-      if (operation.usesDigestToSign()) {
-        return Signer.signDigest(privateKey, digest);
-      }
-      return Signer.signWithHash(privateKey, digest);
-    }
 }

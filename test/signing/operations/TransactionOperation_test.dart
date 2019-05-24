@@ -53,12 +53,28 @@ void main() {
       ..withNOperation(fixture['n_operation'])
       ..withPayload(Util.stringToBytesUtf8(fixture['payload']))
       ..withFee(Currency(fixture['fee'].toString()))
-      ..withSign(Signature(r: Util.decodeBigInt(Util.hexToBytes(fixture['r'])),
+      ..withSignature(Signature(r: Util.decodeBigInt(Util.hexToBytes(fixture['r'])),
                            s: Util.decodeBigInt(Util.hexToBytes(fixture['s']))));
 
       Uint8List encoded = RawOperationCoder.encodeToBytes(op);
 
       expect(Util.byteToHex(encoded), fixture['raw']);
+    });
+    test('can be built by hand and signed', () {
+      PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes('CA02200046D101363B3330D65373A70F6E47BB7745FC8EE1F9B3F71992D6B82648158D73'));
+      TransactionOperation op = 
+        TransactionOperation(
+          sender: AccountNumber.fromInt(fixture['sender']),
+          target: AccountNumber.fromInt(fixture['target']),
+          amount: Currency(fixture['amount'].toString())
+      )
+      ..withNOperation(fixture['n_operation'])
+      ..withPayload(Util.stringToBytesUtf8(fixture['payload']))
+      ..withFee(Currency(fixture['fee'].toString()))
+      ..sign(pk);
+
+      expect(op.signature.r.toString().length > 30, true);
+      expect(op.signature.s.toString().length > 30, true);
     });
   });
 }

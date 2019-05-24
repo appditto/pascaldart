@@ -77,7 +77,7 @@ class TransactionOperation extends BaseOperation {
     )..withNOperation(nOperation)
      ..withFee(fee)
      ..withPayload(payload)
-     ..withSign(signature);
+     ..withSignature(signature);
   }
 
   /// Encode this operation into raw bytes

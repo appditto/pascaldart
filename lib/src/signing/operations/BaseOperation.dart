@@ -3,7 +3,9 @@ import 'dart:typed_data';
 
 import 'package:pascaldart/src/common/PascalCoinInfo.dart';
 import 'package:pascaldart/src/common/model/Currency.dart';
+import 'package:pascaldart/src/common/model/keys/PrivateKey.dart';
 import 'package:pascaldart/src/crypto/model/Signature.dart';
+import 'package:pascaldart/src/signing/Signer.dart';
 
 abstract class BaseOperation {
   Uint8List payload;
@@ -35,7 +37,7 @@ abstract class BaseOperation {
     this.nOperation = nOperation;
   }
 
-  void withSign(Signature signature) {
+  void withSignature(Signature signature) {
     this.signature = signature;
   }
 
@@ -51,4 +53,15 @@ abstract class BaseOperation {
   Uint8List digest();
   Uint8List encodeToBytes();
   int opType();
+
+  /// Sign the operation
+  void sign(PrivateKey privateKey) {
+    Uint8List digest = this.digest();
+
+    if (this.usesDigestToSign()) {
+      this.signature = Signer.signDigest(privateKey, digest);
+    } else {
+      this.signature = Signer.signWithHash(privateKey, digest);
+    }
+  }
 }
