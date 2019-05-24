@@ -20,9 +20,9 @@ class PublicKeyCoder {
     Curve curve = curveCoder.decodeFromBytes(bytes);
     // Next 2 bytes indicate length of X
     int xPos = 4;
-    int xl = int.parse(Util.switchEndian(Util.byteToHex(bytes.sublist(2, 4))), radix: 16);
+    int xl = Util.decodeLength(bytes.sublist(2, 4));
     // Next 2 bytes after xLength + xPos indicate y length
-    int yl = int.parse(Util.switchEndian(Util.byteToHex(bytes.sublist(xPos + xl, xPos + xl + 2))), radix: 16);
+    int yl = Util.decodeLength(bytes.sublist(xPos + xl, xPos + xl + 2));
     int yPos = xPos + xl + 2;
     // Read x and y
     Uint8List x = bytes.sublist(xPos, xPos+xl);

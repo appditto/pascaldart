@@ -5,7 +5,7 @@ import 'package:pascaldart/src/common/PascalCoinInfo.dart';
 import 'package:pascaldart/src/common/model/Currency.dart';
 import 'package:pascaldart/src/crypto/model/Signature.dart';
 
-abstract class BaseOperation<T> {
+abstract class BaseOperation {
   Uint8List payload;
   Signature signature;
   Currency fee;
@@ -17,31 +17,26 @@ abstract class BaseOperation<T> {
   }
 
   /// Sets the payload of the transaction instance.
-  BaseOperation withPayload(Uint8List payload) {
+  void withPayload(Uint8List payload) {
     this.payload = payload;
-    return this;
   }
 
   /// Sets the fee.
-  BaseOperation withFee(Currency fee) {
+  void withFee(Currency fee) {
     this.fee = fee;
-    return this;
   }
 
   /// Sets the fee to the minimum.
-  BaseOperation withMinFee() {
+  void withMinFee() {
     this.fee = PascalCoinInfo.MIN_FEE();
-    return this;
   }
 
-  BaseOperation withNOperation(int nOperation) {
+  void withNOperation(int nOperation) {
     this.nOperation = nOperation;
-    return this;
   }
 
-  BaseOperation withSign(Signature signature) {
+  void withSign(Signature signature) {
     this.signature = signature;
-    return this;
   }
 
   /// Gets a value indicating whether the current operation is already signed.
@@ -53,7 +48,7 @@ abstract class BaseOperation<T> {
     return false;
   }
 
+  Uint8List digest();
   Uint8List encodeToBytes();
-  T decodeFromBytes(Uint8List bytes);
   int opType();
 }

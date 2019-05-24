@@ -95,4 +95,12 @@ class Util {
     HMac mac = HMac(new MD5Digest(), 64)..init(KeyParameter(key));
     return mac.process(data);
   }
+
+  static int decodeLength(Uint8List lengthBytes) {
+    return int.parse(Util.switchEndian(Util.byteToHex(lengthBytes)), radix: 16);    
+  }
+
+  static Uint8List encodeLength(int length) {
+    return Util.hexToBytes(Util.byteToHex(Util.intToBytes(length)).padRight(4, '0'));    
+  }
 }

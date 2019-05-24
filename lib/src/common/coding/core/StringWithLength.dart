@@ -11,7 +11,7 @@ class StringWithLength {
   String decodeFromBytes(Uint8List bytes) {
     int length;
     if (byteSize == 2) {
-      length = int.parse(Util.switchEndian(Util.byteToHex(bytes.sublist(0, 2))), radix: 16);
+      length = Util.decodeLength(bytes.sublist(0, 2));
     } else {
       length = Util.bytesToInt([bytes[0]]);
       this.byteSize = 1;

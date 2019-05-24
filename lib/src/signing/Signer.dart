@@ -19,7 +19,7 @@ class Signer {
 
     /// Sign an operation
     static Signature signOperation(PrivateKey privateKey, BaseOperation operation) {
-      Uint8List digest = operation.encodeToBytes();
+      Uint8List digest = operation.digest();
 
       if (operation.usesDigestToSign()) {
         return Signer.signDigest(privateKey, digest);
