@@ -39,6 +39,8 @@ class RawOperationCoder {
       case 8:
         return ChangeAccountInfoOperation.decodeFromBytes(
             bytes.sublist(8, bytes.length));
+      case 10:
+        return DataOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
       default:
         throw Exception("Couldn't decode operation type");
     }

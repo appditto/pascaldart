@@ -8,3 +8,4 @@ export 'src/signing/operations/DeListForSaleOperation.dart';
 export 'src/signing/operations/BuyAccountOperation.dart';
 export 'src/signing/operations/ChangeKeySignedOperation.dart';
 export 'src/signing/operations/ChangeAccountInfoOperation.dart';
+export 'src/signing/operations/DataOperation.dart';
