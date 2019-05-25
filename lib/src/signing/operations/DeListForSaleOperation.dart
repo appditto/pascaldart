@@ -114,7 +114,7 @@ class DeListForSaleOperation extends BaseOperation {
   Uint8List digest() {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.accountSigner);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.targetSigner);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation + 1);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
     Uint8List price = CurrencyCoder().encodeToBytes(this.price);
     Uint8List accountToPay =
         AccountNumberCoder().encodeToBytes(this.accountToPay);

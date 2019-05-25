@@ -7,56 +7,57 @@ import 'package:pascaldart/src/common/model/AccountNumber.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('signing.operations.DeListForSaleOperation', () {
+  group('signing.operations.BuyAccountOperation', () {
     Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
-        'signer': 1554325,
-        'target': 1554326,
-        'seller': 0,
-        'price': 0,
-        'fee': 0.0001,
-        'payload': 'test',
-        'n_operation': 1,
-        'lockedUntilBlock': 0,
-        'r': '270B996CE47B3C725223A87799BF74E32E1800102B3442F271ED81396708C4EB',
-        's': '932D3542356861815F5A794E80D8945042B5A3852F5D99D1F30EE5C718522C0E',
-        'digest':
-            '95B7170096B717000100000000000000000000000000000001000000000000007465737400000000000000000000000005',
+        'signerPublicKey':
+            '3Ghhboo1Q8CFLc9BTdcweNX75Nctifx8aW1ovF58F1VyjHRxuDQRx2xUcSSm6ragsTRUZHGPSvdwM1HnReE4Je8aYeVeZHFJf23H2z',
+        'buyerAccount': 1430880,
+        'accountToBuy': 1440500,
+        'price': 0.0001,
+        'fee': 0.0002,
+        'payload': 'techworker',
+        'seller': 1440500,
+        'n_operation': 4004,
+        'r': '3B3FF1BA82E8923F6FA8B92B10FEA291CC73E563D4CB92E58039F3D25DB98FA1',
+        's': '7449069D5E034AD0B3419532B11530B52E3EBDBBBB1E754CDEADB6E709291B6B',
         'raw':
-            '010000000500000095B7170096B7170005000100000001000000000000000400746573742000270B996CE47B3C725223A87799BF74E32E1800102B3442F271ED81396708C4EB2000932D3542356861815F5A794E80D8945042B5A3852F5D99D1F30EE5C718522C0E'
+            '010000000600000060D51500A40F0000F4FA1500000000000000000002000000000000000A0074656368776F726B6572000000000000020100000000000000F4FA150000000000000020003B3FF1BA82E8923F6FA8B92B10FEA291CC73E563D4CB92E58039F3D25DB98FA120007449069D5E034AD0B3419532B11530B52E3EBDBBBB1E754CDEADB6E709291B6B'
       };
     });
 
     test('can be decode a signed operation', () {
-      DeListForSaleOperation decoded =
+      BuyAccountOperation decoded =
           RawOperationCoder.decodeFromBytes(Util.hexToBytes(fixture['raw']));
 
       expect(
           Util.byteToHex(Util.encodeBigInt(decoded.signature.r)), fixture['r']);
       expect(
           Util.byteToHex(Util.encodeBigInt(decoded.signature.s)), fixture['s']);
-      expect(decoded.accountSigner.account, fixture['signer']);
-      expect(decoded.targetSigner.account, fixture['target']);
-      expect(decoded.accountToPay.account, fixture['seller']);
+      expect(decoded.sender.account, fixture['buyerAccount']);
+      expect(decoded.target.account, fixture['accountToBuy']);
+      expect(decoded.seller.account, fixture['seller']);
       expect(decoded.price.toStringOpt(), fixture['price'].toString());
+      expect(decoded.amount.toStringOpt(), '0');
       expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
       expect(decoded.nOperation, fixture['n_operation']);
-      expect(decoded.lockedUntilBlock, fixture['lockedUntilBlock']);
       expect(Util.bytesToUtf8String(decoded.payload), fixture['payload']);
     });
     test('can be decode signed operation and encode it again', () {
-      DeListForSaleOperation decoded =
+      BuyAccountOperation decoded =
           RawOperationCoder.decodeFromBytes(Util.hexToBytes(fixture['raw']));
 
       expect(Util.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
     });
     test('can be built by hand', () {
-      DeListForSaleOperation op = DeListForSaleOperation(
-          accountSigner: AccountNumber.fromInt(fixture['signer']),
-          targetSigner: AccountNumber.fromInt(fixture['target']))
+      BuyAccountOperation op = BuyAccountOperation(
+          sender: AccountNumber.fromInt(fixture['buyerAccount']),
+          target: AccountNumber.fromInt(fixture['accountToBuy']),
+          seller: AccountNumber.fromInt(fixture['seller']),
+          price: Currency(fixture['price'].toString()))
         ..withNOperation(fixture['n_operation'])
         ..withPayload(Util.stringToBytesUtf8(fixture['payload']))
         ..withFee(Currency(fixture['fee'].toString()))
@@ -71,9 +72,11 @@ void main() {
     test('can be built by hand and signed', () {
       PrivateKey pk = PrivateKeyCoder().decodeFromBytes(Util.hexToBytes(
           'CA02200046D101363B3330D65373A70F6E47BB7745FC8EE1F9B3F71992D6B82648158D73'));
-      DeListForSaleOperation op = DeListForSaleOperation(
-          accountSigner: AccountNumber.fromInt(fixture['signer']),
-          targetSigner: AccountNumber.fromInt(fixture['target']))
+      BuyAccountOperation op = BuyAccountOperation(
+          sender: AccountNumber.fromInt(fixture['buyerAccount']),
+          target: AccountNumber.fromInt(fixture['accountToBuy']),
+          seller: AccountNumber.fromInt(fixture['seller']),
+          price: Currency(fixture['price'].toString()))
         ..withNOperation(fixture['n_operation'])
         ..withPayload(Util.stringToBytesUtf8(fixture['payload']))
         ..withFee(Currency(fixture['fee'].toString()))
@@ -81,11 +84,6 @@ void main() {
 
       expect(op.signature.r.toString().length > 30, true);
       expect(op.signature.s.toString().length > 30, true);
-    });
-    test('can generate correct digest', () {
-      DeListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(Util.hexToBytes(fixture['raw']));
-      expect(Util.byteToHex(decoded.digest()), fixture['digest']);
     });
   });
 }

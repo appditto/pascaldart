@@ -25,17 +25,22 @@ class PublicKeyCoder {
     int yl = Util.decodeLength(bytes.sublist(xPos + xl, xPos + xl + 2));
     int yPos = xPos + xl + 2;
     // Read x and y
-    Uint8List x = bytes.sublist(xPos, xPos+xl);
-    Uint8List y = bytes.sublist(yPos, yPos+yl);
+    Uint8List x = bytes.sublist(xPos, xPos + xl);
+    Uint8List y = bytes.sublist(yPos, yPos + yl);
     return PublicKey(x, y, curve);
   }
+
   /// Encode public key to bytes
   Uint8List encodeToBytes(PublicKey pubKey) {
     if (pubKey.curve.id == 0) {
       return Uint8List.fromList([0, 0, 0, 0, 0, 0]);
     }
     Uint8List curveBytes = curveCoder.encodeToBytes(pubKey.curve.id);
-    String hex = Util.byteToHex(curveBytes) + pubKey.xlHex() + Util.byteToHex(pubKey.x) + pubKey.ylHex() + Util.byteToHex(pubKey.y);
+    String hex = Util.byteToHex(curveBytes) +
+        pubKey.xlHex() +
+        Util.byteToHex(pubKey.x) +
+        pubKey.ylHex() +
+        Util.byteToHex(pubKey.y);
     return Util.hexToBytes(hex);
   }
 
