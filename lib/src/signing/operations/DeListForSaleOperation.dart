@@ -15,6 +15,10 @@ import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 class DeListForSaleOperation extends BaseOperation {
   AccountNumber accountSigner;
   AccountNumber targetSigner;
+  Currency price;
+  AccountNumber accountToPay;
+  PublicKey newPublicKey;
+  int lockedUntilBlock;
 
   int opType() {
     return 5;
@@ -23,7 +27,12 @@ class DeListForSaleOperation extends BaseOperation {
   /// Creates a new List account for sale operation
   DeListForSaleOperation(
       {@required this.accountSigner, @required this.targetSigner})
-      : super();
+      : super() {
+    this.price = Currency('0');
+    this.accountToPay = AccountNumber.fromInt(0);
+    this.newPublicKey = PublicKey.empty();
+    this.lockedUntilBlock = 0;
+  }
 
   /// Decode this operation from raw bytes
   static DeListForSaleOperation decodeFromBytes(Uint8List bytes) {
@@ -105,10 +114,27 @@ class DeListForSaleOperation extends BaseOperation {
   Uint8List digest() {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.accountSigner);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.targetSigner);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation + 1);
+    Uint8List price = CurrencyCoder().encodeToBytes(this.price);
+    Uint8List accountToPay =
+        AccountNumberCoder().encodeToBytes(this.accountToPay);
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payload = this.payload;
+    Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    //Uint8List lockedUntilBlock = Int32.encodeToBytes(this.lockedUntilBlock);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
-    return Util.concat([signer, target, nOperation, fee, payload, type]);
+    return Util.concat([
+      signer,
+      target,
+      nOperation,
+      price,
+      accountToPay,
+      fee,
+      payload,
+      v2publickey,
+      newPublicKey,
+      type
+    ]);
   }
 }
