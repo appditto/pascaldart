@@ -5,6 +5,7 @@ import 'package:pascaldart/src/common/coding/core/Int32.dart';
 import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 import 'package:pascaldart/src/signing/operations/ChangeKeyOperation.dart';
 import 'package:pascaldart/src/signing/operations/TransactionOperation.dart';
+import 'package:pascaldart/src/signing/operations/ListForSaleOperation.dart';
 
 class RawOperationCoder {
   static BaseOperation decodeFromBytes(Uint8List bytes) {
@@ -14,9 +15,14 @@ class RawOperationCoder {
     int type = Int32.decodeFromBytes(bytes.sublist(4, 8));
     switch (type) {
       case 1:
-        return TransactionOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
+        return TransactionOperation.decodeFromBytes(
+            bytes.sublist(8, bytes.length));
       case 2:
-        return ChangeKeyOperation.decodeFromBytes(bytes.sublist(8, bytes.length));
+        return ChangeKeyOperation.decodeFromBytes(
+            bytes.sublist(8, bytes.length));
+      case 4:
+        return ListForSaleOperation.decodeFromBytes(
+            bytes.sublist(8, bytes.length));
     }
   }
 
@@ -27,10 +33,6 @@ class RawOperationCoder {
     Uint8List type = Int32.encodeToBytes(operation.opType());
     // Op
     Uint8List op = operation.encodeToBytes();
-    return Util.concat([
-      count,
-      type,
-      op
-    ]);
+    return Util.concat([count, type, op]);
   }
 }
