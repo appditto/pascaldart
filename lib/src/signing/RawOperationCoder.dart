@@ -6,6 +6,7 @@ import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 import 'package:pascaldart/src/signing/operations/ChangeKeyOperation.dart';
 import 'package:pascaldart/src/signing/operations/TransactionOperation.dart';
 import 'package:pascaldart/src/signing/operations/ListForSaleOperation.dart';
+import 'package:pascaldart/src/signing/operations/DeListForSaleOperation.dart';
 
 class RawOperationCoder {
   static BaseOperation decodeFromBytes(Uint8List bytes) {
@@ -22,6 +23,9 @@ class RawOperationCoder {
             bytes.sublist(8, bytes.length));
       case 4:
         return ListForSaleOperation.decodeFromBytes(
+            bytes.sublist(8, bytes.length));
+      case 5:
+        return DeListForSaleOperation.decodeFromBytes(
             bytes.sublist(8, bytes.length));
     }
   }
