@@ -4,6 +4,7 @@ import 'package:pascaldart/src/common/Util.dart';
 import 'package:pascaldart/src/common/coding/core/Int32.dart';
 import 'package:pascaldart/src/signing/operations/BaseOperation.dart';
 import 'package:pascaldart/src/signing/operations/ChangeKeyOperation.dart';
+import 'package:pascaldart/src/signing/operations/ChangeKeySignedOperation.dart';
 import 'package:pascaldart/src/signing/operations/TransactionOperation.dart';
 import 'package:pascaldart/src/signing/operations/ListForSaleOperation.dart';
 import 'package:pascaldart/src/signing/operations/DeListForSaleOperation.dart';
@@ -31,6 +32,11 @@ class RawOperationCoder {
       case 6:
         return BuyAccountOperation.decodeFromBytes(
             bytes.sublist(8, bytes.length));
+      case 7:
+        return ChangeKeySignedOperation.decodeFromBytes(
+            bytes.sublist(8, bytes.length));
+      default:
+        throw Exception("Couldn't decode operation type");
     }
   }
 
