@@ -19,7 +19,7 @@ class AesCbcPkcs7 {
     return encryptionCipher.process(value);    
   }
 
-  /// AES?CBC/PKCS7 Decrypt
+  /// AES/CBC/PKCS7 Decrypt
   static Uint8List decrypt(Uint8List encrypted, { Uint8List key, Uint8List iv }) {
     if (key == null) {
       key = Uint8List(1);

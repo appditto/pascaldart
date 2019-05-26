@@ -38,9 +38,7 @@ class ECDHCrypt {
     BigInt d = Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
     Uint8List sharedSecret = Util.encodeBigInt((Q * d).x.toBigInteger(), endian: Endian.big);
     Uint8List secretKey = Sha.sha512([sharedSecret]);
-    print(Util.byteToHex(value));
     Uint8List decryptedData = AesCbcZeroPadding.decrypt(value, key:secretKey.sublist(0, 32), iv: Uint8List(16));
-
     Uint8List decryptedDataWithPaddingRemoved = decryptedData.sublist(0, origMsgLength);
 
     return ECDHResult(

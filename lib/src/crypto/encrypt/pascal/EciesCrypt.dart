@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:collection/collection.dart';
 import 'package:pascaldart/src/common/Util.dart';
-import 'package:pascaldart/src/common/coding/pascal/keys/PublicKeyCoder.dart';
 import 'package:pascaldart/src/common/model/keys/PrivateKey.dart';
 import 'package:pascaldart/src/common/model/keys/PublicKey.dart';
 import 'package:pascaldart/src/crypto/encrypt/ECDHCrypt.dart';
@@ -21,13 +21,11 @@ class EciesCrypt {
   static Uint8List decrypt(Uint8List value, PrivateKey privateKey) {
     EciesData keyData = EciesCoding.decodeFromBytes(value);  
 
-    ECDHResult dec = ECDHCrypt.decrypt(value, privateKey, publicKey: keyData.publicKey, origMsgLength: keyData.originalDataLength);
+    ECDHResult dec = ECDHCrypt.decrypt(keyData.encryptedData, privateKey, publicKey: keyData.publicKey, origMsgLength: keyData.originalDataLength);
 
     Uint8List mac = Util.hmacMd5(keyData.encryptedData, dec.key);
 
-    // var mac5 = hmac3.update(keyData.encryptedData.toString(), 'utf8').digest('hex');
-
-    if (keyData.mac == mac) {
+    if (ListEquality().equals(keyData.mac, mac)) {
       return dec.data;
     }
 
@@ -38,7 +36,7 @@ class EciesCrypt {
   static Uint8List encrypt(Uint8List value, PublicKey publicKey) {
     ECDHResult enc = ECDHCrypt.encrypt(value, publicKey: publicKey);
 
-    String mac = Util.bytesToUtf8String(Util.hmacMd5(enc.data, enc.key));
+    String mac = Util.byteToHex(Util.hmacMd5(enc.data, enc.key));
 
     int originalDataLength = value.length;
     int originalDataLengthIncPadLength = (originalDataLength % 16) == 0 ?
@@ -46,7 +44,7 @@ class EciesCrypt {
 
     EciesData keyData = EciesData(
       publicKey: enc.publicKey,
-      mac: Util.stringToBytesUtf8(mac),
+      mac: Util.hexToBytes(mac),
       encryptedData: enc.data,
       originalDataLength: originalDataLength,
       originalDataLengthIncPadding: originalDataLengthIncPadLength
