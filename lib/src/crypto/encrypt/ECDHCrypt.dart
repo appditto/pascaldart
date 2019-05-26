@@ -16,7 +16,7 @@ class ECDHCrypt {
     publicKey = publicKey == null ? pd.PublicKey.empty() : publicKey;
     KeyPair tempKey = Keys.generate(curve: publicKey.curve);
     ECDomainParameters domainParams = ECDomainParameters(publicKey.curve.name);
-    ECPoint Q = domainParams.curve.createPoint(Util.decodeBigInt(publicKey.x, endian: Endian.big), Util.decodeBigInt(publicKey.y, endian: Endian.big));
+    ECPoint Q = domainParams.curve.decodePoint(publicKey.ecdh());
     BigInt d = Util.decodeBigInt(tempKey.privateKey.ec(), endian: Endian.big);
     Uint8List sharedSecret = Util.encodeBigInt((Q * d).x.toBigInteger(), endian: Endian.big);
     Uint8List secretKey = Sha.sha512([sharedSecret]);
@@ -26,7 +26,7 @@ class ECDHCrypt {
       isEncrypted: true,
       data: encryptedData,
       key: secretKey.sublist(32, 64),
-      publicKey: tempKey.publicKey.ec()
+      publicKey: tempKey.publicKey.ecdh()
     );
   }
 

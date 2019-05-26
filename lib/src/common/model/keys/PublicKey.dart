@@ -44,6 +44,9 @@ class PublicKey {
 
   /// Gets ecdh key
   Uint8List ecdh() {
-    return Util.concat([Util.intToBytes(4), this.x, this.y]);
+    if (this.curve.id == Curve.CI_SECP521R1) {
+      return Util.concat([Util.hexToBytes('0400'), this.x, this.y]);
+    }
+    return Util.concat([Util.hexToBytes('04'), this.x, this.y]);
   }
 }
