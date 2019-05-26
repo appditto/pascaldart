@@ -8,11 +8,10 @@ part of 'GetAccountRequest.dart';
 
 GetAccountRequest _$GetAccountRequestFromJson(Map<String, dynamic> json) {
   $checkKeys(json, disallowNullValues: const ['method']);
-  return GetAccountRequest()
+  return GetAccountRequest(params: json['params'] as Map<String, dynamic>)
     ..jsonrpc = json['jsonrpc'] as String ?? '2.0'
     ..method = json['method'] as String
-    ..id = json['id'] as int ?? 0
-    ..params = json['params'] as Map<String, dynamic>;
+    ..id = json['id'] as int ?? 0;
 }
 
 Map<String, dynamic> _$GetAccountRequestToJson(GetAccountRequest instance) {

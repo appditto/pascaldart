@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:pascaldart/src/json_rpc/model/request/BaseRequest.dart';
 
 part 'GetAccountRequest.g.dart';
@@ -10,13 +9,16 @@ class GetAccountRequest extends BaseRequest {
   Map<String, dynamic> params;
 
   @JsonKey(ignore: true)
-  int account;
-
-  GetAccountRequest({@required this.account}) : super(method: 'getaccount') {
-    this.params = Map();
-    this.params['account'] = account;
+  get account {
+    return params['account'];
   }
 
-  factory GetAccountRequest.fromJson(Map<String, dynamic> json) => _$GetAccountRequestFromJson(json);
+  GetAccountRequest({int account, this.params}) : super(method: 'getaccount') {
+    if (this.params == null) {
+      this.params = Map();
+      this.params['account'] = account;
+    }
+  }
+
   Map<String, dynamic> toJson() => _$GetAccountRequestToJson(this); 
 }

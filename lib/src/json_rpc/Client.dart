@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:pascaldart/src/json_rpc/model/request/BaseRequest.dart';
 
 class RPCClient {
   String rpcAddress;
@@ -14,5 +15,11 @@ class RPCClient {
       return null; // TODO - make this an error response with more details
     }
     return response.body;
+  }
+
+  /// Make a request, and return deserialized response
+  Future<dynamic> makeRpcRequest(BaseRequest request) async {
+    request.id = id;
+    return await rpcPost(request.toJson());
   }
 }
