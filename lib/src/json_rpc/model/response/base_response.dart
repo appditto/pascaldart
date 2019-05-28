@@ -11,7 +11,7 @@ class BaseResponse {
   int id;
 
   @JsonKey(name:'result')
-  Map<String, dynamic> result;
+  dynamic result;
 
   BaseResponse({this.jsonrpc, this.id, this.result});
 

@@ -10,7 +10,7 @@ BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) {
   return BaseResponse(
       jsonrpc: json['jsonrpc'] as String,
       id: json['id'] as int,
-      result: json['result'] as Map<String, dynamic>);
+      result: json['result']);
 }
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
