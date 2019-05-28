@@ -1,10 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pascaldart/src/json_rpc/model/response/BaseResponse.dart';
 
 part 'GetAccountResponse.g.dart';
 
 @JsonSerializable()
-class GetAccountResponse extends BaseResponse {
+class GetAccountResponse {
   @JsonKey(name:'account')
   int account;
 

@@ -1,12 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
 
+part 'BaseResponse.g.dart';
+
 @JsonSerializable()
-abstract class BaseResponse {
+class BaseResponse {
   @JsonKey(name:'jsonrpc')
   String jsonrpc;
 
   @JsonKey(name:'id')
   int id;
 
-  BaseResponse({this.jsonrpc, this.id});
+  @JsonKey(name:'result')
+  Map<String, dynamic> result;
+
+  BaseResponse({this.jsonrpc, this.id, this.result});
+
+  factory BaseResponse.fromJson(Map<String, dynamic> json) => _$BaseResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
 }

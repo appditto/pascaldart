@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:pascaldart/src/json_rpc/model/request/BaseRequest.dart';
+import 'package:pascaldart/src/json_rpc/model/response/BaseResponse.dart';
+import 'package:pascaldart/src/json_rpc/model/response/ErrorResponse.dart';
+import 'package:pascaldart/src/json_rpc/model/response/GetAccountResponse.dart';
 
 class RPCClient {
   String rpcAddress;
@@ -20,6 +25,20 @@ class RPCClient {
   /// Make a request, and return deserialized response
   Future<dynamic> makeRpcRequest(BaseRequest request) async {
     request.id = id;
-    return await rpcPost(request.toJson());
+    String responseJson = await rpcPost(request.toJson());
+    if (responseJson == null) {
+      throw Exception('Did not receive a response');
+    }
+    // Parse base response
+    BaseResponse resp = BaseResponse.fromJson(json.decode(responseJson));
+    // Determine if error response
+    if (resp.result.containsKey('code') && resp.result.containsKey('message')) {
+      return ErrorResponse.fromJson(resp.result);
+    }
+    // Determine correct response type
+    switch (request.method) {
+      case 'getaccount':
+        return GetAccountResponse.fromJson(resp.result);
+    }
   }
 }
