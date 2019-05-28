@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/Sha.dart';
-import 'package:pascaldart/src/common/model/keys/PrivateKey.dart';
+import 'package:pascaldart/src/common/sha.dart';
+import 'package:pascaldart/src/common/model/keys/privatekey.dart';
 import 'package:pascaldart/src/crypto/keys.dart';
-import 'package:pascaldart/src/crypto/model/Signature.dart';
+import 'package:pascaldart/src/crypto/model/signature.dart';
 
 class Signer {
   /// Sign the sha256 of the given digest and return r and s

@@ -100,13 +100,13 @@ void main() {
 
     test('passes aes-cbc vector tests', () {
       aesData.forEach((aes) {
-        Uint8List input = Util.hexToBytes(aes['input']);
-        Uint8List output = Util.hexToBytes(aes['output']);
-        Uint8List iv = Util.hexToBytes(aes['iv']);
-        Uint8List key = Util.hexToBytes(aes['key']);
+        Uint8List input = PDUtil.hexToBytes(aes['input']);
+        Uint8List output = PDUtil.hexToBytes(aes['output']);
+        Uint8List iv = PDUtil.hexToBytes(aes['iv']);
+        Uint8List key = PDUtil.hexToBytes(aes['key']);
         Uint8List encrypted = AesCbcPkcs7.encrypt(input, key: key, iv: iv);
 
-        expect(Util.byteToHex(output), Util.byteToHex(encrypted.sublist(0, 16)));
+        expect(PDUtil.byteToHex(output), PDUtil.byteToHex(encrypted.sublist(0, 16)));
       });
     });
   });

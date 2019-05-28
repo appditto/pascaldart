@@ -2,7 +2,7 @@
 import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
-import '../../fixtures/PublicKey.dart';
+import '../../fixtures/publickey.dart';
 
 void main() {
   group('common.model.keys.PublicKey', () {
@@ -34,15 +34,15 @@ void main() {
 
         expect(() => {
           PublicKey(
-            Util.hexToBytes(List.filled(curve.xylPublicKey() + 1, '00').join()),
-            Util.hexToBytes(List.filled(curve.xylPublicKey(), '00').join()),
+            PDUtil.hexToBytes(List.filled(curve.xylPublicKey() + 1, '00').join()),
+            PDUtil.hexToBytes(List.filled(curve.xylPublicKey(), '00').join()),
             curve
           )
         }, throwsException);
         expect(() => {
           PublicKey(
-            Util.hexToBytes(List.filled(curve.xylPublicKey(), '00').join()),
-            Util.hexToBytes(List.filled(curve.xylPublicKey() + 1, '00').join()),
+            PDUtil.hexToBytes(List.filled(curve.xylPublicKey(), '00').join()),
+            PDUtil.hexToBytes(List.filled(curve.xylPublicKey() + 1, '00').join()),
             curve
           )
         }, throwsException);
@@ -51,20 +51,20 @@ void main() {
 
     test('can return a value only containing x and y', () {
       fixtures.curve714.forEach((c) {
-        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey'])); 
-        expect(Util.byteToHex(key.ec()), c['x'] + c['y']);
+        PublicKey key = coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey'])); 
+        expect(PDUtil.byteToHex(key.ec()), c['x'] + c['y']);
       });
       fixtures.curve715.forEach((c) {
-        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey'])); 
-        expect(Util.byteToHex(key.ec()), c['x'] + c['y']);
+        PublicKey key = coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey'])); 
+        expect(PDUtil.byteToHex(key.ec()), c['x'] + c['y']);
       });
       fixtures.curve716.forEach((c) {
-        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey'])); 
-        expect(Util.byteToHex(key.ec()), c['x'] + c['y']);
+        PublicKey key = coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey'])); 
+        expect(PDUtil.byteToHex(key.ec()), c['x'] + c['y']);
       });
       fixtures.curve729.forEach((c) {
-        PublicKey key = coder.decodeFromBytes(Util.hexToBytes(c['enc_pubkey'])); 
-        expect(Util.byteToHex(key.ec()), c['x'] + c['y']);
+        PublicKey key = coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey'])); 
+        expect(PDUtil.byteToHex(key.ec()), c['x'] + c['y']);
       });
     });
   });

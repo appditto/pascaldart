@@ -26,13 +26,13 @@ void main() {
 
     test('Encode Base58', () {
       testData.forEach((v) {
-        expect(Base58.encode(Util.hexToBytes(v[0])), v[1]);
+        expect(Base58.encode(PDUtil.hexToBytes(v[0])), v[1]);
       });
     });
 
     test('Decode Base58', () {
       testData.forEach((v) {
-        expect(Util.byteToHex(Base58.decode(v[1])), v[0].toUpperCase());
+        expect(PDUtil.byteToHex(Base58.decode(v[1])), v[0].toUpperCase());
       });
     });
   });

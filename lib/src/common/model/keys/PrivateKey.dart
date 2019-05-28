@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/model/keys/Curves.dart';
+import 'package:pascaldart/src/common/model/keys/curves.dart';
 
 // Represents a PascalCoin private key
 class PrivateKey {

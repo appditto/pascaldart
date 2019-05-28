@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/Util.dart';
-import 'package:pascaldart/src/common/model/keys/Curves.dart';
+import 'package:pascaldart/src/common/pascaldart_util.dart';
+import 'package:pascaldart/src/common/model/keys/curves.dart';
 
 /// Represents a pascal coin public key
 class PublicKey {
@@ -30,23 +30,23 @@ class PublicKey {
   }
 
   String xlHex() {
-    return Util.byteToHex(Util.intToBytes(xLength)).padRight(4, '0');
+    return PDUtil.byteToHex(PDUtil.intToBytes(xLength)).padRight(4, '0');
   }
 
   String ylHex() {
-    return Util.byteToHex(Util.intToBytes(yLength)).padRight(4, '0');
+    return PDUtil.byteToHex(PDUtil.intToBytes(yLength)).padRight(4, '0');
   }
 
   /// Gets the ec key.
   Uint8List ec() {
-    return Util.concat([this.x, this.y]);
+    return PDUtil.concat([this.x, this.y]);
   }
 
   /// Gets ecdh key
   Uint8List ecdh() {
     if (this.curve.id == Curve.CI_SECP521R1) {
-      return Util.concat([Util.hexToBytes('0400'), this.x, this.y]);
+      return PDUtil.concat([PDUtil.hexToBytes('0400'), this.x, this.y]);
     }
-    return Util.concat([Util.hexToBytes('04'), this.x, this.y]);
+    return PDUtil.concat([PDUtil.hexToBytes('04'), this.x, this.y]);
   }
 }

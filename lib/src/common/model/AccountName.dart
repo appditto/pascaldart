@@ -1,10 +1,10 @@
-import 'package:pascaldart/src/common/Util.dart';
+import 'package:pascaldart/src/common/pascaldart_util.dart';
 
 /// AccountName encoding for account names.
 class AccountName {
   // the list of characters to escape.
   static final List<String> CHARS_TO_ESCAPE = '(){}[]:"<>'.split('');
-  static final String REGEX_TO_ESCAPE = '(${CHARS_TO_ESCAPE.map((c) => Util.escapeRegex(c)).join('|')})';
+  static final String REGEX_TO_ESCAPE = '(${CHARS_TO_ESCAPE.map((c) => PDUtil.escapeRegex(c)).join('|')})';
 
   static final List<String> ALLOWED_ALL = r'0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+{}[]_:"|<>,.?/~'.split('');
   static final List<String> ALLOWED_START = ALLOWED_ALL.sublist(10);

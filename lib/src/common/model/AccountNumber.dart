@@ -1,5 +1,5 @@
 import 'package:quiver/core.dart'; 
-import 'package:pascaldart/src/common/PascalCoinInfo.dart';
+import 'package:pascaldart/src/common/pascalcoin_info.dart';
 
 /// A simple type that holds an account number in a reliable way.
 class AccountNumber {

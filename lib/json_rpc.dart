@@ -1,2 +1,2 @@
-export 'src/json_rpc/Client.dart';
-export 'src/json_rpc/model/request/GetAccountRequest.dart';
+export 'src/json_rpc/client.dart';
+export 'src/json_rpc/model/request/getaccount_request.dart';

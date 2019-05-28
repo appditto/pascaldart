@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:pointycastle/pointycastle.dart' as pc;
 
 import 'package:pascaldart/common.dart' as common;
-import 'package:pascaldart/src/crypto/model/Signature.dart';
+import 'package:pascaldart/src/crypto/model/signature.dart';
 
 /// Handling of cryptographic keys
 class Keys {
@@ -36,19 +36,19 @@ class Keys {
     pc.ECPrivateKey privateKey = keyPair.privateKey;
     pc.ECPublicKey publicKey = keyPair.publicKey;
     return common.KeyPair(
-      common.PrivateKey(common.Util.encodeBigInt(privateKey.d, endian: Endian.big), curve),
-      common.PublicKey(common.Util.encodeBigInt(publicKey.Q.x.toBigInteger(), endian: Endian.big), common.Util.encodeBigInt(publicKey.Q.y.toBigInteger(), endian: Endian.big), curve)
+      common.PrivateKey(common.PDUtil.encodeBigInt(privateKey.d, endian: Endian.big), curve),
+      common.PublicKey(common.PDUtil.encodeBigInt(publicKey.Q.x.toBigInteger(), endian: Endian.big), common.PDUtil.encodeBigInt(publicKey.Q.y.toBigInteger(), endian: Endian.big), curve)
      );
   }
 
   static common.KeyPair fromPrivateKey(common.PrivateKey privateKey) {
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
-    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big), domainParams);
+    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big), domainParams);
     pc.ECPoint Q = domainParams.G * pKeyEC.d;
     return common.KeyPair(
             privateKey,
-            common.PublicKey(common.Util.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
-                             common.Util.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
+            common.PublicKey(common.PDUtil.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
+                             common.PDUtil.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
                              privateKey.curve)
     );
   }
@@ -57,7 +57,7 @@ class Keys {
   static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes) {
     // Setup deterministic signer
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
-    BigInt d = common.Util.decodeBigInt(privateKey.ec(), endian: Endian.big);
+    BigInt d = common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big);
     pc.PrivateKeyParameter privKeyParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
     pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA"); 
     // Sign

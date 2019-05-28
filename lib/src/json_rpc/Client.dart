@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:pascaldart/src/json_rpc/model/request/BaseRequest.dart';
-import 'package:pascaldart/src/json_rpc/model/response/BaseResponse.dart';
-import 'package:pascaldart/src/json_rpc/model/response/ErrorResponse.dart';
-import 'package:pascaldart/src/json_rpc/model/response/GetAccountResponse.dart';
+import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
+import 'package:pascaldart/src/json_rpc/model/response/base_response.dart';
+import 'package:pascaldart/src/json_rpc/model/response/error_response.dart';
+import 'package:pascaldart/src/json_rpc/model/response/getaccount_response.dart';
 
 class RPCClient {
   String rpcAddress;
