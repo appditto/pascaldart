@@ -14,10 +14,8 @@ class GetBlockRequest extends BaseRequest {
   }
 
   GetBlockRequest({int block, this.params}) : super(method: 'getblock') {
-    if (this.params == null) {
-      this.params = Map();
-      this.params['block'] = block;
-    }
+    this.params = Map();
+    this.params['block'] = block;
   }
 
   Map<String, dynamic> toJson() => _$GetBlockRequestToJson(this); 

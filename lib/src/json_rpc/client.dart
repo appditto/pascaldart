@@ -5,6 +5,7 @@ import 'package:pascaldart/src/json_rpc/model/pascal_account.dart';
 import 'package:pascaldart/src/json_rpc/model/pascal_block.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 import 'package:pascaldart/src/json_rpc/model/response/base_response.dart';
+import 'package:pascaldart/src/json_rpc/model/response/blocks_response.dart';
 import 'package:pascaldart/src/json_rpc/model/response/error_response.dart';
 import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
 
@@ -43,6 +44,8 @@ class RPCClient {
         return PascalAccount.fromJson(resp.result);
       case 'getblock':
         return PascalBlock.fromJson(resp.result);
+      case 'getblocks':
+        return BlocksResponse((json.decode(resp.result) as List).map((e) => PascalBlock.fromJson(e)).toList());
       default:
         return BaseResponse.fromJson(resp.result);
     }

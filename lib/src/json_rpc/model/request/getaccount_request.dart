@@ -14,10 +14,8 @@ class GetAccountRequest extends BaseRequest {
   }
 
   GetAccountRequest({int account, this.params}) : super(method: 'getaccount') {
-    if (this.params == null) {
-      this.params = Map();
-      this.params['account'] = account;
-    }
+    this.params = Map();
+    this.params['account'] = account;
   }
 
   Map<String, dynamic> toJson() => _$GetAccountRequestToJson(this); 
