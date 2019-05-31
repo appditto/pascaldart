@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:pascaldart/src/json_rpc/model/pascal_account.dart';
+import 'package:pascaldart/src/json_rpc/model/pascal_block.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 import 'package:pascaldart/src/json_rpc/model/response/base_response.dart';
 import 'package:pascaldart/src/json_rpc/model/response/error_response.dart';
-import 'package:pascaldart/src/json_rpc/model/response/getaccount_response.dart';
+import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
 
 class RPCClient {
   String rpcAddress;
@@ -23,7 +25,7 @@ class RPCClient {
   }
 
   /// Make a request, and return deserialized response
-  Future<dynamic> makeRpcRequest(BaseRequest request) async {
+  Future<RPCResponse> makeRpcRequest(BaseRequest request) async {
     request.id = id;
     String responseJson = await rpcPost(request.toJson());
     if (responseJson == null) {
@@ -38,7 +40,11 @@ class RPCClient {
     // Determine correct response type
     switch (request.method) {
       case 'getaccount':
-        return GetAccountResponse.fromJson(resp.result);
+        return PascalAccount.fromJson(resp.result);
+      case 'getblock':
+        return PascalBlock.fromJson(resp.result);
+      default:
+        return BaseResponse.fromJson(resp.result);
     }
   }
 }

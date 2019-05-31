@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
 
 part 'base_response.g.dart';
 
 @JsonSerializable()
-class BaseResponse {
+class BaseResponse extends RPCResponse {
   @JsonKey(name:'jsonrpc')
   String jsonrpc;
 

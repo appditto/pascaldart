@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'getaccount_response.dart';
+part of 'pascal_account.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) {
-  return GetAccountResponse(
+PascalAccount _$PascalAccountFromJson(Map<String, dynamic> json) {
+  return PascalAccount(
       account: json['account'] as int,
       encPubkey: json['enc_pubkey'] as String,
       balance: (json['balance'] as num)?.toDouble(),
@@ -15,7 +15,7 @@ GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) {
       updatedBlock: json['updated_b'] as int);
 }
 
-Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
+Map<String, dynamic> _$PascalAccountToJson(PascalAccount instance) =>
     <String, dynamic>{
       'account': instance.account,
       'enc_pubkey': instance.encPubkey,
