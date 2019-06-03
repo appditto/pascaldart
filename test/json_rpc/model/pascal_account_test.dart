@@ -21,7 +21,7 @@ void main() {
       PascalAccount getAcctResp = PascalAccount.fromJson(baseResp.result);
       expect(getAcctResp.account, 1920);
       expect(getAcctResp.encPubkey, 'CA0220009D92DFA1D6F8B2CAE31194EE5433EE4AD457AE145C1C67E49A9196EE58A45B9F200046EAF20C0A26A80A7693E71C0222313A0187AFCA838209FF86FB740A4FFF7F0B');
-      expect(getAcctResp.balance, 29595.952);
+      expect(getAcctResp.balance.toStringOpt(), '29595.952');
       expect(getAcctResp.nOperation, 0);
       expect(getAcctResp.updatedBlock, 11973);
     });

@@ -3,7 +3,6 @@ class Currency {
   BigInt pasc; // Amount
 
   Currency(String value) {
-    value = value.toString();
     value = value.split(',').join(''); // remove commas
   
     final BigInt ten = BigInt.from(10);

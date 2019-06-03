@@ -1,60 +1,60 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pascaldart/src/common/model/currency.dart';
 import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
+import 'package:pascaldart/src/json_rpc/converters.dart';
 
 part 'pascal_block.g.dart';
-
-DateTime _toDateTime(int v) {
-  return DateTime.fromMicrosecondsSinceEpoch(v);
-}
-
-int _fromDateTime(DateTime dt) {
-  return dt.millisecondsSinceEpoch;
-}
 
 /// Represents an 'Account' object returned by PascalCoin json-RPC API
 @JsonSerializable()
 class PascalBlock extends RPCResponse {
-  @JsonKey(name:'block')
+  @JsonKey(name:'block', includeIfNull: false)
   int block;
 
-  @JsonKey(name:'enc_pubkey')
+  @JsonKey(name:'enc_pubkey', includeIfNull: false)
   String encPubkey;
 
-  @JsonKey(name:'reward')
-  int reward;
+  @JsonKey(name:'reward', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
+  Currency reward;
 
-  @JsonKey(name:'fee')
-  double fee;
+  @JsonKey(name:'fee', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
+  Currency fee;
 
-  @JsonKey(name:'ver')
+  @JsonKey(name:'ver', includeIfNull: false)
   int ver;
 
-  @JsonKey(name:'ver_a')
+  @JsonKey(name:'ver_a', includeIfNull: false)
   int ver_a;
 
-  @JsonKey(name:'timestamp', fromJson: _toDateTime, toJson: _fromDateTime)
+  @JsonKey(name:'timestamp', fromJson: toDateTime, toJson: fromDateTime, includeIfNull: false)
   DateTime timestamp;
 
-  @JsonKey(name:'target')
+  @JsonKey(name:'target', includeIfNull: false)
   int target;
 
-  @JsonKey(name:'nonce')
+  @JsonKey(name:'nonce', includeIfNull: false)
   int nonce;
 
-  @JsonKey(name:'payload')
+  @JsonKey(name:'payload', includeIfNull: false)
   String payload;
 
-  @JsonKey(name:'sbh')
+  @JsonKey(name:'sbh', includeIfNull: false)
   String sbh;
 
-  @JsonKey(name:'oph')
+  @JsonKey(name:'oph', includeIfNull: false)
   String oph;
 
-  @JsonKey(name:'pow')
+  @JsonKey(name:'pow', includeIfNull: false)
   String pow;
 
-  @JsonKey(name:'operations')
+  @JsonKey(name:'operations', includeIfNull: false)
   int operations;
+
+  @JsonKey(name:'hashratekhs', includeIfNull: false)
+  int hashratekhs;
+
+  @JsonKey(name:'maturation', includeIfNull: false)
+  int maturation;
 
   PascalBlock({
     this.block,
@@ -70,7 +70,9 @@ class PascalBlock extends RPCResponse {
     this.sbh,
     this.oph,
     this.pow,
-    this.operations
+    this.operations,
+    this.hashratekhs,
+    this.maturation
   });
 
   factory PascalBlock.fromJson(Map<String, dynamic> json) => _$PascalBlockFromJson(json);
