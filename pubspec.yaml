@@ -11,7 +11,7 @@ dependencies:
   hex: ^0.1.2
   collection: ^1.14.11
   pointycastle: ^1.0.1
-  quiver: ^2.0.3
+  quiver: ^2.0.2
   http: ^0.12.0+2
   json_annotation: ^2.4.0
 
