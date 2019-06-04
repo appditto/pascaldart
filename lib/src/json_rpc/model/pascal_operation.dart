@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pascaldart/src/common/model/accountnumber.dart';
 import 'package:pascaldart/src/common/model/currency.dart';
+import 'package:pascaldart/src/common/model/keys/publickey.dart';
 import 'package:pascaldart/src/json_rpc/model/changer.dart';
 import 'package:pascaldart/src/json_rpc/model/receiver.dart';
 import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
@@ -17,6 +18,10 @@ class PascalOperation extends RPCResponse {
 
   @JsonKey(name:'errors', includeIfNull: false)
   String errors;
+
+
+  @JsonKey(name:'block', includeIfNull: false)
+  int block;
 
   @JsonKey(name:'time', includeIfNull: false, fromJson: toDateTime, toJson: fromDateTime)
   DateTime time;
@@ -48,6 +53,9 @@ class PascalOperation extends RPCResponse {
   @JsonKey(name:'ophash', includeIfNull: false)
   String ophash;
 
+  @JsonKey(name:'payload', includeIfNull: false)
+  String payload;
+
   @JsonKey(name:'subtype', includeIfNull: false)
   String subtype;
 
@@ -63,9 +71,13 @@ class PascalOperation extends RPCResponse {
   @JsonKey(name:'changers', includeIfNull: false)
   List<Changer> changers;
 
+  @JsonKey(name:'enc_pubkey', includeIfNull: false, fromJson: hexToPublicKey, toJson: publicKeyToHex)
+  PublicKey encPubkey;
+
   PascalOperation({
     this.valid,
     this.errors,
+    this.block,
     this.time,
     this.opblock,
     this.maturation,
@@ -76,11 +88,13 @@ class PascalOperation extends RPCResponse {
     this.fee,
     this.balance,
     this.ophash,
+    this.payload,
     this.subtype,
     this.signerAccount,
     this.senders,
     this.receivers,
-    this.changers
+    this.changers,
+    this.encPubkey
   });
 
   factory PascalOperation.fromJson(Map<String, dynamic> json) => _$PascalOperationFromJson(json);
