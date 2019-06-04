@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pascaldart/src/common/model/accountname.dart';
+import 'package:pascaldart/src/common/model/accountnumber.dart';
 import 'package:pascaldart/src/common/model/currency.dart';
+import 'package:pascaldart/src/common/model/keys/publickey.dart';
 import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
 import 'package:pascaldart/src/json_rpc/converters.dart';
 
@@ -13,11 +16,11 @@ enum AccountState {
 /// Represents an 'Account' object returned by PascalCoin json-RPC API
 @JsonSerializable()
 class PascalAccount extends RPCResponse {
-  @JsonKey(name:'account', includeIfNull: false)
-  int account;
+  @JsonKey(name:'account', includeIfNull: false, fromJson: intToAccountNum, toJson: accountNumToInt)
+  AccountNumber account;
 
-  @JsonKey(name:'enc_pubkey', includeIfNull: false)
-  String encPubkey;
+  @JsonKey(name:'enc_pubkey', includeIfNull: false, fromJson: hexToPublicKey, toJson: publicKeyToHex)
+  PublicKey encPubkey;
 
   @JsonKey(name:'balance', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
   Currency balance;
@@ -40,17 +43,17 @@ class PascalAccount extends RPCResponse {
   @JsonKey(name:'price', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
   Currency price;
 
-  @JsonKey(name:'seller_account', includeIfNull: false)
-  int sellerAccount;
+  @JsonKey(name:'seller_account', includeIfNull: false, fromJson: intToAccountNum, toJson: accountNumToInt)
+  AccountNumber sellerAccount;
 
   @JsonKey(name: 'private_sale', includeIfNull: false)
   bool privateSale;
 
-  @JsonKey(name: 'new_enc_pubkey', includeIfNull: false)
-  String newEncPubkey;
+  @JsonKey(name: 'new_enc_pubkey', includeIfNull: false, fromJson: hexToPublicKey, toJson: publicKeyToHex)
+  PublicKey newEncPubkey;
 
-  @JsonKey(name: 'name', includeIfNull: false)
-  String name;
+  @JsonKey(name: 'name', includeIfNull: false, fromJson: strToAccountName, toJson: accountNameToStr)
+  AccountName name;
 
   PascalAccount({
     this.account,

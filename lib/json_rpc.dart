@@ -7,3 +7,7 @@ export 'src/json_rpc/model/response/rpc_response.dart';
 export 'src/json_rpc/model/response/base_response.dart';
 export 'src/json_rpc/model/pascal_account.dart';
 export 'src/json_rpc/model/pascal_block.dart';
+export 'src/json_rpc/model/pascal_operation.dart';
+export 'src/json_rpc/model/sender.dart';
+export 'src/json_rpc/model/receiver.dart';
+export 'src/json_rpc/model/changer.dart';

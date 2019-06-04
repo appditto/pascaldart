@@ -9,7 +9,7 @@ part of 'pascal_block.dart';
 PascalBlock _$PascalBlockFromJson(Map<String, dynamic> json) {
   return PascalBlock(
       block: json['block'] as int,
-      encPubkey: json['enc_pubkey'] as String,
+      encPubkey: hexToPublicKey(json['enc_pubkey'] as String),
       reward: pascalToCurrency(json['reward'] as num),
       fee: pascalToCurrency(json['fee'] as num),
       ver: json['ver'] as int,
@@ -36,7 +36,7 @@ Map<String, dynamic> _$PascalBlockToJson(PascalBlock instance) {
   }
 
   writeNotNull('block', instance.block);
-  writeNotNull('enc_pubkey', instance.encPubkey);
+  writeNotNull('enc_pubkey', publicKeyToHex(instance.encPubkey));
   writeNotNull('reward', currencyToDouble(instance.reward));
   writeNotNull('fee', currencyToDouble(instance.fee));
   writeNotNull('ver', instance.ver);

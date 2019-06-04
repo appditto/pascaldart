@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pascaldart/src/common/model/currency.dart';
+import 'package:pascaldart/src/common/model/keys/publickey.dart';
 import 'package:pascaldart/src/json_rpc/model/response/rpc_response.dart';
 import 'package:pascaldart/src/json_rpc/converters.dart';
 
@@ -11,8 +12,8 @@ class PascalBlock extends RPCResponse {
   @JsonKey(name:'block', includeIfNull: false)
   int block;
 
-  @JsonKey(name:'enc_pubkey', includeIfNull: false)
-  String encPubkey;
+  @JsonKey(name:'enc_pubkey', includeIfNull: false, fromJson: hexToPublicKey, toJson: publicKeyToHex)
+  PublicKey encPubkey;
 
   @JsonKey(name:'reward', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
   Currency reward;
