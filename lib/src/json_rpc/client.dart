@@ -51,6 +51,7 @@ class RPCClient {
       case 'getwalletaccounts':
         return AccountsResponse.fromJson(json.decode(responseJson));
       case 'getblockoperations':
+      case 'getaccountoperations':
         return OperationsResponse.fromJson(json.decode(responseJson));
       default:
         return BaseResponse.fromJson(resp.result);
