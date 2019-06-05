@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pascaldart/src/json_rpc/model/pascal_account.dart';
 import 'package:pascaldart/src/json_rpc/model/pascal_block.dart';
+import 'package:pascaldart/src/json_rpc/model/pascal_operation.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 import 'package:pascaldart/src/json_rpc/model/response/accounts_response.dart';
 import 'package:pascaldart/src/json_rpc/model/response/base_response.dart';
@@ -46,12 +47,15 @@ class RPCClient {
         return PascalAccount.fromJson(resp.result);
       case 'getblock':
         return PascalBlock.fromJson(resp.result);
+      case 'findoperation':
+        return PascalOperation.fromJson(resp.result);
       case 'getblocks':
         return BlocksResponse.fromJson(json.decode(responseJson));
       case 'getwalletaccounts':
         return AccountsResponse.fromJson(json.decode(responseJson));
       case 'getblockoperations':
       case 'getaccountoperations':
+      case 'getpendings':
         return OperationsResponse.fromJson(json.decode(responseJson));
       default:
         return BaseResponse.fromJson(resp.result);
