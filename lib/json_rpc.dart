@@ -8,6 +8,7 @@ export 'src/json_rpc/model/request/getblockoperations_request.dart';
 export 'src/json_rpc/model/request/getaccountoperations_request.dart';
 export 'src/json_rpc/model/request/findoperation_request.dart';
 export 'src/json_rpc/model/request/getpendings_request.dart';
+export 'src/json_rpc/model/request/findaccounts_request.dart';
 export 'src/json_rpc/model/response/rpc_response.dart';
 export 'src/json_rpc/model/response/base_response.dart';
 export 'src/json_rpc/model/response/blocks_response.dart';

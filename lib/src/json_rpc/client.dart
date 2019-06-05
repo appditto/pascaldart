@@ -52,6 +52,7 @@ class RPCClient {
       case 'getblocks':
         return BlocksResponse.fromJson(json.decode(responseJson));
       case 'getwalletaccounts':
+      case 'findaccounts':
         return AccountsResponse.fromJson(json.decode(responseJson));
       case 'getblockoperations':
       case 'getaccountoperations':
