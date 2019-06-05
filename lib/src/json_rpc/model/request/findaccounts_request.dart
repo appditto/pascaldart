@@ -37,12 +37,12 @@ class FindAccountsRequest extends BaseRequest {
 
   @JsonKey(ignore: true)
   get minBalance {
-    return params['min_balance'] != null ? Currency.fromMolina(params['min_balance']) : null;
+    return params['min_balance'] != null ? Currency(params['min_balance']) : null;
   }
 
   @JsonKey(ignore: true)
   get maxBalance {
-    return params['max_balance'] != null ? Currency.fromMolina(params['max_balance']) : null;
+    return params['max_balance'] != null ? Currency(params['max_balance']) : null;
   }
 
   @JsonKey(ignore: true)
@@ -83,10 +83,10 @@ class FindAccountsRequest extends BaseRequest {
       this.params['exact'] = exact;
     }
     if (minBalance != null) {
-      this.params['min_balance'] = minBalance.toMolina();
+      this.params['min_balance'] = minBalance.toStringOpt();
     }
     if (maxBalance != null) {
-      this.params['max_balance'] = maxBalance.toMolina();
+      this.params['max_balance'] = maxBalance.toStringOpt();
     }
     if (encPubkey != null) {
       this.params['enc_pubkey'] = encPubkey;

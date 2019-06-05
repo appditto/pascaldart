@@ -48,6 +48,7 @@ class RPCClient {
       case 'getblock':
         return PascalBlock.fromJson(resp.result);
       case 'findoperation':
+      case 'getblockoperation':
         return PascalOperation.fromJson(resp.result);
       case 'getblocks':
         return BlocksResponse.fromJson(json.decode(responseJson));
@@ -57,6 +58,7 @@ class RPCClient {
       case 'getblockoperations':
       case 'getaccountoperations':
       case 'getpendings':
+      case 'executeoperations':
         return OperationsResponse.fromJson(json.decode(responseJson));
       default:
         return BaseResponse.fromJson(resp.result);
