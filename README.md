@@ -2,6 +2,8 @@
 
 A PascalCoin library written in Dart, ported based on the [sbx](https://github.com/Techworker/sbx) JavaScript library for PascalCoin.
 
+[PointyCastle](https://github.com/PointyCastle/pointycastle) APIs are used for ecdsa, sha256/512, hmac, etc.
+
 ## Features
 
 * 'pascaldart/common.dart' - Basic models for PascalCoin objects such as PrivateKey, PublicKey, AccountName, AccountNumber, etc. Also several "Coder" objects which encode and decode these objects to byte arrays.
@@ -17,7 +19,9 @@ If you want to import everything, import `pascaldart/pascaldart.dart`
 * Support multi-operation
 * Add parser for walletkeys.dat (from desktop wallet)
 * Support Extended PASA (EPASA)
-* Much more
+* Support more json-rpc methods
+* Support sect283k1 curve
+* More tests (particularly for operation digests)
 
 ## Issues and contributing
 
