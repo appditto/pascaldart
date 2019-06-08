@@ -19,9 +19,10 @@ class RPCClient {
   RPCClient({this.rpcAddress = 'http://127.0.0.1:4003', this.id = 0});
 
   /// Post json to the RPC address
-  Future<String> rpcPost(Map<String, dynamic> json) async {
+  Future<String> rpcPost(Map<String, dynamic> reqJson) async {
     this.id++;
-    http.Response response = await http.post(rpcAddress, body: json);
+    http.Response response =
+        await http.post(rpcAddress, body: json.encode(reqJson));
     if (response.statusCode != 200) {
       return null; // TODO - make this an error response with more details
     }
@@ -38,7 +39,9 @@ class RPCClient {
     // Parse base response
     BaseResponse resp = BaseResponse.fromJson(json.decode(responseJson));
     // Determine if error response
-    if (resp.result.containsKey('code') && resp.result.containsKey('message')) {
+    if (resp is Map &&
+        resp.result.containsKey('code') &&
+        resp.result.containsKey('message')) {
       return ErrorResponse.fromJson(resp.result);
     }
     // Determine correct response type
