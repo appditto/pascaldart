@@ -6,3 +6,5 @@ export 'common.dart';
 export 'crypto.dart';
 /// src/signing
 export 'signing.dart';
+/// src/json_rpc
+export 'json_rpc.dart';
