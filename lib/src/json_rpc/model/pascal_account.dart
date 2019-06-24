@@ -72,4 +72,8 @@ class PascalAccount extends RPCResponse {
 
   factory PascalAccount.fromJson(Map<String, dynamic> json) => _$PascalAccountFromJson(json);
   Map<String, dynamic> toJson() => _$PascalAccountToJson(this);
+
+  /// Operator overrides
+  bool operator == (o) => (o != null && o.hashCode == hashCode);
+  int get hashCode => account.hashCode;
 }

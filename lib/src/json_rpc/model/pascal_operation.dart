@@ -99,4 +99,8 @@ class PascalOperation extends RPCResponse {
 
   factory PascalOperation.fromJson(Map<String, dynamic> json) => _$PascalOperationFromJson(json);
   Map<String, dynamic> toJson() => _$PascalOperationToJson(this);
+
+  /// Operator overrides
+  bool operator == (o) => (o != null && o.hashCode == hashCode);
+  int get hashCode => ophash.hashCode;
 }
