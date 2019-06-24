@@ -4,7 +4,7 @@ class Currency {
 
   Currency(String value) {
     value = value.split(',').join(''); // remove commas
-  
+
     final BigInt ten = BigInt.from(10);
     final BigInt base = ten.pow(4);
 
@@ -17,7 +17,7 @@ class Currency {
 
     if (value == '.') {
       throw Exception(
-        'Invalid value ${pasc} cannot be converted to base unit with 4 decimals.');
+          'Invalid value ${pasc} cannot be converted to base unit with 4 decimals.');
     }
 
     // Split it into a whole and fractional part
@@ -26,15 +26,19 @@ class Currency {
     String whole;
     String fraction;
 
-    if (comps.length > 2) { 
+    if (comps.length > 2) {
       throw Exception('Too many decimal points');
     } else if (comps.length == 2) {
       fraction = comps[1];
     }
     whole = comps[0];
 
-    if (whole == null) { whole = '0'; }
-    if (fraction == null) { fraction = '0'; }
+    if (whole == null) {
+      whole = '0';
+    }
+    if (fraction == null) {
+      fraction = '0';
+    }
     if (fraction.length > 4) {
       throw Exception('Too many decimal places');
     }
@@ -105,45 +109,13 @@ class Currency {
   /// Gets an optimized pascal value with less zeros as possible.
   String toStringOpt({decimals = 4}) {
     return toFixed(this.pasc)
-      .replaceFirst(RegExp(r'[0]+$'), '')
-      .replaceFirst(RegExp(r'[\.]+$'), '');
+        .replaceFirst(RegExp(r'[0]+$'), '')
+        .replaceFirst(RegExp(r'[\.]+$'), '');
   }
 
   /// Get pascal value as string
   String toMolina() {
     return this.pasc.toString();
-  }
-
-  /// Adds the given value to the current value and returns a **new**
-  /// value.
-  Currency add(Currency addValue) {
-    return Currency.fromBigInt(
-      this.pasc + addValue.pasc,
-    );
-  }
-
-  Currency addInt(int addValue) {
-    return Currency.fromBigInt(this.pasc + BigInt.from(addValue));
-  }
-
-  Currency addString(String addValue) {
-    return Currency.fromBigInt(this.pasc + Currency.fromMolina(addValue).pasc);
-  }
-
-  /// Subtracts the given value from the current value and returns a **new**
-  /// value.
-  Currency sub(Currency subValue) {
-    return Currency.fromBigInt(
-      this.pasc - subValue.pasc,
-    );
-  }
-
-  Currency subInt(int subValue) {
-    return Currency.fromBigInt(this.pasc - BigInt.from(subValue));
-  }
-
-  Currency subString(String subValue) {
-    return Currency.fromBigInt(this.pasc + Currency.fromMolina(subValue).pasc);
   }
 
   /// Gets a positive variant of the value. If the value is already
@@ -159,11 +131,18 @@ class Currency {
     return this;
   }
 
+  /// Arithmetic operators
+  Currency operator +(Currency c) => Currency.fromBigInt(this.pasc + c.pasc);
+  Currency operator -(Currency c) => Currency.fromBigInt(this.pasc - c.pasc);
+
   /// Comparative operators
-  bool operator == (o) => (o is Currency && o.hashCode == hashCode) || (o is BigInt && o.hashCode == pasc.hashCode) || (o is String && o.hashCode == pasc.toString().hashCode);
-  bool operator < (o) => o is Currency && pasc < o.pasc;
-  bool operator <= (o) => o is Currency && pasc <= o.pasc;
-  bool operator > (o) => o is Currency && pasc > o.pasc;
-  bool operator >= (o) => o is Currency && pasc >= o.pasc;
+  bool operator ==(o) =>
+      (o is Currency && o.hashCode == hashCode) ||
+      (o is BigInt && o.hashCode == pasc.hashCode) ||
+      (o is String && o.hashCode == pasc.toString().hashCode);
+  bool operator <(o) => o is Currency && pasc < o.pasc;
+  bool operator <=(o) => o is Currency && pasc <= o.pasc;
+  bool operator >(o) => o is Currency && pasc > o.pasc;
+  bool operator >=(o) => o is Currency && pasc >= o.pasc;
   int get hashCode => pasc.hashCode;
 }

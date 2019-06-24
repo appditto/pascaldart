@@ -1,4 +1,3 @@
-
 import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
@@ -16,13 +15,13 @@ void main() {
       Currency c1 = Currency('1.1');
       Currency c2 = Currency('1.2');
 
-      expect(c1.add(c2).toStringOpt(),'2.3');
+      expect((c1 + c2).toStringOpt(), '2.3');
     });
     test('can sub', () {
       Currency c1 = Currency('1.2');
       Currency c2 = Currency('1.1');
 
-      expect(c1.sub(c2).toStringOpt(),'0.1');
+      expect((c1 - c2).toStringOpt(), '0.1');
     });
     test('can output a fixed decimal', () {
       Currency c1 = Currency('1.2');
