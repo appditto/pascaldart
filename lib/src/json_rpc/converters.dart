@@ -17,7 +17,7 @@ AccountState accountStateFromJson(String state) {
 }
 
 DateTime toDateTime(int v) {
-  return v == null ? null : DateTime.fromMillisecondsSinceEpoch(v);
+  return v == null ? null : DateTime.fromMillisecondsSinceEpoch(v * 1000, isUtc: true);
 }
 
 int fromDateTime(DateTime dt) {

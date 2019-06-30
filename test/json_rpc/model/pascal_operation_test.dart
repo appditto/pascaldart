@@ -12,7 +12,7 @@ void main() {
           "block":21555,
           "opblock":0,
           "optype":2,  
-          "time":1476466491,
+          "time":1561919606,
           "account":101740,
           "optxt":"Change Key to secp256k1",
           "amount":0,
@@ -31,7 +31,8 @@ void main() {
       expect(op.block, 21555);
       expect(op.opblock, 0);
       expect(op.optype, 2);
-      expect(op.time.millisecondsSinceEpoch, 1476466491);
+      expect(op.time.millisecondsSinceEpoch ~/ 1000, 1561919606);
+      expect(op.time.year, 2019);
       expect(op.account.account, 101740);
       expect(op.optxt, "Change Key to secp256k1");
       expect(op.amount.pasc, BigInt.zero);
