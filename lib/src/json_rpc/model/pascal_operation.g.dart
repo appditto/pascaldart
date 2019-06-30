@@ -22,7 +22,6 @@ PascalOperation _$PascalOperationFromJson(Map<String, dynamic> json) {
       balance: pascalToCurrency(json['balance'] as num),
       ophash: json['ophash'] as String,
       payload: json['payload'] as String,
-      subtype: json['subtype'] as String,
       signerAccount: intToAccountNum(json['signer_account'] as int),
       senders: (json['senders'] as List)
           ?.map((e) =>
@@ -62,7 +61,6 @@ Map<String, dynamic> _$PascalOperationToJson(PascalOperation instance) {
   writeNotNull('balance', currencyToDouble(instance.balance));
   writeNotNull('ophash', instance.ophash);
   writeNotNull('payload', instance.payload);
-  writeNotNull('subtype', instance.subtype);
   writeNotNull('signer_account', accountNumToInt(instance.signerAccount));
   writeNotNull('senders', instance.senders);
   writeNotNull('receivers', instance.receivers);

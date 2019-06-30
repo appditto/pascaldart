@@ -56,9 +56,6 @@ class PascalOperation extends RPCResponse {
   @JsonKey(name:'payload', includeIfNull: false)
   String payload;
 
-  @JsonKey(name:'subtype', includeIfNull: false)
-  String subtype;
-
   @JsonKey(name:'signer_account', includeIfNull: false, fromJson: intToAccountNum, toJson: accountNumToInt)
   AccountNumber signerAccount;
 
@@ -89,7 +86,6 @@ class PascalOperation extends RPCResponse {
     this.balance,
     this.ophash,
     this.payload,
-    this.subtype,
     this.signerAccount,
     this.senders,
     this.receivers,

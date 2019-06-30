@@ -6,6 +6,7 @@ export 'src/common/model/accountname.dart';
 export 'src/common/model/accountnumber.dart';
 export 'src/common/model/currency.dart';
 export 'src/common/model/operation_hash.dart';
+export 'src/common/model/optype.dart';
 export 'src/common/model/keys/curves.dart';
 export 'src/common/model/keys/keypair.dart';
 export 'src/common/model/keys/privatekey.dart';
