@@ -36,7 +36,7 @@ void main() {
       expect(block.fee.toStringOpt(), '0');
       expect(block.ver, 1);
       expect(block.ver_a, 0);
-      expect(block.timestamp.millisecondsSinceEpoch, 1473161); // Dart timestamp gives less precision
+      expect(block.timestamp.millisecondsSinceEpoch, 1473161258);
       expect(block.target, 559519020);
       expect(block.nonce, 131965022);
       expect(block.payload, "New Node 9/4/2016 10:10:13 PM - Pascal Coin Miner & Explorer Build:1.0.2.0");
