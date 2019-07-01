@@ -1,6 +1,6 @@
 name: pascaldart
 description: A dart library for PascalCoin. Supports key generation, encoding, encryption/decryption, signing, RPC.
-version: 0.1
+version: 0.1.0
 homepage: https://appditto.com
 author: Appditto <hello@appditto.com>
 

@@ -1,4 +1,4 @@
-## 0.1 (ALPHA)
+## 0.1.0 (ALPHA)
 
 - Provide example
 - Re-format pub.dev suggestions
