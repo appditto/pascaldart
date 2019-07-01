@@ -14,11 +14,11 @@ class PublicKey {
   PublicKey(this.x, this.y, this.curve) {
     this.xLength = x.lengthInBytes;
     this.yLength = y.lengthInBytes;
-    if (this.xLength > this.curve.xylPublicKey() || this.yLength > curve.xylPublicKey(getYLength: true)) {
+    if (this.xLength > this.curve.xylPublicKey() ||
+        this.yLength > curve.xylPublicKey(getYLength: true)) {
       throw Exception('Invalid x and/or y length for curve ${this.curve.name} - ' +
           'expected <= X${curve.xylPublicKey()}:Y${curve.xylPublicKey(getYLength: true)}, ' +
-          'got X${this.xLength}:Y${this.yLength}'
-      );
+          'got X${this.xLength}:Y${this.yLength}');
     }
   }
 

@@ -23,7 +23,8 @@ class GetBlocksRequest extends BaseRequest {
     return params['end'];
   }
 
-  GetBlocksRequest({int last, int start, int end, this.params}) : super(method: 'getblocks') {
+  GetBlocksRequest({int last, int start, int end, this.params})
+      : super(method: 'getblocks') {
     this.params = Map();
     if (last != null) {
       this.params['last'] = last;
@@ -35,5 +36,7 @@ class GetBlocksRequest extends BaseRequest {
     }
   }
 
-  Map<String, dynamic> toJson() => _$GetBlocksRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetBlocksRequestToJson(this);
+  factory GetBlocksRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetBlocksRequestFromJson(json);
 }

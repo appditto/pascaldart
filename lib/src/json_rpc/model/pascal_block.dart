@@ -9,73 +9,89 @@ part 'pascal_block.g.dart';
 /// Represents an 'Account' object returned by PascalCoin json-RPC API
 @JsonSerializable()
 class PascalBlock extends RPCResponse {
-  @JsonKey(name:'block', includeIfNull: false)
+  @JsonKey(name: 'block', includeIfNull: false)
   int block;
 
-  @JsonKey(name:'enc_pubkey', includeIfNull: false, fromJson: hexToPublicKey, toJson: publicKeyToHex)
+  @JsonKey(
+      name: 'enc_pubkey',
+      includeIfNull: false,
+      fromJson: hexToPublicKey,
+      toJson: publicKeyToHex)
   PublicKey encPubkey;
 
-  @JsonKey(name:'reward', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
+  @JsonKey(
+      name: 'reward',
+      includeIfNull: false,
+      toJson: currencyToDouble,
+      fromJson: pascalToCurrency)
   Currency reward;
 
-  @JsonKey(name:'fee', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
+  @JsonKey(
+      name: 'fee',
+      includeIfNull: false,
+      toJson: currencyToDouble,
+      fromJson: pascalToCurrency)
   Currency fee;
 
-  @JsonKey(name:'ver', includeIfNull: false)
+  @JsonKey(name: 'ver', includeIfNull: false)
   int ver;
 
-  @JsonKey(name:'ver_a', includeIfNull: false)
+  @JsonKey(name: 'ver_a', includeIfNull: false)
   int ver_a;
 
-  @JsonKey(name:'timestamp', fromJson: toDateTime, toJson: fromDateTime, includeIfNull: false)
+  @JsonKey(
+      name: 'timestamp',
+      fromJson: toDateTime,
+      toJson: fromDateTime,
+      includeIfNull: false)
   DateTime timestamp;
 
-  @JsonKey(name:'target', includeIfNull: false)
+  @JsonKey(name: 'target', includeIfNull: false)
   int target;
 
-  @JsonKey(name:'nonce', includeIfNull: false)
+  @JsonKey(name: 'nonce', includeIfNull: false)
   int nonce;
 
-  @JsonKey(name:'payload', includeIfNull: false)
+  @JsonKey(name: 'payload', includeIfNull: false)
   String payload;
 
-  @JsonKey(name:'sbh', includeIfNull: false)
+  @JsonKey(name: 'sbh', includeIfNull: false)
   String sbh;
 
-  @JsonKey(name:'oph', includeIfNull: false)
+  @JsonKey(name: 'oph', includeIfNull: false)
   String oph;
 
-  @JsonKey(name:'pow', includeIfNull: false)
+  @JsonKey(name: 'pow', includeIfNull: false)
   String pow;
 
-  @JsonKey(name:'operations', includeIfNull: false)
+  @JsonKey(name: 'operations', includeIfNull: false)
   int operations;
 
-  @JsonKey(name:'hashratekhs', includeIfNull: false)
+  @JsonKey(name: 'hashratekhs', includeIfNull: false)
   int hashratekhs;
 
-  @JsonKey(name:'maturation', includeIfNull: false)
+  @JsonKey(name: 'maturation', includeIfNull: false)
   int maturation;
 
-  PascalBlock({
-    this.block,
-    this.encPubkey,
-    this.reward,
-    this.fee,
-    this.ver,
-    this.ver_a,
-    this.timestamp,
-    this.target,
-    this.nonce,
-    this.payload,
-    this.sbh,
-    this.oph,
-    this.pow,
-    this.operations,
-    this.hashratekhs,
-    this.maturation
-  });
+  PascalBlock(
+      {this.block,
+      this.encPubkey,
+      this.reward,
+      this.fee,
+      this.ver,
+      this.ver_a,
+      this.timestamp,
+      this.target,
+      this.nonce,
+      this.payload,
+      this.sbh,
+      this.oph,
+      this.pow,
+      this.operations,
+      this.hashratekhs,
+      this.maturation});
 
-  factory PascalBlock.fromJson(Map<String, dynamic> json) => _$PascalBlockFromJson(json);
+  factory PascalBlock.fromJson(Map<String, dynamic> json) =>
+      _$PascalBlockFromJson(json);
   Map<String, dynamic> toJson() => _$PascalBlockToJson(this);
 }

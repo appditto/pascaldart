@@ -15,7 +15,6 @@ If you want to import everything, import `pascaldart/pascaldart.dart`
 
 ## TODO
 
-* Provide examples
 * Support multi-operation
 * Add parser for walletkeys.dat (from desktop wallet)
 * Support Extended PASA (EPASA)

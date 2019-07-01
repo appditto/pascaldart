@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:pascaldart/src/common/pascalcoin_info.dart';

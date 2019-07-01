@@ -9,7 +9,8 @@ class PrivateKey {
 
   PrivateKey(this.key, this.curve) {
     if (this.key.length > this.curve.lPrivateKey()) {
-      throw Exception('Invalid private key length for ${this.curve.name} - expected <= ${this.curve.lPrivateKey()}, got ${this.key.length}');
+      throw Exception(
+          'Invalid private key length for ${this.curve.name} - expected <= ${this.curve.lPrivateKey()}, got ${this.key.length}');
     }
   }
 

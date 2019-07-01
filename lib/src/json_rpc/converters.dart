@@ -9,15 +9,21 @@ import 'package:pascaldart/src/json_rpc/model/pascal_account.dart';
 /// Various serialization converters
 
 String accountStateToJson(AccountState state) {
-  return state == null ? null : state == AccountState.LISTED ? "listed" : "normal";
+  return state == null
+      ? null
+      : state == AccountState.LISTED ? "listed" : "normal";
 }
 
 AccountState accountStateFromJson(String state) {
-  return state == null ? null : state == "listed" ? AccountState.LISTED : AccountState.NORMAL;
+  return state == null
+      ? null
+      : state == "listed" ? AccountState.LISTED : AccountState.NORMAL;
 }
 
 DateTime toDateTime(int v) {
-  return v == null ? null : DateTime.fromMillisecondsSinceEpoch(v * 1000, isUtc: true);
+  return v == null
+      ? null
+      : DateTime.fromMillisecondsSinceEpoch(v * 1000, isUtc: true);
 }
 
 int fromDateTime(DateTime dt) {
@@ -49,9 +55,13 @@ String accountNameToStr(AccountName name) {
 }
 
 PublicKey hexToPublicKey(String hexKey) {
-  return hexKey == null ? null : PublicKeyCoder().decodeFromBytes(PDUtil.hexToBytes(hexKey));
+  return hexKey == null
+      ? null
+      : PublicKeyCoder().decodeFromBytes(PDUtil.hexToBytes(hexKey));
 }
 
 String publicKeyToHex(PublicKey pubKey) {
-  return pubKey == null ? null : PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(pubKey));
+  return pubKey == null
+      ? null
+      : PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(pubKey));
 }

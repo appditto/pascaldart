@@ -25,7 +25,9 @@ class TransactionOperation extends BaseOperation {
 
   /// Creates a new Transaction instance with the given data. The payload is
   /// empty by default and not encoded.
-  TransactionOperation({@required this.sender, @required this.target, @required this.amount}) : super();
+  TransactionOperation(
+      {@required this.sender, @required this.target, @required this.amount})
+      : super();
 
   /// Decode this operation from raw bytes
   static TransactionOperation decodeFromBytes(Uint8List bytes) {
@@ -71,14 +73,11 @@ class TransactionOperation extends BaseOperation {
     Signature signature = Signature(r: r, s: s);
 
     // Return op
-    return TransactionOperation(
-      sender: sender,
-      target: target,
-      amount: amount
-    )..withNOperation(nOperation)
-     ..withFee(fee)
-     ..withPayload(payload)
-     ..withSignature(signature);
+    return TransactionOperation(sender: sender, target: target, amount: amount)
+      ..withNOperation(nOperation)
+      ..withFee(fee)
+      ..withPayload(payload)
+      ..withSignature(signature);
   }
 
   /// Encode this operation into raw bytes
@@ -123,15 +122,7 @@ class TransactionOperation extends BaseOperation {
     // Not used in modern pascal coin?
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
-    return PDUtil.concat([
-      sender,
-      nOperation,
-      target,
-      amount,
-      fee,
-      payload,
-      v2publickey,
-      type
-    ]);
+    return PDUtil.concat(
+        [sender, nOperation, target, amount, fee, payload, v2publickey, type]);
   }
 }

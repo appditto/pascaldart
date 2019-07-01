@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 
 part 'findoperation_request.g.dart';
@@ -14,10 +13,14 @@ class FindOperationRequest extends BaseRequest {
     return params['ophash'];
   }
 
-  FindOperationRequest({@required String ophash}) : super(method: 'findoperation') {
+  FindOperationRequest({String ophash}) : super(method: 'findoperation') {
     this.params = Map();
-    this.params['ophash'] = ophash;
+    if (ophash != null) {
+      this.params['ophash'] = ophash;
+    }
   }
 
-  Map<String, dynamic> toJson() => _$FindOperationRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$FindOperationRequestToJson(this);
+  factory FindOperationRequest.fromJson(Map<String, dynamic> json) =>
+      _$FindOperationRequestFromJson(json);
 }

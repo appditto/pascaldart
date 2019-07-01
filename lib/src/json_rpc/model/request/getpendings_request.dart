@@ -28,5 +28,7 @@ class GetPendingsRequest extends BaseRequest {
     }
   }
 
-  Map<String, dynamic> toJson() => _$GetPendingsRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetPendingsRequestToJson(this);
+  factory GetPendingsRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetPendingsRequestFromJson(json);
 }

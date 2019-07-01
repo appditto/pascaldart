@@ -11,6 +11,7 @@ class OperationsResponse extends RPCResponse {
 
   OperationsResponse({this.operations});
 
-  factory OperationsResponse.fromJson(Map<String, dynamic> json) => _$OperationsResponseFromJson(json);
+  factory OperationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$OperationsResponseFromJson(json);
   Map<String, dynamic> toJson() => _$OperationsResponseToJson(this);
 }

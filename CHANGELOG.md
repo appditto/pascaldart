@@ -1,3 +1,8 @@
+## 0.1 (ALPHA)
+
+- Provide example
+- Re-format pub.dev suggestions
+
 ## 0.0.1 (ALPHA)
 
 - Initial Release

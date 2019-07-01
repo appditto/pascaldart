@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 
 part 'getaccountoperations_request.g.dart';
@@ -29,9 +28,13 @@ class GetAccountOperationsRequest extends BaseRequest {
     return params['max'];
   }
 
-  GetAccountOperationsRequest({@required int account, int depth, int start, int max}) : super(method: 'getaccountoperations') {
+  GetAccountOperationsRequest(
+      {int account, int depth, int start, int max})
+      : super(method: 'getaccountoperations') {
     this.params = Map();
-    this.params['account'] = account;
+    if (account != null) {
+      this.params['account'] = account;
+    }
     if (depth != null) {
       this.params['depth'] = depth;
     }
@@ -43,5 +46,7 @@ class GetAccountOperationsRequest extends BaseRequest {
     }
   }
 
-  Map<String, dynamic> toJson() => _$GetAccountOperationsRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetAccountOperationsRequestToJson(this);
+  factory GetAccountOperationsRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetAccountOperationsRequestFromJson(json);
 }

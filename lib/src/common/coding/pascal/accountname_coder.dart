@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:pascaldart/src/common/coding/core/string_with_length.dart';
 import 'package:pascaldart/src/common/model/accountname.dart';
-import 'package:pascaldart/src/common/pascaldart_util.dart';
 
 /// A special pascal type that can en/decode an account name
 class AccountNameCoder {
@@ -12,11 +11,13 @@ class AccountNameCoder {
 
   /// Decode account name from given bytes
   AccountName decodeFromBytes(Uint8List bytes) {
-    return AccountName(StringWithLength(byteSize: byteSize).decodeFromBytes(bytes));
+    return AccountName(
+        StringWithLength(byteSize: byteSize).decodeFromBytes(bytes));
   }
 
   /// Encode account name to bytes
   Uint8List encodeToBytes(AccountName accountName) {
-    return StringWithLength(byteSize: byteSize).encodeToBytes(accountName.toString());
+    return StringWithLength(byteSize: byteSize)
+        .encodeToBytes(accountName.toString());
   }
 }

@@ -28,7 +28,9 @@ class GetWalletAccountsRequest extends BaseRequest {
     return params['max'];
   }
 
-  GetWalletAccountsRequest({String encPubkey, String b58pubkey, int start, int max, this.params}) : super(method: 'getwalletaccounts') {
+  GetWalletAccountsRequest(
+      {String encPubkey, String b58pubkey, int start, int max, this.params})
+      : super(method: 'getwalletaccounts') {
     this.params = Map();
     if (encPubkey != null) {
       this.params['enc_pubkey'] = encPubkey;
@@ -44,5 +46,7 @@ class GetWalletAccountsRequest extends BaseRequest {
     }
   }
 
-  Map<String, dynamic> toJson() => _$GetWalletAccountsRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetWalletAccountsRequestToJson(this);
+  factory GetWalletAccountsRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetWalletAccountsRequestFromJson(json);
 }

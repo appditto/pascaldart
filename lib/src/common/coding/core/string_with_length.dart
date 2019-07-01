@@ -16,13 +16,15 @@ class StringWithLength {
       length = PDUtil.bytesToInt([bytes[0]]);
       this.byteSize = 1;
     }
-    Uint8List nameBytes = bytes.sublist(byteSize, length+byteSize);
+    Uint8List nameBytes = bytes.sublist(byteSize, length + byteSize);
     return PDUtil.bytesToUtf8String(nameBytes);
   }
 
   Uint8List encodeToBytes(String value) {
     int length = value.toString().length;
-    String lengthHex = PDUtil.byteToHex(PDUtil.intToBytes(length)).padRight(byteSize == 2 ? 4 : 2, '0');
-    return PDUtil.hexToBytes(lengthHex + PDUtil.byteToHex(PDUtil.stringToBytesUtf8(value)));
+    String lengthHex = PDUtil.byteToHex(PDUtil.intToBytes(length))
+        .padRight(byteSize == 2 ? 4 : 2, '0');
+    return PDUtil.hexToBytes(
+        lengthHex + PDUtil.byteToHex(PDUtil.stringToBytesUtf8(value)));
   }
 }

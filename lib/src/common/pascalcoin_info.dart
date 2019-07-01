@@ -2,7 +2,6 @@ import 'package:pascaldart/src/common/model/currency.dart';
 
 /// Gets information about forks and features.
 class PascalCoinInfo {
-
   static Currency MIN_FEE() {
     return Currency.fromMolina('1');
   }

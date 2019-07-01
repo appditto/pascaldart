@@ -1,9 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:quiver/core.dart';
 
 /// Available curves in PascalCoin
-const Map<int,String> CURVES = {
+const Map<int, String> CURVES = {
   0: 'empty',
   714: 'secp256k1',
   715: 'secp384r1',
@@ -15,10 +13,12 @@ class XYPubKey {
   int x;
   int y;
   XYPubKey(this.x, this.y);
+
   /// Operator overrides
-  bool operator == (o) => (o != null && o.hashCode == hashCode);
+  bool operator ==(o) => (o != null && o.hashCode == hashCode);
   int get hashCode => hash2(x.hashCode, x.hashCode);
 }
+
 final Map<int, XYPubKey> XYL_PUBKEYS = {
   714: XYPubKey(32, 32),
   715: XYPubKey(48, 48),
@@ -27,12 +27,7 @@ final Map<int, XYPubKey> XYL_PUBKEYS = {
   0: XYPubKey(0, 0),
 };
 
-const Map<int, int> L_PRIVKEYS = {
-  714: 32,
-  715: 48,
-  716: 66,
-  729: 36
-};
+const Map<int, int> L_PRIVKEYS = {714: 32, 715: 48, 716: 66, 729: 36};
 
 const ID = Symbol('id');
 const NAME = Symbol('name');

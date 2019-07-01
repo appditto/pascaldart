@@ -8,5 +8,9 @@ class ECDHResult {
   Uint8List key;
   Uint8List publicKey;
 
-  ECDHResult({@required isEncrypted, @required this.data, @required this.key, this.publicKey});
+  ECDHResult(
+      {@required isEncrypted,
+      @required this.data,
+      @required this.key,
+      this.publicKey});
 }

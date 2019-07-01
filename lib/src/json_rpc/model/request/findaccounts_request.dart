@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:pascaldart/src/common/model/currency.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 
@@ -37,12 +36,16 @@ class FindAccountsRequest extends BaseRequest {
 
   @JsonKey(ignore: true)
   get minBalance {
-    return params['min_balance'] != null ? Currency(params['min_balance']) : null;
+    return params['min_balance'] != null
+        ? Currency(params['min_balance'])
+        : null;
   }
 
   @JsonKey(ignore: true)
   get maxBalance {
-    return params['max_balance'] != null ? Currency(params['max_balance']) : null;
+    return params['max_balance'] != null
+        ? Currency(params['max_balance'])
+        : null;
   }
 
   @JsonKey(ignore: true)
@@ -55,17 +58,17 @@ class FindAccountsRequest extends BaseRequest {
     return params['b58_pubkey'];
   }
 
-  FindAccountsRequest({
-    String name,
-    int type,
-    int start,
-    int max,
-    bool exact,
-    Currency minBalance,
-    Currency maxBalance,
-    String encPubkey,
-    String b58Pubkey
-  }) : super(method: 'findaccounts') {
+  FindAccountsRequest(
+      {String name,
+      int type,
+      int start,
+      int max,
+      bool exact,
+      Currency minBalance,
+      Currency maxBalance,
+      String encPubkey,
+      String b58Pubkey})
+      : super(method: 'findaccounts') {
     this.params = Map();
     if (name != null) {
       this.params['name'] = name;
@@ -96,5 +99,7 @@ class FindAccountsRequest extends BaseRequest {
     }
   }
 
-  Map<String, dynamic> toJson() => _$FindAccountsRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$FindAccountsRequestToJson(this);
+  factory FindAccountsRequest.fromJson(Map<String, dynamic> json) =>
+      _$FindAccountsRequestFromJson(json);
 }

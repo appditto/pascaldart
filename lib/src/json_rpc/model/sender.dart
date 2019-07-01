@@ -9,24 +9,27 @@ part 'sender.g.dart';
 /// Represents an 'Sender' object returned by PascalCoin json-RPC API
 @JsonSerializable()
 class Sender extends RPCResponse {
-  @JsonKey(name:'account', includeIfNull: false, fromJson: intToAccountNum, toJson: accountNumToInt)
+  @JsonKey(
+      name: 'account',
+      includeIfNull: false,
+      fromJson: intToAccountNum,
+      toJson: accountNumToInt)
   AccountNumber sendingAccount;
 
-  @JsonKey(name:'n_operation', includeIfNull: false)
+  @JsonKey(name: 'n_operation', includeIfNull: false)
   int nOperation;
 
-  @JsonKey(name:'amount', includeIfNull: false, toJson: currencyToDouble, fromJson: pascalToCurrency)
+  @JsonKey(
+      name: 'amount',
+      includeIfNull: false,
+      toJson: currencyToDouble,
+      fromJson: pascalToCurrency)
   Currency amount;
 
-  @JsonKey(name:'payload', includeIfNull: false)
+  @JsonKey(name: 'payload', includeIfNull: false)
   String payload;
 
-  Sender({
-    this.sendingAccount,
-    this.nOperation,
-    this.amount,
-    this.payload
-  });
+  Sender({this.sendingAccount, this.nOperation, this.amount, this.payload});
 
   factory Sender.fromJson(Map<String, dynamic> json) => _$SenderFromJson(json);
   Map<String, dynamic> toJson() => _$SenderToJson(this);

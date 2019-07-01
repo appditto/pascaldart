@@ -33,10 +33,10 @@ void main() {
       ChangeAccountInfoOperation decoded =
           RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
 
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)), fixture['r']);
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)), fixture['s']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+          fixture['r']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+          fixture['s']);
       expect(decoded.accountSigner.account, fixture['signer']);
       expect(decoded.targetSigner.account, fixture['target']);
       expect(decoded.nOperation, fixture['n_operation']);

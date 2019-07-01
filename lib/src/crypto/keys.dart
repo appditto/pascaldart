@@ -25,9 +25,11 @@ class Keys {
     secureRandom.seed(pc.KeyParameter(Uint8List.fromList(seeds)));
 
     pc.ECDomainParameters domainParams = pc.ECDomainParameters(curve.name);
-    pc.ECKeyGeneratorParameters ecParams = pc.ECKeyGeneratorParameters(domainParams);
+    pc.ECKeyGeneratorParameters ecParams =
+        pc.ECKeyGeneratorParameters(domainParams);
     pc.ParametersWithRandom params =
-        pc.ParametersWithRandom<pc.ECKeyGeneratorParameters>(ecParams, secureRandom);
+        pc.ParametersWithRandom<pc.ECKeyGeneratorParameters>(
+            ecParams, secureRandom);
 
     pc.KeyGenerator keyGenerator = pc.KeyGenerator("EC");
     keyGenerator.init(params);
@@ -36,37 +38,49 @@ class Keys {
     pc.ECPrivateKey privateKey = keyPair.privateKey;
     pc.ECPublicKey publicKey = keyPair.publicKey;
     return common.KeyPair(
-      common.PrivateKey(common.PDUtil.encodeBigInt(privateKey.d, endian: Endian.big), curve),
-      common.PublicKey(common.PDUtil.encodeBigInt(publicKey.Q.x.toBigInteger(), endian: Endian.big), common.PDUtil.encodeBigInt(publicKey.Q.y.toBigInteger(), endian: Endian.big), curve)
-     );
+        common.PrivateKey(
+            common.PDUtil.encodeBigInt(privateKey.d, endian: Endian.big),
+            curve),
+        common.PublicKey(
+            common.PDUtil.encodeBigInt(publicKey.Q.x.toBigInteger(),
+                endian: Endian.big),
+            common.PDUtil.encodeBigInt(publicKey.Q.y.toBigInteger(),
+                endian: Endian.big),
+            curve));
   }
 
   static common.KeyPair fromPrivateKey(common.PrivateKey privateKey) {
-    pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
-    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big), domainParams);
+    pc.ECDomainParameters domainParams =
+        pc.ECDomainParameters(privateKey.curve.name);
+    pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(
+        common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big),
+        domainParams);
     pc.ECPoint Q = domainParams.G * pKeyEC.d;
     return common.KeyPair(
-            privateKey,
-            common.PublicKey(common.PDUtil.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
-                             common.PDUtil.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
-                             privateKey.curve)
-    );
+        privateKey,
+        common.PublicKey(
+            common.PDUtil.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
+            common.PDUtil.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
+            privateKey.curve));
   }
 
   /// Sign bytes using sha256 with ecdsa
   static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes) {
     // Setup deterministic signer
-    pc.ECDomainParameters domainParams = pc.ECDomainParameters(privateKey.curve.name);
+    pc.ECDomainParameters domainParams =
+        pc.ECDomainParameters(privateKey.curve.name);
     BigInt d = common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big);
-    pc.PrivateKeyParameter privKeyParams = pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
-    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA"); 
+    pc.PrivateKeyParameter privKeyParams =
+        pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
+    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA");
     // Sign
     signer.init(true, privKeyParams);
     pc.ECSignature ecsig = signer.generateSignature(msgBytes);
     // Verify
-    pc.Signer verifier = pc.Signer("SHA-256/ECDSA"); 
+    pc.Signer verifier = pc.Signer("SHA-256/ECDSA");
     pc.ECPoint Q = domainParams.G * d;
-    pc.PublicKeyParameter pubKeyParams = pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
+    pc.PublicKeyParameter pubKeyParams =
+        pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
     verifier.init(false, pubKeyParams);
     if (verifier.verifySignature(msgBytes, ecsig)) {
       return Signature(r: ecsig.r, s: ecsig.s);

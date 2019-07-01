@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:pascaldart/src/common/pascaldart_util.dart';
 import 'package:pascaldart/src/common/coding/core/int16.dart';
 import 'package:pascaldart/src/common/coding/core/int32.dart';
 import 'package:pascaldart/src/common/coding/core/int8.dart';
@@ -18,7 +17,9 @@ class OpTypeCoder {
     if (byteSize == 1) {
       return Int8.decodeFromBytes(bytes);
     }
-    int opType = byteSize == 2 ? Int16.decodeFromBytes(bytes) : Int32.decodeFromBytes(bytes);
+    int opType = byteSize == 2
+        ? Int16.decodeFromBytes(bytes)
+        : Int32.decodeFromBytes(bytes);
     return opType;
   }
 

@@ -7,7 +7,7 @@ class PDUtil {
   /// Converts a Uint8List to a hex string
   static String byteToHex(List<int> bytes) {
     return HEX.encode(bytes).toUpperCase();
-  }  
+  }
 
   /// Converts a hex string to a Uint8List
   static Uint8List hexToBytes(String hex) {
@@ -26,7 +26,8 @@ class PDUtil {
 
   /// https://github.com/MauroJr/escape-regex/blob/master/index.js
   static String escapeRegex(string) {
-    return ('' + string).replaceAllMapped(RegExp(r'([?!${}*:()|=^[\]\/\\.+])'), (match) => '\\${match.group(0)}');
+    return ('' + string).replaceAllMapped(
+        RegExp(r'([?!${}*:()|=^[\]\/\\.+])'), (match) => '\\${match.group(0)}');
   }
 
   /// Concatenates one or more byte arrays
@@ -55,7 +56,7 @@ class PDUtil {
   /// Convert string to byte array
   static Uint8List stringToBytesUtf8(String str) {
     return utf8.encode(str);
-  } 
+  }
 
   /// Convert byte array to string utf-8
   static String bytesToUtf8String(Uint8List bytes) {
@@ -75,17 +76,21 @@ class PDUtil {
   static BigInt decodeBigInt(List<int> bytes, {Endian endian = Endian.little}) {
     BigInt result = BigInt.from(0);
     for (int i = 0; i < bytes.length; i++) {
-      result += BigInt.from(bytes[endian == Endian.little ? i : bytes.length - i - 1]) << (8 * i);
+      result += BigInt.from(
+              bytes[endian == Endian.little ? i : bytes.length - i - 1]) <<
+          (8 * i);
     }
     return result;
   }
 
   /// Encode a BigInt into bytes using specified endianness.
-  static Uint8List encodeBigInt(BigInt number, {Endian endian = Endian.little}) {
+  static Uint8List encodeBigInt(BigInt number,
+      {Endian endian = Endian.little}) {
     int size = (number.bitLength + 7) >> 3;
     var result = Uint8List(size);
     for (int i = 0; i < size; i++) {
-      result[endian == Endian.little ? i : size - i - 1] = (number & BigInt.from(0xff)).toInt();
+      result[endian == Endian.little ? i : size - i - 1] =
+          (number & BigInt.from(0xff)).toInt();
       number = number >> 8;
     }
     return result;
@@ -97,10 +102,12 @@ class PDUtil {
   }
 
   static int decodeLength(Uint8List lengthBytes) {
-    return int.parse(PDUtil.switchEndian(PDUtil.byteToHex(lengthBytes)), radix: 16);    
+    return int.parse(PDUtil.switchEndian(PDUtil.byteToHex(lengthBytes)),
+        radix: 16);
   }
 
   static Uint8List encodeLength(int length) {
-    return PDUtil.hexToBytes(PDUtil.byteToHex(PDUtil.intToBytes(length)).padRight(4, '0'));    
+    return PDUtil.hexToBytes(
+        PDUtil.byteToHex(PDUtil.intToBytes(length)).padRight(4, '0'));
   }
 }

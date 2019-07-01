@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:pascaldart/common.dart';
@@ -17,7 +16,8 @@ void main() {
     });
 
     test('generates key and iv with salt', () {
-      KeyIV data = KDF.pascalCoin('test', salt: PDUtil.stringToBytesUtf8('123456798'));
+      KeyIV data =
+          KDF.pascalCoin('test', salt: PDUtil.stringToBytesUtf8('123456798'));
       expect(data.key is Uint8List, true);
       expect(data.iv is Uint8List, true);
 

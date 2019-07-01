@@ -7,5 +7,10 @@ class EciesData {
   int originalDataLength;
   int originalDataLengthIncPadding;
 
-  EciesData({this.publicKey, this.mac, this.encryptedData, this.originalDataLength, this.originalDataLengthIncPadding});
+  EciesData(
+      {this.publicKey,
+      this.mac,
+      this.encryptedData,
+      this.originalDataLength,
+      this.originalDataLengthIncPadding});
 }

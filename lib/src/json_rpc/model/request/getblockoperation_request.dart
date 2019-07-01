@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:pascaldart/src/json_rpc/model/request/base_request.dart';
 
 part 'getblockoperation_request.g.dart';
@@ -19,11 +18,16 @@ class GetBlockOperationRequest extends BaseRequest {
     return params['opblock'];
   }
 
-  GetBlockOperationRequest({@required int block, int opblock = 0}) : super(method: 'getblockoperation') {
+  GetBlockOperationRequest({int block, int opblock = 0})
+      : super(method: 'getblockoperation') {
     this.params = Map();
-    this.params['block'] = block;
+    if (block != null) {
+      this.params['block'] = block;
+    }
     this.params['opblock'] = opblock;
   }
 
-  Map<String, dynamic> toJson() => _$GetBlockOperationRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetBlockOperationRequestToJson(this);
+  factory GetBlockOperationRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetBlockOperationRequestFromJson(json);
 }

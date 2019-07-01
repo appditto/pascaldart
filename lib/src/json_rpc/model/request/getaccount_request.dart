@@ -18,5 +18,7 @@ class GetAccountRequest extends BaseRequest {
     this.params['account'] = account;
   }
 
-  Map<String, dynamic> toJson() => _$GetAccountRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetAccountRequestToJson(this);
+  factory GetAccountRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetAccountRequestFromJson(json);
 }

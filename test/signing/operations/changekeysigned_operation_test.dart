@@ -31,10 +31,10 @@ void main() {
       ChangeKeySignedOperation decoded =
           RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
 
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)), fixture['r']);
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)), fixture['s']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+          fixture['r']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+          fixture['s']);
       expect(decoded.signer.account, fixture['sender']);
       expect(decoded.target.account, fixture['target']);
       expect(decoded.nOperation, fixture['n_operation']);

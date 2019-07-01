@@ -32,10 +32,10 @@ void main() {
       BuyAccountOperation decoded =
           RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
 
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)), fixture['r']);
-      expect(
-          PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)), fixture['s']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+          fixture['r']);
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+          fixture['s']);
       expect(decoded.sender.account, fixture['buyerAccount']);
       expect(decoded.target.account, fixture['accountToBuy']);
       expect(decoded.seller.account, fixture['seller']);

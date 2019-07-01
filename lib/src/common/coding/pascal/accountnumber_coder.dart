@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:pascaldart/src/common/coding/core/int32.dart';
 import 'package:pascaldart/src/common/model/accountnumber.dart';
-import 'package:pascaldart/src/common/pascaldart_util.dart';
 
 /// A special pascal type that can en/decode an account number
 class AccountNumberCoder {
@@ -14,6 +13,6 @@ class AccountNumberCoder {
 
   /// Encode an account number to bytes
   Uint8List encodeToBytes(AccountNumber accountNumber) {
-    return Int32.encodeToBytes(accountNumber.account);;
+    return Int32.encodeToBytes(accountNumber.account);
   }
 }

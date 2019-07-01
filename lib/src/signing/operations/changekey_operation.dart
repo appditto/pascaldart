@@ -22,7 +22,8 @@ class ChangeKeyOperation extends BaseOperation {
   }
 
   /// Creates a new Change Key operation
-  ChangeKeyOperation({@required this.signer, @required this.newPublicKey}) : super();
+  ChangeKeyOperation({@required this.signer, @required this.newPublicKey})
+      : super();
 
   /// Decode this operation from raw bytes
   static ChangeKeyOperation decodeFromBytes(Uint8List bytes) {
@@ -50,10 +51,13 @@ class ChangeKeyOperation extends BaseOperation {
     // 6 zero-bytes are always here
     offset += 6;
     // New public key
-    int newPublicKeyLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
+    int newPublicKeyLength =
+        PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
-    Uint8List newPublicKeyBytes = bytes.sublist(offset, offset + newPublicKeyLength);
-    PublicKey newPublicKey = PublicKeyCoder().decodeFromBytes(newPublicKeyBytes);
+    Uint8List newPublicKeyBytes =
+        bytes.sublist(offset, offset + newPublicKeyLength);
+    PublicKey newPublicKey =
+        PublicKeyCoder().decodeFromBytes(newPublicKeyBytes);
     offset += newPublicKeyLength;
     // Signature
     int rLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
@@ -66,13 +70,11 @@ class ChangeKeyOperation extends BaseOperation {
     Signature signature = Signature(r: r, s: s);
 
     // Return op
-    return ChangeKeyOperation(
-      signer: signer,
-      newPublicKey: newPublicKey
-    )..withNOperation(nOperation)
-     ..withFee(fee)
-     ..withPayload(payload)
-     ..withSignature(signature);
+    return ChangeKeyOperation(signer: signer, newPublicKey: newPublicKey)
+      ..withNOperation(nOperation)
+      ..withFee(fee)
+      ..withPayload(payload)
+      ..withSignature(signature);
   }
 
   /// Encode this operation into raw bytes
@@ -116,14 +118,7 @@ class ChangeKeyOperation extends BaseOperation {
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
-    return PDUtil.concat([
-      signer,
-      nOperation,
-      fee,
-      payload,
-      v2publickey,
-      newPublicKey,
-      type
-    ]);
-  }  
+    return PDUtil.concat(
+        [signer, nOperation, fee, payload, v2publickey, newPublicKey, type]);
+  }
 }

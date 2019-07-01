@@ -18,5 +18,7 @@ class GetBlockRequest extends BaseRequest {
     this.params['block'] = block;
   }
 
-  Map<String, dynamic> toJson() => _$GetBlockRequestToJson(this); 
+  Map<String, dynamic> toJson() => _$GetBlockRequestToJson(this);
+  factory GetBlockRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetBlockRequestFromJson(json);
 }

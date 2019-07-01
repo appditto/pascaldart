@@ -11,6 +11,7 @@ class AccountsResponse extends RPCResponse {
 
   AccountsResponse({this.accounts});
 
-  factory AccountsResponse.fromJson(Map<String, dynamic> json) => _$AccountsResponseFromJson(json);
+  factory AccountsResponse.fromJson(Map<String, dynamic> json) =>
+      _$AccountsResponseFromJson(json);
   Map<String, dynamic> toJson() => _$AccountsResponseToJson(this);
 }

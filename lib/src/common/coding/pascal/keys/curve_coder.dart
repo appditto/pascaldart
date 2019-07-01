@@ -5,7 +5,6 @@ import 'package:pascaldart/src/common/model/keys/curves.dart';
 
 /// A special pascal type that can en/decode a curve id.
 class CurveCoder {
-
   /// Decode curve from given bytes
   Curve decodeFromBytes(Uint8List bytes) {
     return Curve(Int16.decodeFromBytes(bytes));

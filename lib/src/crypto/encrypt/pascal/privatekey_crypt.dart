@@ -18,7 +18,8 @@ class PrivateKeyCrypt {
     // Decrypt
     Uint8List encData = value.sublist(16);
 
-    Uint8List privateKeyDecryptedAndEncoded = AesCbcPkcs7.decrypt(encData, key: key.key, iv: key.iv);
+    Uint8List privateKeyDecryptedAndEncoded =
+        AesCbcPkcs7.decrypt(encData, key: key.key, iv: key.iv);
 
     return PrivateKeyCoder().decodeFromBytes(privateKeyDecryptedAndEncoded);
   }
@@ -35,8 +36,10 @@ class PrivateKeyCrypt {
 
     KeyIV keyInfo = KDF.pascalCoin(password, salt: salt);
 
-    Uint8List privateKeyEncrypted = AesCbcPkcs7.encrypt(privateKeyEncoded, key: keyInfo.key, iv: keyInfo.iv);
+    Uint8List privateKeyEncrypted = AesCbcPkcs7.encrypt(privateKeyEncoded,
+        key: keyInfo.key, iv: keyInfo.iv);
 
-    return PDUtil.concat([PDUtil.stringToBytesUtf8("Salted__"), salt, privateKeyEncrypted]);
+    return PDUtil.concat(
+        [PDUtil.stringToBytesUtf8("Salted__"), salt, privateKeyEncrypted]);
   }
 }

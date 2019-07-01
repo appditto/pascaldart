@@ -19,9 +19,11 @@ class EciesCrypt {
    * @return {BC|false}
    */
   static Uint8List decrypt(Uint8List value, PrivateKey privateKey) {
-    EciesData keyData = EciesCoding.decodeFromBytes(value);  
+    EciesData keyData = EciesCoding.decodeFromBytes(value);
 
-    ECDHResult dec = ECDHCrypt.decrypt(keyData.encryptedData, privateKey, publicKey: keyData.publicKey, origMsgLength: keyData.originalDataLength);
+    ECDHResult dec = ECDHCrypt.decrypt(keyData.encryptedData, privateKey,
+        publicKey: keyData.publicKey,
+        origMsgLength: keyData.originalDataLength);
 
     Uint8List mac = PDUtil.hmacMd5(keyData.encryptedData, dec.key);
 
@@ -39,16 +41,15 @@ class EciesCrypt {
     String mac = PDUtil.byteToHex(PDUtil.hmacMd5(enc.data, enc.key));
 
     int originalDataLength = value.length;
-    int originalDataLengthIncPadLength = (originalDataLength % 16) == 0 ?
-      0 : 16 - (originalDataLength % 16);
+    int originalDataLengthIncPadLength =
+        (originalDataLength % 16) == 0 ? 0 : 16 - (originalDataLength % 16);
 
     EciesData keyData = EciesData(
-      publicKey: enc.publicKey,
-      mac: PDUtil.hexToBytes(mac),
-      encryptedData: enc.data,
-      originalDataLength: originalDataLength,
-      originalDataLengthIncPadding: originalDataLengthIncPadLength
-    );
+        publicKey: enc.publicKey,
+        mac: PDUtil.hexToBytes(mac),
+        encryptedData: enc.data,
+        originalDataLength: originalDataLength,
+        originalDataLengthIncPadding: originalDataLengthIncPadLength);
     return EciesCoding.encodeToBytes(keyData);
   }
 }

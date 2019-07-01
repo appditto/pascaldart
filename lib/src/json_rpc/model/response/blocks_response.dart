@@ -11,6 +11,7 @@ class BlocksResponse extends RPCResponse {
 
   BlocksResponse({this.blocks});
 
-  factory BlocksResponse.fromJson(Map<String, dynamic> json) => _$BlocksResponseFromJson(json);
+  factory BlocksResponse.fromJson(Map<String, dynamic> json) =>
+      _$BlocksResponseFromJson(json);
   Map<String, dynamic> toJson() => _$BlocksResponseToJson(this);
 }

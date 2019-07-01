@@ -1,4 +1,4 @@
-import 'package:quiver/core.dart'; 
+import 'package:quiver/core.dart';
 import 'package:pascaldart/src/common/pascalcoin_info.dart';
 
 /// A simple type that holds an account number in a reliable way.
@@ -6,11 +6,14 @@ class AccountNumber {
   int account; // Account number
   int checksum; // Account checksum
   int createdInBlock; // Block this account was created in
-  bool isFoundationReward; // Whether or not PC foundation got this account initially
+  bool
+      isFoundationReward; // Whether or not PC foundation got this account initially
 
   void calcBlockInfo() {
     this.createdInBlock = (this.account / 5).floor();
-    this.isFoundationReward = PascalCoinInfo.isDeveloperReward(this.createdInBlock) && this.account % 5 == 4;
+    this.isFoundationReward =
+        PascalCoinInfo.isDeveloperReward(this.createdInBlock) &&
+            this.account % 5 == 4;
   }
 
   AccountNumber(String account) {
@@ -21,7 +24,8 @@ class AccountNumber {
       this.checksum = int.parse(accountParts[1]);
       int expectedChecksum = AccountNumber.calculateChecksum(this.account);
       if (expectedChecksum != this.checksum) {
-        throw Exception('Invalid account checksum account: ${this.account}, expected: $expectedChecksum, actual: ${this.checksum}');
+        throw Exception(
+            'Invalid account checksum account: ${this.account}, expected: $expectedChecksum, actual: ${this.checksum}');
       }
     } else {
       this.account = int.parse(account);
@@ -47,6 +51,6 @@ class AccountNumber {
   }
 
   /// Operator overrides
-  bool operator == (o) => (o != null && o.hashCode == hashCode);
+  bool operator ==(o) => (o != null && o.hashCode == hashCode);
   int get hashCode => hash2(account.hashCode, checksum.hashCode);
 }

@@ -27,8 +27,11 @@ class PrivateKeyCoder {
 
   String encodeToHex(PrivateKey privKey) {
     Uint8List curveBytes = curveCoder.encodeToBytes(privKey.curve.id);
-    String length = PDUtil.byteToHex(PDUtil.intToBytes(privKey.key.lengthInBytes)).padRight(4, '0');
-    String hex = PDUtil.byteToHex(curveBytes) + length + PDUtil.byteToHex(privKey.key);
+    String length =
+        PDUtil.byteToHex(PDUtil.intToBytes(privKey.key.lengthInBytes))
+            .padRight(4, '0');
+    String hex =
+        PDUtil.byteToHex(curveBytes) + length + PDUtil.byteToHex(privKey.key);
     return hex;
   }
 }

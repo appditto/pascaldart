@@ -1,11 +1,11 @@
-
 import 'package:pascaldart/common.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('common.model.AccountName', () {
     test('can be initialized with a valid start pascal64 string', () {
-      String startStr = r'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-+{}[]_:"|<>,.?/~';
+      String startStr =
+          r'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-+{}[]_:"|<>,.?/~';
       AccountName name = AccountName(startStr);
       expect(name.accountName, startStr);
     });
@@ -61,6 +61,6 @@ void main() {
       expect(AccountName.isEscape('\\', '1'), false);
       expect(AccountName.isEscape('\\', '2'), false);
       expect(AccountName.isEscape('\\', '3'), false);
-    });    
+    });
   });
 }
