@@ -1,3 +1,7 @@
+## 0.1.1 (ALPHA)
+
+- Update homepage to point to github
+  
 ## 0.1.0 (ALPHA)
 
 - Provide example
