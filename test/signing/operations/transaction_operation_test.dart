@@ -81,5 +81,25 @@ void main() {
       expect(op.signature.r.toString().length > 30, true);
       expect(op.signature.s.toString().length > 30, true);
     });
+    test('can calculate digest correctly', () {
+      TransactionOperation op = TransactionOperation(
+        sender: AccountNumber.fromInt(1440500),
+        target: AccountNumber.fromInt(1440503),
+        amount: Currency('0.0015')
+      )
+      ..withFee(Currency('0'))
+      ..withPayload(PDUtil.stringToBytesUtf8(''))
+      ..withNOperation(4003);
+      expect(PDUtil.byteToHex(op.digest()), 'F4FA1500A30F0000F7FA15000F000000000000000000000000000000000001');
+      TransactionOperation op2 = TransactionOperation(
+        sender: AccountNumber.fromInt(1440500),
+        target: AccountNumber.fromInt(1440503),
+        amount: Currency('0.0015')
+      )
+      ..withFee(Currency('0.0002'))
+      ..withPayload(PDUtil.stringToBytesUtf8('techworker'))
+      ..withNOperation(4003);
+      expect(PDUtil.byteToHex(op2.digest()), 'F4FA1500A30F0000F7FA15000F00000000000000020000000000000074656368776F726B6572000001');
+    });
   });
 }

@@ -120,7 +120,7 @@ class TransactionOperation extends BaseOperation {
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payload = this.payload;
     // Not used in modern pascal coin?
-    Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List v2publickey = Uint8List.fromList([0, 0]);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
     return PDUtil.concat(
         [sender, nOperation, target, amount, fee, payload, v2publickey, type]);
