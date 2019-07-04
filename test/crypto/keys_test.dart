@@ -121,10 +121,10 @@ void main() {
           Signature sig = Keys.sign(pk, PDUtil.stringToBytesUtf8('test123'),
               hashMessage: false);
           expect(
-              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.r, endian: Endian.big)),
+              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.r)),
               '4C3492DC3FB565D9D4C132575BCEAA55571491A983A82A5460E341198E38C250');
           expect(
-              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.s, endian: Endian.big)),
+              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.s)),
               '7FA6FF43CD3B13F6E91F810FEF9BE6359CA355C53272C841D2BF934217EE53DE');
         }
       });
