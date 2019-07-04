@@ -105,11 +105,13 @@ class ChangeAccountInfoOperation extends BaseOperation {
     // Signature
     int rLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
-    BigInt r = PDUtil.decodeBigInt(bytes.sublist(offset, offset + rLength));
+    BigInt r = PDUtil.decodeBigInt(bytes.sublist(offset, offset + rLength),
+        endian: Endian.big);
     offset += rLength;
     int sLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
-    BigInt s = PDUtil.decodeBigInt(bytes.sublist(offset, offset + sLength));
+    BigInt s = PDUtil.decodeBigInt(bytes.sublist(offset, offset + sLength),
+        endian: Endian.big);
     Signature signature = Signature(r: r, s: s);
 
     // Return op
@@ -137,9 +139,9 @@ class ChangeAccountInfoOperation extends BaseOperation {
     Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
     Uint8List newName = AccountNameCoder().encodeToBytes(this.newName);
     Uint8List newType = Int16.encodeToBytes(this.newType);
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List r = PDUtil.encodeBigInt(signature.r, endian: Endian.big);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature.s, endian: Endian.big);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       signer,

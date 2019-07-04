@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:pascaldart/common.dart';
 import 'package:pascaldart/crypto.dart';
 import 'package:test/test.dart';
@@ -113,18 +115,21 @@ void main() {
     });
     test('can sign a value', () {
       fixtures.curve714.forEach((c) {
-        if (Curve(714).supported) {
+        if (Curve(714).supported && fixtures.curve714.indexOf(c) == 0) {
           PrivateKey pk = PrivateKeyCoder()
               .decodeFromBytes(PDUtil.hexToBytes(c['enc_privkey']));
-          Signature sig = Keys.sign(pk, PDUtil.stringToBytesUtf8('test123'));
+          Signature sig = Keys.sign(pk, PDUtil.stringToBytesUtf8('test123'),
+              hashMessage: false);
           expect(
-              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.r)).length == 64, true);
+              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.r, endian: Endian.big)),
+              '4C3492DC3FB565D9D4C132575BCEAA55571491A983A82A5460E341198E38C250');
           expect(
-              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.s)).length == 64, true);
+              PDUtil.byteToHex(PDUtil.encodeBigInt(sig.s, endian: Endian.big)),
+              '7FA6FF43CD3B13F6E91F810FEF9BE6359CA355C53272C841D2BF934217EE53DE');
         }
       });
       fixtures.curve715.forEach((c) {
-        if (Curve(715).supported) {
+        if (Curve(715).supported && fixtures.curve715.indexOf(c) == 0) {
           PrivateKey pk = PrivateKeyCoder()
               .decodeFromBytes(PDUtil.hexToBytes(c['enc_privkey']));
           Signature sig = Keys.sign(pk, PDUtil.stringToBytesUtf8('test123'));
@@ -135,7 +140,7 @@ void main() {
         }
       });
       fixtures.curve716.forEach((c) {
-        if (Curve(716).supported) {
+        if (Curve(716).supported && fixtures.curve716.indexOf(c) == 0) {
           PrivateKey pk = PrivateKeyCoder()
               .decodeFromBytes(PDUtil.hexToBytes(c['enc_privkey']));
           Signature sig = Keys.sign(pk, PDUtil.stringToBytesUtf8('test123'));

@@ -81,11 +81,13 @@ class DataOperation extends BaseOperation {
     // Signature
     int rLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
-    BigInt r = PDUtil.decodeBigInt(bytes.sublist(offset, offset + rLength));
+    BigInt r = PDUtil.decodeBigInt(bytes.sublist(offset, offset + rLength),
+        endian: Endian.big);
     offset += rLength;
     int sLength = PDUtil.decodeLength(bytes.sublist(offset, offset + 2));
     offset += 2;
-    BigInt s = PDUtil.decodeBigInt(bytes.sublist(offset, offset + sLength));
+    BigInt s = PDUtil.decodeBigInt(bytes.sublist(offset, offset + sLength),
+        endian: Endian.big);
     Signature signature = Signature(r: r, s: s);
 
     // Return op
@@ -114,9 +116,9 @@ class DataOperation extends BaseOperation {
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
     Uint8List payload = this.payload;
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List r = PDUtil.encodeBigInt(signature.r, endian: Endian.big);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature.s, endian: Endian.big);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       signer,

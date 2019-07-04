@@ -1,4 +1,3 @@
-export 'src/signing/signer.dart';
 export 'src/signing/rawop_coder.dart';
 export 'src/signing/operations/base_operation.dart';
 export 'src/signing/operations/changekey_operation.dart';

@@ -1,10 +1,13 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:pointycastle/digests/sha256.dart';
+import 'package:pointycastle/macs/hmac.dart';
 import 'package:pointycastle/pointycastle.dart' as pc;
 
 import 'package:pascaldart/common.dart' as common;
 import 'package:pascaldart/src/crypto/model/signature.dart';
+import 'package:pointycastle/signers/ecdsa_signer.dart';
 
 /// Handling of cryptographic keys
 class Keys {
@@ -65,19 +68,22 @@ class Keys {
   }
 
   /// Sign bytes using sha256 with ecdsa
-  static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes) {
+  static Signature sign(common.PrivateKey privateKey, Uint8List msgBytes,
+      {bool hashMessage = true}) {
     // Setup deterministic signer
     pc.ECDomainParameters domainParams =
         pc.ECDomainParameters(privateKey.curve.name);
     BigInt d = common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big);
     pc.PrivateKeyParameter privKeyParams =
         pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
-    pc.Signer signer = pc.Signer("SHA-256/DET-ECDSA");
+    ECDSASigner signer = ECDSASigner(
+        hashMessage ? SHA256Digest() : null, HMac(SHA256Digest(), 64));
     // Sign
     signer.init(true, privKeyParams);
     pc.ECSignature ecsig = signer.generateSignature(msgBytes);
     // Verify
-    pc.Signer verifier = pc.Signer("SHA-256/ECDSA");
+    ECDSASigner verifier = ECDSASigner(
+        hashMessage ? SHA256Digest() : null, HMac(SHA256Digest(), 64));
     pc.ECPoint Q = domainParams.G * d;
     pc.PublicKeyParameter pubKeyParams =
         pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
