@@ -1,3 +1,7 @@
+## 0.1.2 (ALPHA)
+
+- Fix operation signing
+
 ## 0.1.1 (ALPHA)
 
 - Update homepage to point to github
