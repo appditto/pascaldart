@@ -125,5 +125,5 @@ class PascalOperation extends RPCResponse {
 
   /// Operator overrides
   bool operator ==(o) => (o != null && o.hashCode == hashCode);
-  int get hashCode => ophash.hashCode;
+  int get hashCode => ophash.substring(9).hashCode;
 }
