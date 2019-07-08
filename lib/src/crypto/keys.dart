@@ -89,7 +89,7 @@ class Keys {
         pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
     verifier.init(false, pubKeyParams);
     if (verifier.verifySignature(msgBytes, ecsig)) {
-      return Signature(r: ecsig.r, s: ecsig.s);
+      return Signature(r: ecsig.r, s: ecsig.s, ensureBigEndian: true);
     }
     throw Exception("Couldn't verify signature");
   }
