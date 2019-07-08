@@ -129,7 +129,7 @@ class BuyAccountOperation extends BaseOperation {
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
     Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
     Uint8List payload = this.payload;
-    Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List v2publickey = Uint8List.fromList([0, 0]);
     Uint8List fixedType = Int8.encodeToBytes(2);
     Uint8List price = CurrencyCoder().encodeToBytes(this.price);
     Uint8List seller = AccountNumberCoder().encodeToBytes(this.seller);

@@ -85,7 +85,7 @@ class ChangeKeyOperation extends BaseOperation {
     Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
     Uint8List payload = this.payload;
     // Not used in modern pascal coin?
-    Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
+    Uint8List v2publickey = Uint8List.fromList([0, 0]);
     Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
     Uint8List newPublicKeyLength = PDUtil.encodeLength(newPublicKey.length);
     Uint8List r = PDUtil.encodeBigInt(signature.r);
