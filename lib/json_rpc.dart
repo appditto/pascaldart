@@ -1,4 +1,5 @@
 export 'src/json_rpc/client.dart';
+export 'src/json_rpc/converters.dart';
 export 'src/json_rpc/model/request/base_request.dart';
 export 'src/json_rpc/model/request/getaccount_request.dart';
 export 'src/json_rpc/model/request/getblock_request.dart';
