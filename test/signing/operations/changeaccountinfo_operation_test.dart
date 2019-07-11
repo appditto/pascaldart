@@ -96,5 +96,20 @@ void main() {
       expect(op.signature.r.toString().length > 30, true);
       expect(op.signature.s.toString().length > 30, true);
     });
+    test('can compute digest correctly', () {
+      ChangeAccountInfoOperation op = ChangeAccountInfoOperation(
+        accountSigner: AccountNumber.fromInt(1440500),
+        targetSigner: AccountNumber.fromInt(1440500),
+        newName: AccountName('bbedward'),
+        withNewName: true
+      )
+      ..withNOperation(20)
+      ..withPayload(PDUtil.stringToBytesUtf8(""))
+      ..withFee(Currency("0"))
+        ..withSignature(Signature(
+            r: PDUtil.decodeBigInt(PDUtil.hexToBytes(fixture['r'])),
+            s: PDUtil.decodeBigInt(PDUtil.hexToBytes(fixture['s']))));
+        expect(PDUtil.byteToHex(op.digest()), 'F4FA1500F4FA150014000000000000000000000000000000000000000200000000000008006262656477617264000008');
+    });
   });
 }

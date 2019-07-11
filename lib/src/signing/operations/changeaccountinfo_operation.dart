@@ -166,7 +166,7 @@ class ChangeAccountInfoOperation extends BaseOperation {
     Uint8List target = AccountNumberCoder().encodeToBytes(this.targetSigner);
     Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
     Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payload = this.payload;
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List changeType = Int8.encodeToBytes(this.changeType);
     Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
@@ -178,7 +178,7 @@ class ChangeAccountInfoOperation extends BaseOperation {
       target,
       nOperation,
       fee,
-      payload,
+      payloadLength,
       v2publickey,
       changeType,
       newPublicKey,
@@ -197,7 +197,7 @@ class ChangeAccountInfoOperation extends BaseOperation {
     if (this.withNewName) {
       changeType |= 2;
     }
-    if (this.withNewName) {
+    if (this.withNewType) {
       changeType |= 4;
     }
 
