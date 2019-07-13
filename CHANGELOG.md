@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Fix changeaccountinfo, listforsale, changekey, and changekeysigned operations
+
 ## 0.1.1 (ALPHA)
 
 - Update homepage to point to github
