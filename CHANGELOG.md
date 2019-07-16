@@ -1,3 +1,7 @@
+## 0.1.4
+
+- Fix handling negative Currency values
+
 ## 0.1.3
 
 - Fix changeaccountinfo, listforsale, changekey, and changekeysigned operations
