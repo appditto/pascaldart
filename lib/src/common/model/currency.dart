@@ -76,6 +76,8 @@ class Currency {
   }
 
   String toFixed(BigInt x) {
+    bool isNegative = x < BigInt.zero;
+    x = x.abs();
     BigInt base = BigInt.from(10).pow(4);
     String mod = (x % base).toString();
     String m = (x ~/ base).toString();
@@ -83,18 +85,6 @@ class Currency {
     // 0-pad
     while (mod.length % 4 != 0) {
       mod = '0' + mod;
-    }
-
-    bool isNegative = false;
-
-    if (x.toString().substring(0, 1) == '-') {
-      if (m.substring(0, 1) == '-') {
-        m = m.substring(1);
-      }
-      if (mod.substring(0, 1) == '-') {
-        mod = mod.substring(1);
-      }
-      isNegative = true;
     }
 
     return '${isNegative ? '-' : ''}$m.$mod';

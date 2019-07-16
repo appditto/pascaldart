@@ -40,8 +40,10 @@ void main() {
     });
     test('can handle negatives', () {
       Currency c1 = Currency('-1.2000');
-
+      Currency c2 = Currency((-0.0001).toString());
       expect(c1.toMolina(), "-12000");
+      expect(c1.toStringOpt(), "-1.2");
+      expect(c2.toStringOpt(), '-0.0001');
     });
     test('can make a negative value positive', () {
       Currency c1 = Currency('-1.2000');
