@@ -84,6 +84,9 @@ class PascalAccount extends RPCResponse {
       toJson: accountNameToStr)
   AccountName name;
 
+  @JsonKey(ignore: true)
+  bool isBorrowed;
+  
   PascalAccount(
       {this.account,
       this.encPubkey,
@@ -96,7 +99,8 @@ class PascalAccount extends RPCResponse {
       this.price,
       this.sellerAccount,
       this.privateSale,
-      this.newEncPubkey});
+      this.newEncPubkey,
+      this.isBorrowed = false});
 
   factory PascalAccount.fromJson(Map<String, dynamic> json) =>
       _$PascalAccountFromJson(json);
