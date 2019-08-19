@@ -1,3 +1,8 @@
+## 0.1.5
+
+- Add special PascalAccount field for Blaise
+- Update LICENSE
+
 ## 0.1.4
 
 - Fix handling negative Currency values
