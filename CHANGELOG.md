@@ -1,3 +1,7 @@
+## 0.1.6
+
+- Add another special PascalAccount field for blaise
+
 ## 0.1.5
 
 - Add special PascalAccount field for Blaise
