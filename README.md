@@ -1,4 +1,5 @@
-**This is BETA software, use at your own risk**
+# PascalDart
+[![Pub](https://img.shields.io/pub/v/pascaldart)](https://pub.dev/packages/pascaldart) [![Pipeline](https://gitlab.com/appditto/pascaldart/badges/master/pipeline.svg)](https://gitlab.com/appditto/pascaldart/pipelines)
 
 A PascalCoin library written in Dart, ported based on the [sbx](https://github.com/Techworker/sbx) JavaScript library for PascalCoin.
 
