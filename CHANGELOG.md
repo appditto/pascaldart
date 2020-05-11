@@ -1,3 +1,10 @@
+# CHANGELOG
+
+## 1.0.0 (May 11th, 2020)
+
+- Update dependencies
+- Add dart analysis suggestions
+
 ## 0.1.6
 
 - Add another special PascalAccount field for blaise
