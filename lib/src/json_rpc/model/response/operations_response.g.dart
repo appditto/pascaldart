@@ -8,12 +8,15 @@ part of 'operations_response.dart';
 
 OperationsResponse _$OperationsResponseFromJson(Map<String, dynamic> json) {
   return OperationsResponse(
-      operations: (json['result'] as List)
-          ?.map((e) => e == null
-              ? null
-              : PascalOperation.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+    operations: (json['result'] as List)
+        ?.map((e) => e == null
+            ? null
+            : PascalOperation.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$OperationsResponseToJson(OperationsResponse instance) =>
-    <String, dynamic>{'result': instance.operations};
+    <String, dynamic>{
+      'result': instance.operations,
+    };

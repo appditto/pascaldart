@@ -8,12 +8,15 @@ part of 'accounts_response.dart';
 
 AccountsResponse _$AccountsResponseFromJson(Map<String, dynamic> json) {
   return AccountsResponse(
-      accounts: (json['result'] as List)
-          ?.map((e) => e == null
-              ? null
-              : PascalAccount.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+    accounts: (json['result'] as List)
+        ?.map((e) => e == null
+            ? null
+            : PascalAccount.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$AccountsResponseToJson(AccountsResponse instance) =>
-    <String, dynamic>{'result': instance.accounts};
+    <String, dynamic>{
+      'result': instance.accounts,
+    };

@@ -8,10 +8,11 @@ part of 'sender.dart';
 
 Sender _$SenderFromJson(Map<String, dynamic> json) {
   return Sender(
-      sendingAccount: intToAccountNum(json['account'] as int),
-      nOperation: json['n_operation'] as int,
-      amount: pascalToCurrency(json['amount'] as num),
-      payload: json['payload'] as String);
+    sendingAccount: intToAccountNum(json['account'] as int),
+    nOperation: json['n_operation'] as int,
+    amount: pascalToCurrency(json['amount'] as num),
+    payload: json['payload'] as String,
+  );
 }
 
 Map<String, dynamic> _$SenderToJson(Sender instance) {
