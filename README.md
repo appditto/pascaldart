@@ -1,5 +1,5 @@
 # PascalDart
-[![Pub](https://img.shields.io/pub/v/pascaldart)](https://pub.dev/packages/pascaldart) [![Pipeline](https://gitlab.com/appditto/pascaldart/badges/master/pipeline.svg)](https://gitlab.com/appditto/pascaldart/pipelines)
+[![Pub](https://img.shields.io/pub/v/pascaldart)](https://pub.dev/packages/pascaldart) [![CI](https://github.com/appditto/pascaldart/workflows/CI/badge.svg)](https://github.com/appditto/pascaldart/actions?query=workflow%3ACI)
 
 A PascalCoin library written in Dart, ported based on the [sbx](https://github.com/Techworker/sbx) JavaScript library for PascalCoin.
 
