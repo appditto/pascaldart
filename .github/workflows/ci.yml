@@ -19,4 +19,4 @@ jobs:
         run: |
           pub version
           pub get
-          pub test
+          pub run test

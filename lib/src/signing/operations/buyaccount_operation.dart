@@ -72,7 +72,7 @@ class BuyAccountOperation extends BaseOperation {
     // 6 zero-bytes are always here
     offset += 6;
     // Fixed type
-    int fixedType = Int8.decodeFromBytes(bytes.sublist(offset, offset + 1));
+    //int fixedType = Int8.decodeFromBytes(bytes.sublist(offset, offset + 1));
     offset += 1;
     // Price
     Uint8List priceBytes = bytes.sublist(offset, offset + 8);

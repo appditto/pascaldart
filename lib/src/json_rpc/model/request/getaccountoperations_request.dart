@@ -28,8 +28,7 @@ class GetAccountOperationsRequest extends BaseRequest {
     return params['max'];
   }
 
-  GetAccountOperationsRequest(
-      {int account, int depth, int start, int max})
+  GetAccountOperationsRequest({int account, int depth, int start, int max})
       : super(method: 'getaccountoperations') {
     this.params = Map();
     if (account != null) {

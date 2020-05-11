@@ -49,7 +49,7 @@ class DeListForSaleOperation extends BaseOperation {
     offset += 4;
     // Optype
     Uint8List opTypeBytes = bytes.sublist(offset, offset + 2);
-    int opType = OpTypeCoder(2).decodeFromBytes(opTypeBytes);
+    //int opType = OpTypeCoder(2).decodeFromBytes(opTypeBytes);
     offset += 2;
     // nOp
     Uint8List nOperationBytes = bytes.sublist(offset, offset + 4);

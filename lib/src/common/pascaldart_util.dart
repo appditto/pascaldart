@@ -97,7 +97,7 @@ class PDUtil {
   }
 
   static Uint8List hmacMd5(Uint8List data, Uint8List key) {
-    HMac mac = HMac(new MD5Digest(), 64)..init(KeyParameter(key));
+    HMac mac = HMac(MD5Digest(), 64)..init(KeyParameter(key));
     return mac.process(data);
   }
 

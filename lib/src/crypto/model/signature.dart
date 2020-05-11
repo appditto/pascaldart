@@ -7,10 +7,13 @@ class Signature {
   BigInt r;
   BigInt s;
 
-  Signature({@required this.r, @required this.s, bool ensureBigEndian = false}) {
-    if (ensureBigEndian && Endian.host == Endian.little) { 
-      this.r = PDUtil.decodeBigInt(PDUtil.encodeBigInt(this.r, endian: Endian.big));
-      this.s = PDUtil.decodeBigInt(PDUtil.encodeBigInt(this.s, endian: Endian.big));
+  Signature(
+      {@required this.r, @required this.s, bool ensureBigEndian = false}) {
+    if (ensureBigEndian && Endian.host == Endian.little) {
+      this.r =
+          PDUtil.decodeBigInt(PDUtil.encodeBigInt(this.r, endian: Endian.big));
+      this.s =
+          PDUtil.decodeBigInt(PDUtil.encodeBigInt(this.s, endian: Endian.big));
     }
   }
 }

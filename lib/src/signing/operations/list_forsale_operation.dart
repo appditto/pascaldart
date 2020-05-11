@@ -58,8 +58,8 @@ class ListForSaleOperation extends BaseOperation {
     AccountNumber target = acctNumCoder.decodeFromBytes(targetBytes);
     offset += 4;
     // Optype
-    Uint8List opTypeBytes = bytes.sublist(offset, offset + 2);
-    int opType = OpTypeCoder(2).decodeFromBytes(opTypeBytes);
+    //Uint8List opTypeBytes = bytes.sublist(offset, offset + 2);
+    //int opType = OpTypeCoder(2).decodeFromBytes(opTypeBytes);
     offset += 2;
     // nOp
     Uint8List nOperationBytes = bytes.sublist(offset, offset + 4);

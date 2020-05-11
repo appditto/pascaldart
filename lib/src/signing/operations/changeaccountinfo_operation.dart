@@ -87,7 +87,7 @@ class ChangeAccountInfoOperation extends BaseOperation {
     // 6 zero-bytes are always here
     offset += 6;
     // Change type
-    int changeType = Int8.decodeFromBytes(bytes.sublist(offset, offset + 1));
+    //int changeType = Int8.decodeFromBytes(bytes.sublist(offset, offset + 1));
     offset++;
     // New public key
     Uint8List newPublicKeyBytes = bytes.sublist(offset, bytes.length);
