@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('signing.operations.ChangeKeyOperation', () {
-    Map<String, dynamic> fixture;
+    late Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
@@ -28,23 +28,23 @@ void main() {
 
     test('can be decode a signed operation', () {
       ChangeKeyOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ChangeKeyOperation;
 
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.r)),
           fixture['r']);
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.s)),
           fixture['s']);
       expect(decoded.signer.account, fixture['signer']);
       expect(decoded.nOperation, fixture['n_operation']);
-      expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
-      expect(PDUtil.bytesToUtf8String(decoded.payload), fixture['payload']);
+      expect(decoded.fee!.toStringOpt(), fixture['fee'].toString());
+      expect(PDUtil.bytesToUtf8String(decoded.payload!), fixture['payload']);
       expect(PublicKeyCoder().encodeToBase58(decoded.newPublicKey),
           fixture['newPublicKey']);
     });
 
     test('can be decode signed operation and encode it again', () {
       ChangeKeyOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ChangeKeyOperation;
 
       expect(PDUtil.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
@@ -78,8 +78,8 @@ void main() {
         ..withFee(Currency(fixture['fee'].toString()))
         ..sign(pk);
 
-      expect(op.signature.r.toString().length > 30, true);
-      expect(op.signature.s.toString().length > 30, true);
+      expect(op.signature!.r.toString().length > 30, true);
+      expect(op.signature!.s.toString().length > 30, true);
     });
   });
 }

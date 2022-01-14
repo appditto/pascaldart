@@ -16,7 +16,7 @@ void main() {
       Curve(0)
     ];
 
-    PrivateKeyFixtures fixtures;
+    late PrivateKeyFixtures fixtures;
 
     setUp(() {
       fixtures = PrivateKeyFixtures();

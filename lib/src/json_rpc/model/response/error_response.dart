@@ -6,10 +6,10 @@ part 'error_response.g.dart';
 @JsonSerializable()
 class ErrorResponse extends RPCResponse {
   @JsonKey(name: 'code')
-  int errorCode;
+  int? errorCode;
 
   @JsonKey(name: 'message')
-  String errorMessage;
+  String? errorMessage;
 
   ErrorResponse({this.errorCode, this.errorMessage});
 

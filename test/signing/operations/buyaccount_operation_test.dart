@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('signing.operations.BuyAccountOperation', () {
-    Map<String, dynamic> fixture;
+    late Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
@@ -30,24 +30,24 @@ void main() {
 
     test('can be decode a signed operation', () {
       BuyAccountOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as BuyAccountOperation;
 
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.r)),
           fixture['r']);
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.s)),
           fixture['s']);
       expect(decoded.sender.account, fixture['buyerAccount']);
       expect(decoded.target.account, fixture['accountToBuy']);
       expect(decoded.seller.account, fixture['seller']);
       expect(decoded.price.toStringOpt(), fixture['price'].toString());
-      expect(decoded.amount.toStringOpt(), '0');
-      expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
+      expect(decoded.amount!.toStringOpt(), '0');
+      expect(decoded.fee!.toStringOpt(), fixture['fee'].toString());
       expect(decoded.nOperation, fixture['n_operation']);
-      expect(PDUtil.bytesToUtf8String(decoded.payload), fixture['payload']);
+      expect(PDUtil.bytesToUtf8String(decoded.payload!), fixture['payload']);
     });
     test('can be decode signed operation and encode it again', () {
       BuyAccountOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as BuyAccountOperation;
 
       expect(PDUtil.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
@@ -82,8 +82,8 @@ void main() {
         ..withFee(Currency(fixture['fee'].toString()))
         ..sign(pk);
 
-      expect(op.signature.r.toString().length > 30, true);
-      expect(op.signature.s.toString().length > 30, true);
+      expect(op.signature!.r.toString().length > 30, true);
+      expect(op.signature!.s.toString().length > 30, true);
     });
   });
 }

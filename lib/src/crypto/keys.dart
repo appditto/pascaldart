@@ -12,7 +12,7 @@ import 'package:pointycastle/signers/ecdsa_signer.dart';
 /// Handling of cryptographic keys
 class Keys {
   /// Generate a keypair for the given curve
-  static common.KeyPair generate({common.Curve curve}) {
+  static common.KeyPair generate({common.Curve? curve}) {
     if (curve == null) {
       curve = common.Curve.getDefaultCurve();
     } else if (!curve.supported) {
@@ -27,7 +27,7 @@ class Keys {
     }
     secureRandom.seed(pc.KeyParameter(Uint8List.fromList(seeds)));
 
-    pc.ECDomainParameters domainParams = pc.ECDomainParameters(curve.name);
+    pc.ECDomainParameters domainParams = pc.ECDomainParameters(curve.name!);
     pc.ECKeyGeneratorParameters ecParams =
         pc.ECKeyGeneratorParameters(domainParams);
     pc.ParametersWithRandom params =
@@ -38,32 +38,34 @@ class Keys {
     keyGenerator.init(params);
 
     pc.AsymmetricKeyPair keyPair = keyGenerator.generateKeyPair();
-    pc.ECPrivateKey privateKey = keyPair.privateKey;
-    pc.ECPublicKey publicKey = keyPair.publicKey;
+    pc.ECPrivateKey privateKey = keyPair.privateKey as pc.ECPrivateKey;
+    pc.ECPublicKey publicKey = keyPair.publicKey as pc.ECPublicKey;
     return common.KeyPair(
         common.PrivateKey(
-            common.PDUtil.encodeBigInt(privateKey.d, endian: Endian.big),
+            common.PDUtil.encodeBigInt(privateKey.d!, endian: Endian.big),
             curve),
         common.PublicKey(
-            common.PDUtil.encodeBigInt(publicKey.Q.x.toBigInteger(),
+            common.PDUtil.encodeBigInt(publicKey.Q!.x!.toBigInteger()!,
                 endian: Endian.big),
-            common.PDUtil.encodeBigInt(publicKey.Q.y.toBigInteger(),
+            common.PDUtil.encodeBigInt(publicKey.Q!.y!.toBigInteger()!,
                 endian: Endian.big),
             curve));
   }
 
   static common.KeyPair fromPrivateKey(common.PrivateKey privateKey) {
     pc.ECDomainParameters domainParams =
-        pc.ECDomainParameters(privateKey.curve.name);
+        pc.ECDomainParameters(privateKey.curve.name!);
     pc.ECPrivateKey pKeyEC = pc.ECPrivateKey(
         common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big),
         domainParams);
-    pc.ECPoint Q = domainParams.G * pKeyEC.d;
+    pc.ECPoint Q = (domainParams.G * pKeyEC.d)!;
     return common.KeyPair(
         privateKey,
         common.PublicKey(
-            common.PDUtil.encodeBigInt(Q.x.toBigInteger(), endian: Endian.big),
-            common.PDUtil.encodeBigInt(Q.y.toBigInteger(), endian: Endian.big),
+            common.PDUtil.encodeBigInt(Q.x!.toBigInteger()!,
+                endian: Endian.big),
+            common.PDUtil.encodeBigInt(Q.y!.toBigInteger()!,
+                endian: Endian.big),
             privateKey.curve));
   }
 
@@ -72,7 +74,7 @@ class Keys {
       {bool hashMessage = true}) {
     // Setup deterministic signer
     pc.ECDomainParameters domainParams =
-        pc.ECDomainParameters(privateKey.curve.name);
+        pc.ECDomainParameters(privateKey.curve.name!);
     BigInt d = common.PDUtil.decodeBigInt(privateKey.ec(), endian: Endian.big);
     pc.PrivateKeyParameter privKeyParams =
         pc.PrivateKeyParameter(pc.ECPrivateKey(d, domainParams));
@@ -80,11 +82,11 @@ class Keys {
         hashMessage ? SHA256Digest() : null, HMac(SHA256Digest(), 64));
     // Sign
     signer.init(true, privKeyParams);
-    pc.ECSignature ecsig = signer.generateSignature(msgBytes);
+    pc.ECSignature ecsig = signer.generateSignature(msgBytes) as pc.ECSignature;
     // Verify
     ECDSASigner verifier = ECDSASigner(
         hashMessage ? SHA256Digest() : null, HMac(SHA256Digest(), 64));
-    pc.ECPoint Q = domainParams.G * d;
+    pc.ECPoint? Q = domainParams.G * d;
     pc.PublicKeyParameter pubKeyParams =
         pc.PublicKeyParameter(pc.ECPublicKey(Q, domainParams));
     verifier.init(false, pubKeyParams);

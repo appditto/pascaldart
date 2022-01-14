@@ -6,25 +6,25 @@ part 'getpendings_request.g.dart';
 @JsonSerializable()
 class GetPendingsRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get start {
-    return params['start'];
+    return params!['start'];
   }
 
   @JsonKey(ignore: true)
   get max {
-    return params['max'];
+    return params!['max'];
   }
 
-  GetPendingsRequest({int start, int max}) : super(method: 'getpendings') {
+  GetPendingsRequest({int? start, int? max}) : super(method: 'getpendings') {
     this.params = Map();
     if (start != null) {
-      this.params['start'] = start;
+      this.params!['start'] = start;
     }
     if (max != null) {
-      this.params['max'] = max;
+      this.params!['max'] = max;
     }
   }
 

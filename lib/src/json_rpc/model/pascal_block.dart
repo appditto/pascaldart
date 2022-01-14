@@ -10,68 +10,68 @@ part 'pascal_block.g.dart';
 @JsonSerializable()
 class PascalBlock extends RPCResponse {
   @JsonKey(name: 'block', includeIfNull: false)
-  int block;
+  int? block;
 
   @JsonKey(
       name: 'enc_pubkey',
       includeIfNull: false,
       fromJson: hexToPublicKey,
       toJson: publicKeyToHex)
-  PublicKey encPubkey;
+  PublicKey? encPubkey;
 
   @JsonKey(
       name: 'reward',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency reward;
+  Currency? reward;
 
   @JsonKey(
       name: 'fee',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency fee;
+  Currency? fee;
 
   @JsonKey(name: 'ver', includeIfNull: false)
-  int ver;
+  int? ver;
 
   @JsonKey(name: 'ver_a', includeIfNull: false)
-  int ver_a;
+  int? ver_a;
 
   @JsonKey(
       name: 'timestamp',
       fromJson: toDateTime,
       toJson: fromDateTime,
       includeIfNull: false)
-  DateTime timestamp;
+  DateTime? timestamp;
 
   @JsonKey(name: 'target', includeIfNull: false)
-  int target;
+  int? target;
 
   @JsonKey(name: 'nonce', includeIfNull: false)
-  int nonce;
+  int? nonce;
 
   @JsonKey(name: 'payload', includeIfNull: false)
-  String payload;
+  String? payload;
 
   @JsonKey(name: 'sbh', includeIfNull: false)
-  String sbh;
+  String? sbh;
 
   @JsonKey(name: 'oph', includeIfNull: false)
-  String oph;
+  String? oph;
 
   @JsonKey(name: 'pow', includeIfNull: false)
-  String pow;
+  String? pow;
 
   @JsonKey(name: 'operations', includeIfNull: false)
-  int operations;
+  int? operations;
 
   @JsonKey(name: 'hashratekhs', includeIfNull: false)
-  int hashratekhs;
+  int? hashratekhs;
 
   @JsonKey(name: 'maturation', includeIfNull: false)
-  int maturation;
+  int? maturation;
 
   PascalBlock(
       {this.block,

@@ -14,20 +14,20 @@ class Sender extends RPCResponse {
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber sendingAccount;
+  AccountNumber? sendingAccount;
 
   @JsonKey(name: 'n_operation', includeIfNull: false)
-  int nOperation;
+  int? nOperation;
 
   @JsonKey(
       name: 'amount',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency amount;
+  Currency? amount;
 
   @JsonKey(name: 'payload', includeIfNull: false)
-  String payload;
+  String? payload;
 
   Sender({this.sendingAccount, this.nOperation, this.amount, this.payload});
 

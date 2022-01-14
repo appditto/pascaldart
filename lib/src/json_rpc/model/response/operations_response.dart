@@ -7,7 +7,7 @@ part 'operations_response.g.dart';
 @JsonSerializable()
 class OperationsResponse extends RPCResponse {
   @JsonKey(name: 'result')
-  List<PascalOperation> operations;
+  List<PascalOperation>? operations;
 
   OperationsResponse({this.operations});
 

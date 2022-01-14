@@ -17,10 +17,10 @@ import 'package:pascaldart/src/signing/operations/base_operation.dart';
 class BuyAccountOperation extends BaseOperation {
   AccountNumber sender;
   AccountNumber target;
-  Currency amount;
+  Currency? amount;
   Currency price;
   AccountNumber seller;
-  PublicKey newPublicKey;
+  PublicKey? newPublicKey;
 
   int opType() {
     return 6;
@@ -28,11 +28,11 @@ class BuyAccountOperation extends BaseOperation {
 
   /// Creates a new List account for sale operation
   BuyAccountOperation(
-      {@required this.sender,
-      @required this.target,
+      {required this.sender,
+      required this.target,
       this.amount,
-      @required this.price,
-      @required this.seller,
+      required this.price,
+      required this.seller,
       this.newPublicKey})
       : super() {
     this.amount = this.amount ?? Currency('0');
@@ -123,23 +123,23 @@ class BuyAccountOperation extends BaseOperation {
   /// Encode this operation into raw bytes
   Uint8List encodeToBytes() {
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
-    Uint8List payload = this.payload;
+    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
+    Uint8List? payload = this.payload;
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List fixedType = Int8.encodeToBytes(2);
     Uint8List price = CurrencyCoder().encodeToBytes(this.price);
     Uint8List seller = AccountNumberCoder().encodeToBytes(this.seller);
-    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey!);
     Uint8List newPublicKeyLength = PDUtil.encodeLength(newPublicKey.length);
     newPublicKeyLength =
         newPublicKey.length == 6 ? Uint8List(0) : newPublicKeyLength;
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List r = PDUtil.encodeBigInt(signature!.r);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature!.s);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       sender,
@@ -165,15 +165,15 @@ class BuyAccountOperation extends BaseOperation {
   /// Gets the digest of this operation
   Uint8List digest() {
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payload = this.payload;
+    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List? payload = this.payload;
     Uint8List v2publickey = Uint8List.fromList([0, 0]);
     Uint8List price = CurrencyCoder().encodeToBytes(this.price);
     Uint8List seller = AccountNumberCoder().encodeToBytes(this.seller);
-    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey!);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
     return PDUtil.concat([
       sender,

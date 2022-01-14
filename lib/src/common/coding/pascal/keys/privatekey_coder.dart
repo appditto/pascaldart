@@ -6,8 +6,8 @@ import 'package:pascaldart/src/common/pascaldart_util.dart';
 
 /// Pascal Private Key encoder/decoder
 class PrivateKeyCoder {
-  CurveCoder curveCoder;
-  int encodedSize;
+  late CurveCoder curveCoder;
+  int? encodedSize;
 
   PrivateKeyCoder() {
     curveCoder = CurveCoder();
@@ -26,7 +26,7 @@ class PrivateKeyCoder {
   }
 
   String encodeToHex(PrivateKey privKey) {
-    Uint8List curveBytes = curveCoder.encodeToBytes(privKey.curve.id);
+    Uint8List curveBytes = curveCoder.encodeToBytes(privKey.curve.id!);
     String length =
         PDUtil.byteToHex(PDUtil.intToBytes(privKey.key.lengthInBytes))
             .padRight(4, '0');

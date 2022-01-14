@@ -6,13 +6,11 @@ part of 'receiver.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Receiver _$ReceiverFromJson(Map<String, dynamic> json) {
-  return Receiver(
-    receivingAccount: intToAccountNum(json['account'] as int),
-    amount: pascalToCurrency(json['amount'] as num),
-    payload: json['payload'] as String,
-  );
-}
+Receiver _$ReceiverFromJson(Map<String, dynamic> json) => Receiver(
+      receivingAccount: intToAccountNum(json['account'] as int?),
+      amount: pascalToCurrency(json['amount'] as num?),
+      payload: json['payload'] as String?,
+    );
 
 Map<String, dynamic> _$ReceiverToJson(Receiver instance) {
   final val = <String, dynamic>{};

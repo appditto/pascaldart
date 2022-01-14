@@ -1,8 +1,8 @@
 class PublicKeyFixtures {
-  List<Map<String, dynamic>> curve714;
-  List<Map<String, dynamic>> curve715;
-  List<Map<String, dynamic>> curve716;
-  List<Map<String, dynamic>> curve729;
+  late List<Map<String, dynamic>> curve714;
+  late List<Map<String, dynamic>> curve715;
+  late List<Map<String, dynamic>> curve716;
+  late List<Map<String, dynamic>> curve729;
 
   PublicKeyFixtures() {
     curve714 = [

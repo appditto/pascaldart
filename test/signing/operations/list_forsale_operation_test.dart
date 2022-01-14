@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('signing.operations.ListForSaleOperation', () {
-    Map<String, dynamic> fixture;
+    late Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
@@ -33,26 +33,26 @@ void main() {
 
     test('can be decode a signed operation', () {
       ListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ListForSaleOperation;
 
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.r)),
           fixture['r']);
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.s)),
           fixture['s']);
       expect(decoded.accountSigner.account, fixture['signer']);
       expect(decoded.targetSigner.account, fixture['target']);
       expect(decoded.accountToPay.account, fixture['seller']);
       expect(decoded.price.toStringOpt(), fixture['price'].toString());
-      expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
+      expect(decoded.fee!.toStringOpt(), fixture['fee'].toString());
       expect(decoded.nOperation, fixture['n_operation']);
       expect(decoded.lockedUntilBlock, fixture['lockedUntilBlock']);
-      expect(PDUtil.bytesToUtf8String(decoded.payload), fixture['payload']);
-      expect(PublicKeyCoder().encodeToBase58(decoded.newPublicKey),
+      expect(PDUtil.bytesToUtf8String(decoded.payload!), fixture['payload']);
+      expect(PublicKeyCoder().encodeToBase58(decoded.newPublicKey!),
           fixture['newPublicKey']);
     });
     test('can be decode signed operation and encode it again', () {
       ListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ListForSaleOperation;
 
       expect(PDUtil.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
@@ -93,8 +93,8 @@ void main() {
             fixture['lockedUntilBlock'])
         ..sign(pk);
 
-      expect(op.signature.r.toString().length > 30, true);
-      expect(op.signature.s.toString().length > 30, true);
+      expect(op.signature!.r.toString().length > 30, true);
+      expect(op.signature!.s.toString().length > 30, true);
     });
   });
 }

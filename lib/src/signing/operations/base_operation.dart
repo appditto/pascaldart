@@ -7,10 +7,10 @@ import 'package:pascaldart/src/crypto/keys.dart';
 import 'package:pascaldart/src/crypto/model/signature.dart';
 
 abstract class BaseOperation {
-  Uint8List payload;
-  Signature signature;
-  Currency fee;
-  int nOperation;
+  Uint8List? payload;
+  Signature? signature;
+  Currency? fee;
+  int? nOperation;
 
   BaseOperation({this.payload, this.signature, this.fee}) {
     this.payload = this.payload ?? Uint8List(1);
@@ -32,7 +32,7 @@ abstract class BaseOperation {
     this.fee = PascalCoinInfo.MIN_FEE();
   }
 
-  void withNOperation(int nOperation) {
+  void withNOperation(int? nOperation) {
     this.nOperation = nOperation;
   }
 

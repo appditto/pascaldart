@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('crypto.encrypt.aes.cbcpkcs7', () {
-    List<Map<String, dynamic>> aesData;
+    late List<Map<String, dynamic>> aesData;
 
     setUp(() {
       aesData = [

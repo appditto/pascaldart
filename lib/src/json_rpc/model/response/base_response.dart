@@ -6,10 +6,10 @@ part 'base_response.g.dart';
 @JsonSerializable()
 class BaseResponse extends RPCResponse {
   @JsonKey(name: 'jsonrpc')
-  String jsonrpc;
+  String? jsonrpc;
 
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'result')
   dynamic result;

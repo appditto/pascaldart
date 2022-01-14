@@ -34,11 +34,11 @@ class EciesCoding {
   }
 
   static Uint8List encodeToBytes(EciesData data) {
-    Uint8List publicKeyLength = Int8.encodeToBytes(data.publicKey.length);
-    Uint8List macLength = Int8.encodeToBytes(data.mac.length);
-    Uint8List originalDataLength = Int16.encodeToBytes(data.originalDataLength);
+    Uint8List publicKeyLength = Int8.encodeToBytes(data.publicKey!.length);
+    Uint8List macLength = Int8.encodeToBytes(data.mac!.length);
+    Uint8List originalDataLength = Int16.encodeToBytes(data.originalDataLength!);
     Uint8List originalDataLengthIncPadding =
-        Int16.encodeToBytes(data.originalDataLengthIncPadding);
+        Int16.encodeToBytes(data.originalDataLengthIncPadding!);
     return PDUtil.concat([
       publicKeyLength,
       macLength,

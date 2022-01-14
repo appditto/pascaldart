@@ -6,16 +6,16 @@ part 'getaccount_request.g.dart';
 @JsonSerializable()
 class GetAccountRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get account {
-    return params['account'];
+    return params!['account'];
   }
 
-  GetAccountRequest({int account, this.params}) : super(method: 'getaccount') {
+  GetAccountRequest({int? account, this.params}) : super(method: 'getaccount') {
     this.params = Map();
-    this.params['account'] = account;
+    this.params!['account'] = account;
   }
 
   Map<String, dynamic> toJson() => _$GetAccountRequestToJson(this);

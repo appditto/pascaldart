@@ -7,12 +7,15 @@ part of 'findoperation_request.dart';
 // **************************************************************************
 
 FindOperationRequest _$FindOperationRequestFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, disallowNullValues: const ['method']);
+  $checkKeys(
+    json,
+    disallowNullValues: const ['method'],
+  );
   return FindOperationRequest()
-    ..jsonrpc = json['jsonrpc'] as String ?? '2.0'
-    ..method = json['method'] as String
-    ..id = json['id'] as int ?? 0
-    ..params = json['params'] as Map<String, dynamic>;
+    ..jsonrpc = json['jsonrpc'] as String? ?? '2.0'
+    ..method = json['method'] as String?
+    ..id = json['id'] as int? ?? 0
+    ..params = json['params'] as Map<String, dynamic>?;
 }
 
 Map<String, dynamic> _$FindOperationRequestToJson(

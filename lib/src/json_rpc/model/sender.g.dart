@@ -6,14 +6,12 @@ part of 'sender.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Sender _$SenderFromJson(Map<String, dynamic> json) {
-  return Sender(
-    sendingAccount: intToAccountNum(json['account'] as int),
-    nOperation: json['n_operation'] as int,
-    amount: pascalToCurrency(json['amount'] as num),
-    payload: json['payload'] as String,
-  );
-}
+Sender _$SenderFromJson(Map<String, dynamic> json) => Sender(
+      sendingAccount: intToAccountNum(json['account'] as int?),
+      nOperation: json['n_operation'] as int?,
+      amount: pascalToCurrency(json['amount'] as num?),
+      payload: json['payload'] as String?,
+    );
 
 Map<String, dynamic> _$SenderToJson(Sender instance) {
   final val = <String, dynamic>{};

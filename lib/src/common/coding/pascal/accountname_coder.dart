@@ -16,7 +16,7 @@ class AccountNameCoder {
   }
 
   /// Encode account name to bytes
-  Uint8List encodeToBytes(AccountName accountName) {
+  Uint8List encodeToBytes(AccountName? accountName) {
     return StringWithLength(byteSize: byteSize)
         .encodeToBytes(accountName.toString());
   }

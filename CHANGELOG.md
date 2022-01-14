@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.0.0 (January 14th, 2022)
+
+- Null safety
+- Update dependencies for compatibility with newer flutter SDK
+
 ## 1.0.0 (May 11th, 2020)
 
 - Update dependencies

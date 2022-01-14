@@ -12,7 +12,7 @@ class AccountName {
           .split('');
   static final List<String> ALLOWED_START = ALLOWED_ALL.sublist(10);
 
-  String accountName;
+  String? accountName;
 
   AccountName(String accountName) {
     this.accountName = AccountName.validate(accountName);
@@ -44,12 +44,12 @@ class AccountName {
 
   @override
   String toString() {
-    return this.accountName;
+    return this.accountName!;
   }
 
   /// Gets an escaped string representation for EPasa usage.
   String toStringEscaped() {
-    return this.accountName.replaceAllMapped(
+    return this.accountName!.replaceAllMapped(
         RegExp(REGEX_TO_ESCAPE), (match) => '\\${match.group(0)}');
   }
 

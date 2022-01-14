@@ -5,8 +5,8 @@ import '../../../fixtures/privatekey.dart';
 
 void main() {
   group('common.coding.pascal.keys.PrivateKeyCoder', () {
-    PrivateKeyCoder coder;
-    PrivateKeyFixtures fixtures;
+    late PrivateKeyCoder coder;
+    late PrivateKeyFixtures fixtures;
 
     setUp(() {
       coder = PrivateKeyCoder();

@@ -8,7 +8,7 @@ import 'package:pointycastle/src/registry/registry.dart';
 /// AES Encrypt/Decrypt using CBC block cipher and no padding
 class AesCbcZeroPadding {
   /// AES/CBC/ZeroByte Encrypt
-  static Uint8List encrypt(Uint8List value, {Uint8List key, Uint8List iv}) {
+  static Uint8List encrypt(Uint8List value, {Uint8List? key, Uint8List? iv}) {
     registry.register(ZeroBytePadding.FACTORY_CONFIG);
     if (key == null) {
       key = Uint8List(1);
@@ -24,7 +24,7 @@ class AesCbcZeroPadding {
   }
 
   /// AES/CBC/ZeroByte Decrypt
-  static Uint8List decrypt(Uint8List encrypted, {Uint8List key, Uint8List iv}) {
+  static Uint8List decrypt(Uint8List encrypted, {Uint8List? key, Uint8List? iv}) {
     registry.register(ZeroBytePadding.FACTORY_CONFIG);
     if (key == null) {
       key = Uint8List(1);
@@ -70,5 +70,5 @@ class ZeroBytePadding extends BasePadding {
   }
 
   @override
-  void init([CipherParameters params]) {}
+  void init([CipherParameters? params]) {}
 }

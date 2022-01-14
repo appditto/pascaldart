@@ -6,22 +6,21 @@ part of 'pascal_account.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PascalAccount _$PascalAccountFromJson(Map<String, dynamic> json) {
-  return PascalAccount(
-    account: intToAccountNum(json['account'] as int),
-    encPubkey: hexToPublicKey(json['enc_pubkey'] as String),
-    balance: pascalToCurrency(json['balance'] as num),
-    nOperation: json['n_operation'] as int,
-    updatedBlock: json['updated_b'] as int,
-    state: accountStateFromJson(json['state'] as String),
-    type: json['type'] as int,
-    lockedUntilBlock: json['locked_until_block'] as int,
-    price: pascalToCurrency(json['price'] as num),
-    sellerAccount: intToAccountNum(json['seller_account'] as int),
-    privateSale: json['private_sale'] as bool,
-    newEncPubkey: hexToPublicKey(json['new_enc_pubkey'] as String),
-  )..name = strToAccountName(json['name'] as String);
-}
+PascalAccount _$PascalAccountFromJson(Map<String, dynamic> json) =>
+    PascalAccount(
+      account: intToAccountNum(json['account'] as int?),
+      encPubkey: hexToPublicKey(json['enc_pubkey'] as String?),
+      balance: pascalToCurrency(json['balance'] as num?),
+      nOperation: json['n_operation'] as int?,
+      updatedBlock: json['updated_b'] as int?,
+      state: accountStateFromJson(json['state'] as String?),
+      type: json['type'] as int?,
+      lockedUntilBlock: json['locked_until_block'] as int?,
+      price: pascalToCurrency(json['price'] as num?),
+      sellerAccount: intToAccountNum(json['seller_account'] as int?),
+      privateSale: json['private_sale'] as bool?,
+      newEncPubkey: hexToPublicKey(json['new_enc_pubkey'] as String?),
+    )..name = strToAccountName(json['name'] as String?);
 
 Map<String, dynamic> _$PascalAccountToJson(PascalAccount instance) {
   final val = <String, dynamic>{};

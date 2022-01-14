@@ -5,7 +5,7 @@ import '../../fixtures/operation_hash.dart';
 
 void main() {
   group('common.coding.pascal.OperationHashCoder', () {
-    OperationHashFixtures fixture;
+    late OperationHashFixtures fixture;
 
     setUp(() {
       fixture = OperationHashFixtures();

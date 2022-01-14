@@ -9,7 +9,7 @@ import '../../fixtures/privatekey.dart';
 
 void main() {
   group('crypto.encrypt.pascal.PrivateKeyCryptor', () {
-    PrivateKeyFixtures fixtures;
+    late PrivateKeyFixtures fixtures;
 
     setUp(() {
       fixtures = PrivateKeyFixtures();

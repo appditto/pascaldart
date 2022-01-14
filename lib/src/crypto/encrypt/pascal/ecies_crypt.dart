@@ -21,11 +21,11 @@ class EciesCrypt {
   static Uint8List decrypt(Uint8List value, PrivateKey privateKey) {
     EciesData keyData = EciesCoding.decodeFromBytes(value);
 
-    ECDHResult dec = ECDHCrypt.decrypt(keyData.encryptedData, privateKey,
+    ECDHResult dec = ECDHCrypt.decrypt(keyData.encryptedData!, privateKey,
         publicKey: keyData.publicKey,
         origMsgLength: keyData.originalDataLength);
 
-    Uint8List mac = PDUtil.hmacMd5(keyData.encryptedData, dec.key);
+    Uint8List mac = PDUtil.hmacMd5(keyData.encryptedData!, dec.key);
 
     if (ListEquality().equals(keyData.mac, mac)) {
       return dec.data;

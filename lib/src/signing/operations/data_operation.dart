@@ -18,7 +18,7 @@ class DataOperation extends BaseOperation {
   AccountNumber target;
   int dataType;
   int dataSequence;
-  Currency amount;
+  Currency? amount;
 
   int opType() {
     return 10;
@@ -26,9 +26,9 @@ class DataOperation extends BaseOperation {
 
   /// Creates a new Change Key operation
   DataOperation(
-      {@required this.signer,
-      @required this.sender,
-      @required this.target,
+      {required this.signer,
+      required this.sender,
+      required this.target,
       this.amount,
       this.dataType = 0,
       this.dataSequence = 0})
@@ -107,16 +107,16 @@ class DataOperation extends BaseOperation {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.signer);
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List dataType = Int16.encodeToBytes(this.dataType);
     Uint8List dataSequence = Int16.encodeToBytes(this.dataSequence);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
-    Uint8List payload = this.payload;
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
+    Uint8List? payload = this.payload;
+    Uint8List r = PDUtil.encodeBigInt(signature!.r);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature!.s);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       signer,
@@ -141,13 +141,13 @@ class DataOperation extends BaseOperation {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.signer);
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List dataType = Int16.encodeToBytes(this.dataType);
     Uint8List dataSequence = Int16.encodeToBytes(this.dataSequence);
-    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
-    Uint8List payload = this.payload;
+    Uint8List amount = CurrencyCoder().encodeToBytes(this.amount!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
+    Uint8List? payload = this.payload;
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());
     return PDUtil.concat([
       signer,

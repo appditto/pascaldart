@@ -5,8 +5,8 @@ import '../../../fixtures/publickey.dart';
 
 void main() {
   group('common.coding.pascal.keys.PublicKeyCoder', () {
-    PublicKeyCoder coder;
-    PublicKeyFixtures fixtures;
+    late PublicKeyCoder coder;
+    late PublicKeyFixtures fixtures;
 
     setUp(() {
       coder = PublicKeyCoder();
@@ -16,56 +16,56 @@ void main() {
       fixtures.curve714.forEach((c) {
         PublicKey key =
             coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey']));
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve715.forEach((c) {
         PublicKey key =
             coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey']));
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve716.forEach((c) {
         PublicKey key =
             coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey']));
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve729.forEach((c) {
         PublicKey key =
             coder.decodeFromBytes(PDUtil.hexToBytes(c['enc_pubkey']));
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
     });
     test('can decode a pascalcoin pubkey from base58', () {
       fixtures.curve714.forEach((c) {
         PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve715.forEach((c) {
         PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve716.forEach((c) {
         PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
       fixtures.curve729.forEach((c) {
         PublicKey key = coder.decodeFromBase58(c['b58_pubkey']);
-        expect(PDUtil.byteToHex(key.x), c['x']);
-        expect(PDUtil.byteToHex(key.y), c['y']);
-        expect(key.curve.id, c['ec_nid']);
+        expect(PDUtil.byteToHex(key.x!), c['x']);
+        expect(PDUtil.byteToHex(key.y!), c['y']);
+        expect(key.curve!.id, c['ec_nid']);
       });
     });
     test('can encode a pascalcoin pubkey', () {

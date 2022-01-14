@@ -17,8 +17,8 @@ import 'package:pascaldart/src/signing/operations/base_operation.dart';
 class ChangeAccountInfoOperation extends BaseOperation {
   AccountNumber accountSigner;
   AccountNumber targetSigner;
-  PublicKey newPublicKey;
-  AccountName newName;
+  PublicKey? newPublicKey;
+  AccountName? newName;
   int newType;
   bool withNewPubkey;
   bool withNewName;
@@ -30,8 +30,8 @@ class ChangeAccountInfoOperation extends BaseOperation {
 
   /// Creates a new List account for sale operation
   ChangeAccountInfoOperation(
-      {@required this.accountSigner,
-      @required this.targetSigner,
+      {required this.accountSigner,
+      required this.targetSigner,
       this.newPublicKey,
       this.newName,
       this.newType = 0,
@@ -128,18 +128,18 @@ class ChangeAccountInfoOperation extends BaseOperation {
   Uint8List encodeToBytes() {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.accountSigner);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.targetSigner);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
-    Uint8List payload = this.payload;
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
+    Uint8List? payload = this.payload;
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List changeType = Int8.encodeToBytes(this.changeType);
-    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey!);
     Uint8List newName = AccountNameCoder().encodeToBytes(this.newName);
     Uint8List newType = Int16.encodeToBytes(this.newType);
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List r = PDUtil.encodeBigInt(signature!.r);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature!.s);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       signer,
@@ -164,12 +164,12 @@ class ChangeAccountInfoOperation extends BaseOperation {
   Uint8List digest() {
     Uint8List signer = AccountNumberCoder().encodeToBytes(this.accountSigner);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.targetSigner);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
     Uint8List changeType = Int8.encodeToBytes(this.changeType);
-    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey);
+    Uint8List newPublicKey = PublicKeyCoder().encodeToBytes(this.newPublicKey!);
     Uint8List newName = AccountNameCoder().encodeToBytes(this.newName);
     Uint8List newType = Int16.encodeToBytes(this.newType);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());

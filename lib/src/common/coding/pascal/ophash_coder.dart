@@ -19,11 +19,11 @@ class OperationHashCoder {
 
   Uint8List encodeToBytes(OperationHash opHash) {
     // Block number is 4-byte uint32
-    Uint8List blockNo = Int32.encodeToBytes(opHash.block);
+    Uint8List blockNo = Int32.encodeToBytes(opHash.block!);
     // Account # is 4-byte uint32
-    Uint8List accountNo = Int32.encodeToBytes(opHash.account.account);
+    Uint8List accountNo = Int32.encodeToBytes(opHash.account.account!);
     // NOperation is 4-byte uint32
-    Uint8List nOp = Int32.encodeToBytes(opHash.nOperation);
+    Uint8List nOp = Int32.encodeToBytes(opHash.nOperation!);
     // md160 is remaining bytes
     return PDUtil.concat([blockNo, accountNo, nOp, opHash.md160]);
   }

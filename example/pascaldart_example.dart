@@ -23,12 +23,12 @@ main() async {
   RPCResponse rawResp = await rpc.makeRpcRequest(request);
   if (rawResp.isError) {
     // Handling an error
-    ErrorResponse errResp = rawResp;
+    ErrorResponse errResp = rawResp as ErrorResponse;
     print(errResp.errorMessage);
   } else {
-    OperationsResponse opResp = rawResp;
-    opResp.operations.forEach((op) {
-      print(op.amount.toStringOpt());
+    OperationsResponse opResp = rawResp as OperationsResponse;
+    opResp.operations!.forEach((op) {
+      print(op.amount!.toStringOpt());
     });
   }
 }

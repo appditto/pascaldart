@@ -6,15 +6,12 @@ part of 'accounts_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountsResponse _$AccountsResponseFromJson(Map<String, dynamic> json) {
-  return AccountsResponse(
-    accounts: (json['result'] as List)
-        ?.map((e) => e == null
-            ? null
-            : PascalAccount.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+AccountsResponse _$AccountsResponseFromJson(Map<String, dynamic> json) =>
+    AccountsResponse(
+      accounts: (json['result'] as List<dynamic>?)
+          ?.map((e) => PascalAccount.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$AccountsResponseToJson(AccountsResponse instance) =>
     <String, dynamic>{

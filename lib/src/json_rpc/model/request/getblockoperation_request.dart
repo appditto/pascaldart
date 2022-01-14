@@ -6,25 +6,25 @@ part 'getblockoperation_request.g.dart';
 @JsonSerializable()
 class GetBlockOperationRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get block {
-    return params['block'];
+    return params!['block'];
   }
 
   @JsonKey(ignore: true)
   get opblock {
-    return params['opblock'];
+    return params!['opblock'];
   }
 
-  GetBlockOperationRequest({int block, int opblock = 0})
+  GetBlockOperationRequest({int? block, int opblock = 0})
       : super(method: 'getblockoperation') {
     this.params = Map();
     if (block != null) {
-      this.params['block'] = block;
+      this.params!['block'] = block;
     }
-    this.params['opblock'] = opblock;
+    this.params!['opblock'] = opblock;
   }
 
   Map<String, dynamic> toJson() => _$GetBlockOperationRequestToJson(this);

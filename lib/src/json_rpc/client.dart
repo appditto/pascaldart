@@ -19,10 +19,10 @@ class RPCClient {
   RPCClient({this.rpcAddress = 'http://127.0.0.1:4003', this.id = 0});
 
   /// Post json to the RPC address
-  Future<String> rpcPost(Map<String, dynamic> reqJson) async {
+  Future<String?> rpcPost(Map<String, dynamic> reqJson) async {
     this.id++;
     http.Response response =
-        await http.post(rpcAddress, body: json.encode(reqJson));
+        await http.post(Uri.parse(rpcAddress), body: json.encode(reqJson));
     if (response.statusCode != 200) {
       return null; // TODO - make this an error response with more details
     }
@@ -32,7 +32,7 @@ class RPCClient {
   /// Make a request, and return deserialized response
   Future<RPCResponse> makeRpcRequest(BaseRequest request) async {
     request.id = id;
-    String responseJson = await rpcPost(request.toJson());
+    String? responseJson = await rpcPost(request.toJson());
     if (responseJson == null) {
       throw Exception('Did not receive a response');
     }

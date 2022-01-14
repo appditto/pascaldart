@@ -43,13 +43,13 @@ class Base58 {
   }
 
   /// Decodes a base58 string into a byte-array
-  static List<int> decode(String input) {
+  static List<int> decode(String? input) {
     if (input == null || input.isEmpty) {
       return Uint8List(0);
     }
 
     // generate base 58 index list from input string
-    List<int> input58 = List(input.length);
+    List<int?> input58 = List.filled(input.length, 0);
     for (int i = 0; i < input.length; i++) {
       int charint = ALPHABET.indexOf(input[i]);
       if (charint < 0) {
@@ -97,10 +97,10 @@ class Base58 {
 
   /// number -> number / 256
   /// returns number % 256
-  static int _divmod256(List<int> number58, int startAt) {
+  static int _divmod256(List<int?> number58, int startAt) {
     int remaining = 0;
     for (int i = startAt; i < number58.length; i++) {
-      int num = 58 * remaining + (number58[i] & 0xFF);
+      int num = 58 * remaining + (number58[i]! & 0xFF);
       number58[i] = num ~/ 256;
       remaining = num % 256;
     }

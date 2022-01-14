@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('common.coding.pascal.AccountNumberCoder', () {
-    AccountNumberCoder coder;
+    late AccountNumberCoder coder;
     setUp(() {
       coder = AccountNumberCoder();
     });

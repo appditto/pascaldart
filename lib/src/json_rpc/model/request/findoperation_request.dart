@@ -6,17 +6,17 @@ part 'findoperation_request.g.dart';
 @JsonSerializable()
 class FindOperationRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get ophash {
-    return params['ophash'];
+    return params!['ophash'];
   }
 
-  FindOperationRequest({String ophash}) : super(method: 'findoperation') {
+  FindOperationRequest({String? ophash}) : super(method: 'findoperation') {
     this.params = Map();
     if (ophash != null) {
-      this.params['ophash'] = ophash;
+      this.params!['ophash'] = ophash;
     }
   }
 

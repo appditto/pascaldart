@@ -11,8 +11,8 @@ void main() {
       Curve.CI_SECP521R1,
       Curve.CI_SECP384R1
     ];
-    PublicKeyFixtures fixtures;
-    PublicKeyCoder coder;
+    late PublicKeyFixtures fixtures;
+    late PublicKeyCoder coder;
 
     setUp(() {
       coder = PublicKeyCoder();
@@ -22,9 +22,9 @@ void main() {
     test('can be created as an empty key (used by pasc v2)', () {
       PublicKey pubkey = PublicKey.empty();
 
-      expect(pubkey.curve.id, 0);
-      expect(pubkey.x.length, 0);
-      expect(pubkey.y.length, 0);
+      expect(pubkey.curve!.id, 0);
+      expect(pubkey.x!.length, 0);
+      expect(pubkey.y!.length, 0);
     });
 
     test('cannot be created with wronfues managed by the curve', () {

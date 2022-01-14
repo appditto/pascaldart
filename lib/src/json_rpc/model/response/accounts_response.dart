@@ -7,7 +7,7 @@ part 'accounts_response.g.dart';
 @JsonSerializable()
 class AccountsResponse extends RPCResponse {
   @JsonKey(name: 'result')
-  List<PascalAccount> accounts;
+  List<PascalAccount>? accounts;
 
   AccountsResponse({this.accounts});
 

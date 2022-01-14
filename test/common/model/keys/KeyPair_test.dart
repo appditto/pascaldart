@@ -4,9 +4,9 @@ import 'package:test/test.dart';
 import '../../fixtures/privatekey.dart';
 
 void main() {
-  PrivateKeyCoder privCoder;
-  PublicKeyCoder pubCoder;
-  PrivateKeyFixtures fixtures;
+  late PrivateKeyCoder privCoder;
+  late PublicKeyCoder pubCoder;
+  late PrivateKeyFixtures fixtures;
 
   setUp(() {
     privCoder = PrivateKeyCoder();

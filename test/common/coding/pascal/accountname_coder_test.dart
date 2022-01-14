@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('common.coding.pascal.accountNameCoder', () {
-    AccountNameCoder coderBS2;
-    AccountNameCoder coderBS1;
+    late AccountNameCoder coderBS2;
+    late AccountNameCoder coderBS1;
     setUp(() {
       coderBS2 = AccountNameCoder();
       coderBS1 = AccountNameCoder(byteSize: 1);

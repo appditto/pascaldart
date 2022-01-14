@@ -7,7 +7,7 @@ part 'blocks_response.g.dart';
 @JsonSerializable()
 class BlocksResponse extends RPCResponse {
   @JsonKey(name: 'result')
-  List<PascalBlock> blocks;
+  List<PascalBlock>? blocks;
 
   BlocksResponse({this.blocks});
 

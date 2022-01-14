@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Common.Base58', () {
-    List<List<String>> testData;
+    late List<List<String>> testData;
 
     setUp(() {
       testData = [

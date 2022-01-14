@@ -6,38 +6,34 @@ part of 'pascal_operation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PascalOperation _$PascalOperationFromJson(Map<String, dynamic> json) {
-  return PascalOperation(
-    valid: json['valid'] as bool,
-    errors: json['errors'] as String,
-    block: json['block'] as int,
-    time: toDateTime(json['time'] as int),
-    opblock: json['opblock'] as int,
-    maturation: json['maturation'] as int,
-    optype: json['optype'] as int,
-    account: intToAccountNum(json['account'] as int),
-    optxt: json['optxt'] as String,
-    amount: pascalToCurrency(json['amount'] as num),
-    fee: pascalToCurrency(json['fee'] as num),
-    balance: pascalToCurrency(json['balance'] as num),
-    ophash: json['ophash'] as String,
-    payload: json['payload'] as String,
-    signerAccount: intToAccountNum(json['signer_account'] as int),
-    senders: (json['senders'] as List)
-        ?.map((e) =>
-            e == null ? null : Sender.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    receivers: (json['receivers'] as List)
-        ?.map((e) =>
-            e == null ? null : Receiver.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    changers: (json['changers'] as List)
-        ?.map((e) =>
-            e == null ? null : Changer.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    encPubkey: hexToPublicKey(json['enc_pubkey'] as String),
-  );
-}
+PascalOperation _$PascalOperationFromJson(Map<String, dynamic> json) =>
+    PascalOperation(
+      valid: json['valid'] as bool?,
+      errors: json['errors'] as String?,
+      block: json['block'] as int?,
+      time: toDateTime(json['time'] as int?),
+      opblock: json['opblock'] as int?,
+      maturation: json['maturation'] as int?,
+      optype: json['optype'] as int?,
+      account: intToAccountNum(json['account'] as int?),
+      optxt: json['optxt'] as String?,
+      amount: pascalToCurrency(json['amount'] as num?),
+      fee: pascalToCurrency(json['fee'] as num?),
+      balance: pascalToCurrency(json['balance'] as num?),
+      ophash: json['ophash'] as String?,
+      payload: json['payload'] as String?,
+      signerAccount: intToAccountNum(json['signer_account'] as int?),
+      senders: (json['senders'] as List<dynamic>?)
+          ?.map((e) => Sender.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      receivers: (json['receivers'] as List<dynamic>?)
+          ?.map((e) => Receiver.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      changers: (json['changers'] as List<dynamic>?)
+          ?.map((e) => Changer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      encPubkey: hexToPublicKey(json['enc_pubkey'] as String?),
+    );
 
 Map<String, dynamic> _$PascalOperationToJson(PascalOperation instance) {
   final val = <String, dynamic>{};

@@ -5,19 +5,19 @@ import 'package:pascaldart/src/common/model/keys/curves.dart';
 
 /// Represents a pascal coin public key
 class PublicKey {
-  Uint8List x;
-  Uint8List y;
-  int xLength;
-  int yLength;
-  Curve curve;
+  Uint8List? x;
+  Uint8List? y;
+  late int xLength;
+  late int yLength;
+  Curve? curve;
 
-  PublicKey(this.x, this.y, this.curve) {
-    this.xLength = x.lengthInBytes;
-    this.yLength = y.lengthInBytes;
-    if (this.xLength > this.curve.xylPublicKey() ||
-        this.yLength > curve.xylPublicKey(getYLength: true)) {
-      throw Exception('Invalid x and/or y length for curve ${this.curve.name} - ' +
-          'expected <= X${curve.xylPublicKey()}:Y${curve.xylPublicKey(getYLength: true)}, ' +
+  PublicKey(Uint8List this.x, Uint8List this.y, this.curve) {
+    this.xLength = x!.lengthInBytes;
+    this.yLength = y!.lengthInBytes;
+    if (this.xLength > this.curve!.xylPublicKey() ||
+        this.yLength > curve!.xylPublicKey(getYLength: true)) {
+      throw Exception('Invalid x and/or y length for curve ${this.curve!.name} - ' +
+          'expected <= X${curve!.xylPublicKey()}:Y${curve!.xylPublicKey(getYLength: true)}, ' +
           'got X${this.xLength}:Y${this.yLength}');
     }
   }
@@ -44,7 +44,7 @@ class PublicKey {
 
   /// Gets ecdh key
   Uint8List ecdh() {
-    if (this.curve.id == Curve.CI_SECP521R1) {
+    if (this.curve!.id == Curve.CI_SECP521R1) {
       return PDUtil.concat([PDUtil.hexToBytes('0400'), this.x, this.y]);
     }
     return PDUtil.concat([PDUtil.hexToBytes('04'), this.x, this.y]);

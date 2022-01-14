@@ -44,8 +44,8 @@ class Curve {
   static const int CI_SECT283K1 = 729; // sect283k1 curve ID
   static const int CI_SECP521R1 = 716; // secp521r1 curve ID
 
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   Curve(int curveId) {
     if (!CURVES.containsKey(curveId)) {
@@ -53,7 +53,7 @@ class Curve {
     }
 
     this.id = curveId;
-    this.name = CURVES[id];
+    this.name = CURVES[id!];
   }
 
   Curve.fromString(String curveName) {
@@ -66,7 +66,7 @@ class Curve {
 
   @override
   String toString() {
-    return this.name;
+    return this.name!;
   }
 
   /// Gets the default curve.
@@ -76,12 +76,12 @@ class Curve {
 
   /// Gets the length of either x and y for validation.
   int xylPublicKey({bool getYLength = false}) {
-    return getYLength ? XYL_PUBKEYS[this.id].y : XYL_PUBKEYS[this.id].x;
+    return getYLength ? XYL_PUBKEYS[this.id!]!.y : XYL_PUBKEYS[this.id!]!.x;
   }
 
   /// Gets the length of either x and y for validation.
-  int lPrivateKey() {
-    return L_PRIVKEYS[this.id];
+  int? lPrivateKey() {
+    return L_PRIVKEYS[this.id!];
   }
 
   /// Gets a value indicating whether the key is supported for signing /

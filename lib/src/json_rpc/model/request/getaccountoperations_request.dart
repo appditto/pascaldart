@@ -6,42 +6,42 @@ part 'getaccountoperations_request.g.dart';
 @JsonSerializable()
 class GetAccountOperationsRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get account {
-    return params['account'];
+    return params!['account'];
   }
 
   @JsonKey(ignore: true)
   get depth {
-    return params['depth'];
+    return params!['depth'];
   }
 
   @JsonKey(ignore: true)
   get start {
-    return params['start'];
+    return params!['start'];
   }
 
   @JsonKey(ignore: true)
   get max {
-    return params['max'];
+    return params!['max'];
   }
 
-  GetAccountOperationsRequest({int account, int depth, int start, int max})
+  GetAccountOperationsRequest({int? account, int? depth, int? start, int? max})
       : super(method: 'getaccountoperations') {
     this.params = Map();
     if (account != null) {
-      this.params['account'] = account;
+      this.params!['account'] = account;
     }
     if (depth != null) {
-      this.params['depth'] = depth;
+      this.params!['depth'] = depth;
     }
     if (start != null) {
-      this.params['start'] = start;
+      this.params!['start'] = start;
     }
     if (max != null) {
-      this.params['max'] = max;
+      this.params!['max'] = max;
     }
   }
 

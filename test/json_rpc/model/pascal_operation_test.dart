@@ -33,15 +33,15 @@ void main() {
       expect(op.block, 21555);
       expect(op.opblock, 0);
       expect(op.optype, 2);
-      expect(op.time.millisecondsSinceEpoch ~/ 1000, 1561919606);
-      expect(op.time.year, 2019);
-      expect(op.account.account, 101740);
+      expect(op.time!.millisecondsSinceEpoch ~/ 1000, 1561919606);
+      expect(op.time!.year, 2019);
+      expect(op.account!.account, 101740);
       expect(op.optxt, "Change Key to secp256k1");
-      expect(op.amount.pasc, BigInt.zero);
-      expect(op.fee.pasc, BigInt.zero);
-      expect(op.balance.pasc, BigInt.zero);
+      expect(op.amount!.pasc, BigInt.zero);
+      expect(op.fee!.pasc, BigInt.zero);
+      expect(op.balance!.pasc, BigInt.zero);
       expect(op.payload, "");
-      expect(PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(op.encPubkey)),
+      expect(PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(op.encPubkey!)),
           'CA02200078D867C93D58C2C46C66667A139543DCF8420D9119B7A0E06197D22A5BBCE5542000EA2E492FD8B90E48AF3D9EF438C6FBEA57C8A8E75889807DE588B490B1D57187');
       expect(op.ophash,
           '335400006C8D0100020000003330433034464446453130354434444445424141');

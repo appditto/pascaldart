@@ -1,6 +1,6 @@
 /// Pascal currency math/currency functions
 class Currency {
-  BigInt pasc; // Amount
+  BigInt? pasc; // Amount
 
   Currency(String value) {
     value = value.split(',').join(''); // remove commas
@@ -24,7 +24,7 @@ class Currency {
     List<String> comps = value.split('.');
 
     String whole;
-    String fraction;
+    String? fraction;
 
     if (comps.length > 2) {
       throw Exception('Too many decimal points');
@@ -43,7 +43,7 @@ class Currency {
       throw Exception('Too many decimal places');
     }
 
-    while (fraction.length < 4) {
+    while (fraction!.length < 4) {
       fraction += '0';
     }
 
@@ -72,7 +72,7 @@ class Currency {
 
   @override
   String toString() {
-    return toFixed(this.pasc);
+    return toFixed(this.pasc!);
   }
 
   String toFixed(BigInt x) {
@@ -98,7 +98,7 @@ class Currency {
 
   /// Gets an optimized pascal value with less zeros as possible.
   String toStringOpt({decimals = 4}) {
-    return toFixed(this.pasc)
+    return toFixed(this.pasc!)
         .replaceFirst(RegExp(r'[0]+$'), '')
         .replaceFirst(RegExp(r'[\.]+$'), '');
   }
@@ -112,9 +112,9 @@ class Currency {
   /// positive, the current instance will be returned, else a new
   /// instance.
   Currency toPositive() {
-    if (this.pasc < BigInt.zero) {
+    if (this.pasc! < BigInt.zero) {
       return Currency.fromBigInt(
-        this.pasc * BigInt.from(-1),
+        this.pasc! * BigInt.from(-1),
       );
     }
 
@@ -122,17 +122,17 @@ class Currency {
   }
 
   /// Arithmetic operators
-  Currency operator +(Currency c) => Currency.fromBigInt(this.pasc + c.pasc);
-  Currency operator -(Currency c) => Currency.fromBigInt(this.pasc - c.pasc);
+  Currency operator +(Currency c) => Currency.fromBigInt(this.pasc! + c.pasc!);
+  Currency operator -(Currency c) => Currency.fromBigInt(this.pasc! - c.pasc!);
 
   /// Comparative operators
   bool operator ==(o) =>
       (o is Currency && o.hashCode == hashCode) ||
       (o is BigInt && o.hashCode == pasc.hashCode) ||
       (o is String && o.hashCode == pasc.toString().hashCode);
-  bool operator <(o) => o is Currency && pasc < o.pasc;
-  bool operator <=(o) => o is Currency && pasc <= o.pasc;
-  bool operator >(o) => o is Currency && pasc > o.pasc;
-  bool operator >=(o) => o is Currency && pasc >= o.pasc;
+  bool operator <(o) => o is Currency && pasc! < o.pasc!;
+  bool operator <=(o) => o is Currency && pasc! <= o.pasc!;
+  bool operator >(o) => o is Currency && pasc! > o.pasc!;
+  bool operator >=(o) => o is Currency && pasc! >= o.pasc!;
   int get hashCode => pasc.hashCode;
 }

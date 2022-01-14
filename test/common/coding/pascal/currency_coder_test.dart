@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('common.coding.pascal.CurrencyCoder', () {
-    CurrencyCoder coder;
+    late CurrencyCoder coder;
     setUp(() {
       coder = CurrencyCoder();
     });

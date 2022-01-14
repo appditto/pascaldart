@@ -6,43 +6,43 @@ part 'getwalletaccounts_request.g.dart';
 @JsonSerializable()
 class GetWalletAccountsRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true, includeIfNull: false)
   get encPubkey {
-    return params['enc_pubkey'];
+    return params!['enc_pubkey'];
   }
 
   @JsonKey(ignore: true, includeIfNull: false)
   get b58pubkey {
-    return params['b58_pubkey'];
+    return params!['b58_pubkey'];
   }
 
   @JsonKey(ignore: true, includeIfNull: false)
   get start {
-    return params['start'];
+    return params!['start'];
   }
 
   @JsonKey(ignore: true, includeIfNull: false)
   get max {
-    return params['max'];
+    return params!['max'];
   }
 
   GetWalletAccountsRequest(
-      {String encPubkey, String b58pubkey, int start, int max, this.params})
+      {String? encPubkey, String? b58pubkey, int? start, int? max, this.params})
       : super(method: 'getwalletaccounts') {
     this.params = Map();
     if (encPubkey != null) {
-      this.params['enc_pubkey'] = encPubkey;
+      this.params!['enc_pubkey'] = encPubkey;
     }
     if (b58pubkey != null) {
-      this.params['b58_pubkey'] = b58pubkey;
+      this.params!['b58_pubkey'] = b58pubkey;
     }
     if (start != null) {
-      this.params['start'] = start;
+      this.params!['start'] = start;
     }
     if (max != null) {
-      this.params['max'] = max;
+      this.params!['max'] = max;
     }
   }
 

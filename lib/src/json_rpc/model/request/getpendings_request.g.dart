@@ -7,12 +7,15 @@ part of 'getpendings_request.dart';
 // **************************************************************************
 
 GetPendingsRequest _$GetPendingsRequestFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, disallowNullValues: const ['method']);
+  $checkKeys(
+    json,
+    disallowNullValues: const ['method'],
+  );
   return GetPendingsRequest()
-    ..jsonrpc = json['jsonrpc'] as String ?? '2.0'
-    ..method = json['method'] as String
-    ..id = json['id'] as int ?? 0
-    ..params = json['params'] as Map<String, dynamic>;
+    ..jsonrpc = json['jsonrpc'] as String? ?? '2.0'
+    ..method = json['method'] as String?
+    ..id = json['id'] as int? ?? 0
+    ..params = json['params'] as Map<String, dynamic>?;
 }
 
 Map<String, dynamic> _$GetPendingsRequestToJson(GetPendingsRequest instance) {

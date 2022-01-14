@@ -6,7 +6,7 @@ abstract class BaseRequest {
   String jsonrpc = '2.0';
 
   @JsonKey(name: 'method', disallowNullValue: true)
-  String method;
+  String? method;
 
   @JsonKey(name: 'id', defaultValue: 0)
   int id;

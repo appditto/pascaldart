@@ -14,89 +14,89 @@ part 'pascal_operation.g.dart';
 @JsonSerializable()
 class PascalOperation extends RPCResponse {
   @JsonKey(name: 'valid', includeIfNull: false)
-  bool valid;
+  bool? valid;
 
   @JsonKey(name: 'errors', includeIfNull: false)
-  String errors;
+  String? errors;
 
   @JsonKey(name: 'block', includeIfNull: false)
-  int block;
+  int? block;
 
   @JsonKey(
       name: 'time',
       includeIfNull: false,
       fromJson: toDateTime,
       toJson: fromDateTime)
-  DateTime time;
+  DateTime? time;
 
   @JsonKey(name: 'opblock', includeIfNull: false)
-  int opblock;
+  int? opblock;
 
   @JsonKey(name: 'maturation')
-  int maturation;
+  int? maturation;
 
   @JsonKey(name: 'optype', includeIfNull: false)
-  int optype;
+  int? optype;
 
   @JsonKey(
       name: 'account',
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber account;
+  AccountNumber? account;
 
   @JsonKey(name: 'optxt', includeIfNull: false)
-  String optxt;
+  String? optxt;
 
   @JsonKey(
       name: 'amount',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency amount;
+  Currency? amount;
 
   @JsonKey(
       name: 'fee',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency fee;
+  Currency? fee;
 
   @JsonKey(
       name: 'balance',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency balance;
+  Currency? balance;
 
   @JsonKey(name: 'ophash', includeIfNull: false)
-  String ophash;
+  String? ophash;
 
   @JsonKey(name: 'payload', includeIfNull: false)
-  String payload;
+  String? payload;
 
   @JsonKey(
       name: 'signer_account',
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber signerAccount;
+  AccountNumber? signerAccount;
 
   @JsonKey(name: 'senders', includeIfNull: false)
-  List<Sender> senders;
+  List<Sender>? senders;
 
   @JsonKey(name: 'receivers', includeIfNull: false)
-  List<Receiver> receivers;
+  List<Receiver>? receivers;
 
   @JsonKey(name: 'changers', includeIfNull: false)
-  List<Changer> changers;
+  List<Changer>? changers;
 
   @JsonKey(
       name: 'enc_pubkey',
       includeIfNull: false,
       fromJson: hexToPublicKey,
       toJson: publicKeyToHex)
-  PublicKey encPubkey;
+  PublicKey? encPubkey;
 
   PascalOperation(
       {this.valid,
@@ -125,5 +125,5 @@ class PascalOperation extends RPCResponse {
 
   /// Operator overrides
   bool operator ==(o) => (o != null && o.hashCode == hashCode);
-  int get hashCode => ophash != null ? ophash.substring(9).hashCode : 0;
+  int get hashCode => ophash != null ? ophash!.substring(9).hashCode : 0;
 }

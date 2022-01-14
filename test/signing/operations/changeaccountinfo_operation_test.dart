@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('signing.operations.ChangeAccountInfoOperation', () {
-    Map<String, dynamic> fixture;
+    late Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
@@ -31,29 +31,29 @@ void main() {
 
     test('can be decode a signed operation', () {
       ChangeAccountInfoOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ChangeAccountInfoOperation;
 
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.r)),
           fixture['r']);
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.s)),
           fixture['s']);
       expect(decoded.accountSigner.account, fixture['signer']);
       expect(decoded.targetSigner.account, fixture['target']);
       expect(decoded.nOperation, fixture['n_operation']);
-      expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
+      expect(decoded.fee!.toStringOpt(), fixture['fee'].toString());
       expect(decoded.changeType & 1, 1);
       expect(decoded.changeType & 2, 2);
       expect(decoded.changeType & 4, 4);
-      expect(PDUtil.bytesToUtf8String(decoded.payload), fixture['payload']);
+      expect(PDUtil.bytesToUtf8String(decoded.payload!), fixture['payload']);
       expect(decoded.newName.toString(), fixture['newName']);
       expect(decoded.newType.toString(), fixture['newType']);
-      expect(PublicKeyCoder().encodeToBase58(decoded.newPublicKey),
+      expect(PublicKeyCoder().encodeToBase58(decoded.newPublicKey!),
           fixture['newPublicKey']);
     });
 
     test('can be decode signed operation and encode it again', () {
       ChangeAccountInfoOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as ChangeAccountInfoOperation;
 
       expect(PDUtil.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
@@ -93,8 +93,8 @@ void main() {
             PublicKeyCoder().decodeFromBase58(fixture['newPublicKey']))
         ..sign(pk);
 
-      expect(op.signature.r.toString().length > 30, true);
-      expect(op.signature.s.toString().length > 30, true);
+      expect(op.signature!.r.toString().length > 30, true);
+      expect(op.signature!.s.toString().length > 30, true);
     });
     test('can compute digest correctly', () {
       ChangeAccountInfoOperation op = ChangeAccountInfoOperation(

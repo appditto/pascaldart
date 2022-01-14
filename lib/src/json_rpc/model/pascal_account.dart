@@ -18,71 +18,71 @@ class PascalAccount extends RPCResponse {
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber account;
+  AccountNumber? account;
 
   @JsonKey(
       name: 'enc_pubkey',
       includeIfNull: false,
       fromJson: hexToPublicKey,
       toJson: publicKeyToHex)
-  PublicKey encPubkey;
+  PublicKey? encPubkey;
 
   @JsonKey(
       name: 'balance',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency balance;
+  Currency? balance;
 
   @JsonKey(name: 'n_operation', includeIfNull: false)
-  int nOperation;
+  int? nOperation;
 
   @JsonKey(name: 'updated_b', includeIfNull: false)
-  int updatedBlock;
+  int? updatedBlock;
 
   @JsonKey(
       name: 'state',
       includeIfNull: false,
       toJson: accountStateToJson,
       fromJson: accountStateFromJson)
-  AccountState state;
+  AccountState? state;
 
   @JsonKey(name: 'type', includeIfNull: false)
-  int type;
+  int? type;
 
   @JsonKey(name: 'locked_until_block', includeIfNull: false)
-  int lockedUntilBlock;
+  int? lockedUntilBlock;
 
   @JsonKey(
       name: 'price',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency price;
+  Currency? price;
 
   @JsonKey(
       name: 'seller_account',
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber sellerAccount;
+  AccountNumber? sellerAccount;
 
   @JsonKey(name: 'private_sale', includeIfNull: false)
-  bool privateSale;
+  bool? privateSale;
 
   @JsonKey(
       name: 'new_enc_pubkey',
       includeIfNull: false,
       fromJson: hexToPublicKey,
       toJson: publicKeyToHex)
-  PublicKey newEncPubkey;
+  PublicKey? newEncPubkey;
 
   @JsonKey(
       name: 'name',
       includeIfNull: false,
       fromJson: strToAccountName,
       toJson: accountNameToStr)
-  AccountName name;
+  AccountName? name;
 
   @JsonKey(ignore: true)
   bool isBorrowed;

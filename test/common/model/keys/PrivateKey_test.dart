@@ -5,7 +5,7 @@ import '../../fixtures/privatekey.dart';
 
 void main() {
   group('common.model.keys.PrivateKey', () {
-    PrivateKeyFixtures fixtures;
+    late PrivateKeyFixtures fixtures;
     setUp(() {
       fixtures = PrivateKeyFixtures();
     });

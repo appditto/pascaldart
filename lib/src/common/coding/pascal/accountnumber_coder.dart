@@ -13,6 +13,6 @@ class AccountNumberCoder {
 
   /// Encode an account number to bytes
   Uint8List encodeToBytes(AccountNumber accountNumber) {
-    return Int32.encodeToBytes(accountNumber.account);
+    return Int32.encodeToBytes(accountNumber.account!);
   }
 }

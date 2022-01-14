@@ -14,17 +14,17 @@ class Receiver extends RPCResponse {
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber receivingAccount;
+  AccountNumber? receivingAccount;
 
   @JsonKey(
       name: 'amount',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency amount;
+  Currency? amount;
 
   @JsonKey(name: 'payload', includeIfNull: false)
-  String payload;
+  String? payload;
 
   Receiver({this.receivingAccount, this.amount, this.payload});
 

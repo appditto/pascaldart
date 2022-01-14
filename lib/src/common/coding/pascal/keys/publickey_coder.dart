@@ -9,7 +9,7 @@ import 'package:pascaldart/src/common/sha.dart';
 /// A pascal coin Public Key
 class PublicKeyCoder {
   bool omitXYLengths;
-  CurveCoder curveCoder;
+  late CurveCoder curveCoder;
   PublicKeyCoder({this.omitXYLengths = false}) {
     this.curveCoder = CurveCoder();
   }
@@ -32,15 +32,15 @@ class PublicKeyCoder {
 
   /// Encode public key to bytes
   Uint8List encodeToBytes(PublicKey pubKey) {
-    if (pubKey.curve.id == 0) {
+    if (pubKey.curve!.id == 0) {
       return Uint8List.fromList([0, 0, 0, 0, 0, 0]);
     }
-    Uint8List curveBytes = curveCoder.encodeToBytes(pubKey.curve.id);
+    Uint8List curveBytes = curveCoder.encodeToBytes(pubKey.curve!.id!);
     String hex = PDUtil.byteToHex(curveBytes) +
         pubKey.xlHex() +
-        PDUtil.byteToHex(pubKey.x) +
+        PDUtil.byteToHex(pubKey.x!) +
         pubKey.ylHex() +
-        PDUtil.byteToHex(pubKey.y);
+        PDUtil.byteToHex(pubKey.y!);
     return PDUtil.hexToBytes(hex);
   }
 
@@ -56,8 +56,8 @@ class PublicKeyCoder {
   }
 
   /// Gets a public key instance from the given base58 string.
-  PublicKey decodeFromBase58(String base58) {
-    Uint8List decoded = Base58.decode(base58);
+  PublicKey decodeFromBase58(String? base58) {
+    Uint8List decoded = Base58.decode(base58) as Uint8List;
 
     return this.decodeFromBytes(decoded.sublist(1, decoded.lengthInBytes - 4));
   }

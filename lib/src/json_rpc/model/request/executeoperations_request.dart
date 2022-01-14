@@ -6,18 +6,18 @@ part 'executeoperations_request.g.dart';
 @JsonSerializable()
 class ExecuteOperationsRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get rawOperations {
-    return params['rawoperations'];
+    return params!['rawoperations'];
   }
 
-  ExecuteOperationsRequest({String rawOperations})
+  ExecuteOperationsRequest({String? rawOperations})
       : super(method: 'executeoperations') {
     this.params = Map();
     if (rawOperations != null) {
-      this.params['rawoperations'] = rawOperations;
+      this.params!['rawoperations'] = rawOperations;
     }
   }
 

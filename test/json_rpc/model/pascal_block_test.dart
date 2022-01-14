@@ -36,13 +36,13 @@ void main() {
       expect(baseResp.id, 123);
       PascalBlock block = PascalBlock.fromJson(baseResp.result);
       expect(block.block, 8888);
-      expect(PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(block.encPubkey)),
+      expect(PDUtil.byteToHex(PublicKeyCoder().encodeToBytes(block.encPubkey!)),
           'CA0220000E60B6F76778CFE8678E30369BA7B2C38D0EC93FC3F39E61468E29FEC39F13BF2000572EDE3C44CF00FF86AFF651474D53CCBDF86B953F1ECE5FB8FC7BB6FA16F114');
-      expect(block.reward.toStringOpt(), '100');
-      expect(block.fee.toStringOpt(), '0');
+      expect(block.reward!.toStringOpt(), '100');
+      expect(block.fee!.toStringOpt(), '0');
       expect(block.ver, 1);
       expect(block.ver_a, 0);
-      expect(block.timestamp.millisecondsSinceEpoch ~/ 1000, 1473161258);
+      expect(block.timestamp!.millisecondsSinceEpoch ~/ 1000, 1473161258);
       expect(block.target, 559519020);
       expect(block.nonce, 131965022);
       expect(block.payload,

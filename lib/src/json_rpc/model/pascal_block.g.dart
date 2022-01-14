@@ -6,26 +6,24 @@ part of 'pascal_block.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PascalBlock _$PascalBlockFromJson(Map<String, dynamic> json) {
-  return PascalBlock(
-    block: json['block'] as int,
-    encPubkey: hexToPublicKey(json['enc_pubkey'] as String),
-    reward: pascalToCurrency(json['reward'] as num),
-    fee: pascalToCurrency(json['fee'] as num),
-    ver: json['ver'] as int,
-    ver_a: json['ver_a'] as int,
-    timestamp: toDateTime(json['timestamp'] as int),
-    target: json['target'] as int,
-    nonce: json['nonce'] as int,
-    payload: json['payload'] as String,
-    sbh: json['sbh'] as String,
-    oph: json['oph'] as String,
-    pow: json['pow'] as String,
-    operations: json['operations'] as int,
-    hashratekhs: json['hashratekhs'] as int,
-    maturation: json['maturation'] as int,
-  );
-}
+PascalBlock _$PascalBlockFromJson(Map<String, dynamic> json) => PascalBlock(
+      block: json['block'] as int?,
+      encPubkey: hexToPublicKey(json['enc_pubkey'] as String?),
+      reward: pascalToCurrency(json['reward'] as num?),
+      fee: pascalToCurrency(json['fee'] as num?),
+      ver: json['ver'] as int?,
+      ver_a: json['ver_a'] as int?,
+      timestamp: toDateTime(json['timestamp'] as int?),
+      target: json['target'] as int?,
+      nonce: json['nonce'] as int?,
+      payload: json['payload'] as String?,
+      sbh: json['sbh'] as String?,
+      oph: json['oph'] as String?,
+      pow: json['pow'] as String?,
+      operations: json['operations'] as int?,
+      hashratekhs: json['hashratekhs'] as int?,
+      maturation: json['maturation'] as int?,
+    );
 
 Map<String, dynamic> _$PascalBlockToJson(PascalBlock instance) {
   final val = <String, dynamic>{};

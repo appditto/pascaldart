@@ -16,51 +16,51 @@ class Changer extends RPCResponse {
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber changingAccount;
+  AccountNumber? changingAccount;
 
   @JsonKey(name: 'n_operation', includeIfNull: false)
-  int nOperation;
+  int? nOperation;
 
   @JsonKey(
       name: 'new_enc_pubkey',
       includeIfNull: false,
       fromJson: hexToPublicKey,
       toJson: publicKeyToHex)
-  PublicKey newEncPubkey;
+  PublicKey? newEncPubkey;
 
   @JsonKey(
       name: 'new_name',
       includeIfNull: false,
       fromJson: strToAccountName,
       toJson: accountNameToStr)
-  AccountName newName;
+  AccountName? newName;
 
   @JsonKey(name: 'new_type', includeIfNull: false)
-  int newType;
+  int? newType;
 
   @JsonKey(
       name: 'seller_account',
       includeIfNull: false,
       fromJson: intToAccountNum,
       toJson: accountNumToInt)
-  AccountNumber sellerAccount;
+  AccountNumber? sellerAccount;
 
   @JsonKey(
       name: 'account_price',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency accountPrice;
+  Currency? accountPrice;
 
   @JsonKey(name: 'locked_until_block', includeIfNull: false)
-  int lockedUntilBlock;
+  int? lockedUntilBlock;
 
   @JsonKey(
       name: 'fee',
       includeIfNull: false,
       toJson: currencyToDouble,
       fromJson: pascalToCurrency)
-  Currency fee;
+  Currency? fee;
 
   Changer(
       {this.changingAccount,

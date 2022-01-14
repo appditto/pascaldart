@@ -1,5 +1,5 @@
 class OperationHashFixtures {
-  List<Map<String, dynamic>> hashes;
+  late List<Map<String, dynamic>> hashes;
 
   OperationHashFixtures() {
     hashes = [

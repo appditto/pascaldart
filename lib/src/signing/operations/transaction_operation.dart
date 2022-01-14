@@ -26,7 +26,7 @@ class TransactionOperation extends BaseOperation {
   /// Creates a new Transaction instance with the given data. The payload is
   /// empty by default and not encoded.
   TransactionOperation(
-      {@required this.sender, @required this.target, @required this.amount})
+      {required this.sender, required this.target, required this.amount})
       : super();
 
   /// Decode this operation from raw bytes
@@ -83,17 +83,17 @@ class TransactionOperation extends BaseOperation {
   /// Encode this operation into raw bytes
   Uint8List encodeToBytes() {
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
     Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payloadLength = PDUtil.encodeLength(this.payload.length);
-    Uint8List payload = this.payload;
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List payloadLength = PDUtil.encodeLength(this.payload!.length);
+    Uint8List? payload = this.payload;
     // Not used in modern pascal coin?
     Uint8List v2publickey = PublicKeyCoder().encodeToBytes(PublicKey.empty());
-    Uint8List r = PDUtil.encodeBigInt(signature.r);
+    Uint8List r = PDUtil.encodeBigInt(signature!.r);
     Uint8List rLength = PDUtil.encodeLength(r.length);
-    Uint8List s = PDUtil.encodeBigInt(signature.s);
+    Uint8List s = PDUtil.encodeBigInt(signature!.s);
     Uint8List sLength = PDUtil.encodeLength(s.length);
     return PDUtil.concat([
       sender,
@@ -114,11 +114,11 @@ class TransactionOperation extends BaseOperation {
   /// Gets the digest of this operation
   Uint8List digest() {
     Uint8List sender = AccountNumberCoder().encodeToBytes(this.sender);
-    Uint8List nOperation = Int32.encodeToBytes(this.nOperation);
+    Uint8List nOperation = Int32.encodeToBytes(this.nOperation!);
     Uint8List target = AccountNumberCoder().encodeToBytes(this.target);
     Uint8List amount = CurrencyCoder().encodeToBytes(this.amount);
-    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee);
-    Uint8List payload = this.payload;
+    Uint8List fee = CurrencyCoder().encodeToBytes(this.fee!);
+    Uint8List? payload = this.payload;
     // Not used in modern pascal coin?
     Uint8List v2publickey = Uint8List.fromList([0, 0]);
     Uint8List type = OpTypeCoder(1).encodeToBytes(this.opType());

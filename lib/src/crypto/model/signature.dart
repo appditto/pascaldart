@@ -8,7 +8,7 @@ class Signature {
   BigInt s;
 
   Signature(
-      {@required this.r, @required this.s, bool ensureBigEndian = false}) {
+      {required this.r, required this.s, bool ensureBigEndian = false}) {
     if (ensureBigEndian && Endian.host == Endian.little) {
       this.r =
           PDUtil.decodeBigInt(PDUtil.encodeBigInt(this.r, endian: Endian.big));

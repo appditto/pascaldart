@@ -7,95 +7,95 @@ part 'findaccounts_request.g.dart';
 @JsonSerializable()
 class FindAccountsRequest extends BaseRequest {
   @JsonKey(name: 'params')
-  Map<String, dynamic> params;
+  Map<String, dynamic>? params;
 
   @JsonKey(ignore: true)
   get name {
-    return params['name'];
+    return params!['name'];
   }
 
   @JsonKey(ignore: true)
   get type {
-    return params['type'];
+    return params!['type'];
   }
 
   @JsonKey(ignore: true)
   get start {
-    return params['start'];
+    return params!['start'];
   }
 
   @JsonKey(ignore: true)
   get max {
-    return params['max'];
+    return params!['max'];
   }
 
   @JsonKey(ignore: true)
   get exact {
-    return params['exact'];
+    return params!['exact'];
   }
 
   @JsonKey(ignore: true)
   get minBalance {
-    return params['min_balance'] != null
-        ? Currency(params['min_balance'])
+    return params!['min_balance'] != null
+        ? Currency(params!['min_balance'])
         : null;
   }
 
   @JsonKey(ignore: true)
   get maxBalance {
-    return params['max_balance'] != null
-        ? Currency(params['max_balance'])
+    return params!['max_balance'] != null
+        ? Currency(params!['max_balance'])
         : null;
   }
 
   @JsonKey(ignore: true)
   get encPubkey {
-    return params['enc_pubkey'];
+    return params!['enc_pubkey'];
   }
 
   @JsonKey(ignore: true)
   get b58Pubkey {
-    return params['b58_pubkey'];
+    return params!['b58_pubkey'];
   }
 
   FindAccountsRequest(
-      {String name,
-      int type,
-      int start,
-      int max,
-      bool exact,
-      Currency minBalance,
-      Currency maxBalance,
-      String encPubkey,
-      String b58Pubkey})
+      {String? name,
+      int? type,
+      int? start,
+      int? max,
+      bool? exact,
+      Currency? minBalance,
+      Currency? maxBalance,
+      String? encPubkey,
+      String? b58Pubkey})
       : super(method: 'findaccounts') {
     this.params = Map();
     if (name != null) {
-      this.params['name'] = name;
+      this.params!['name'] = name;
     }
     if (type != null) {
-      this.params['type'] = type;
+      this.params!['type'] = type;
     }
     if (start != null) {
-      this.params['start'] = start;
+      this.params!['start'] = start;
     }
     if (max != null) {
-      this.params['max'] = max;
+      this.params!['max'] = max;
     }
     if (exact != null) {
-      this.params['exact'] = exact;
+      this.params!['exact'] = exact;
     }
     if (minBalance != null) {
-      this.params['min_balance'] = minBalance.toStringOpt();
+      this.params!['min_balance'] = minBalance.toStringOpt();
     }
     if (maxBalance != null) {
-      this.params['max_balance'] = maxBalance.toStringOpt();
+      this.params!['max_balance'] = maxBalance.toStringOpt();
     }
     if (encPubkey != null) {
-      this.params['enc_pubkey'] = encPubkey;
+      this.params!['enc_pubkey'] = encPubkey;
     }
     if (b58Pubkey != null) {
-      this.params['b58_pubkey'] = b58Pubkey;
+      this.params!['b58_pubkey'] = b58Pubkey;
     }
   }
 

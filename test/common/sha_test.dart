@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('Common.Sha', () {
-    List<Map<String, String>> sha256data;
-    List<Map<String, String>> sha512data;
+    late List<Map<String, String>> sha256data;
+    late List<Map<String, String>> sha512data;
 
     setUp(() {
       sha256data = [
@@ -57,7 +57,7 @@ void main() {
       String result;
       sha256data.forEach((hash) {
         result = PDUtil.byteToHex(
-            Sha.sha256([PDUtil.stringToBytesUtf8(hash['input'])]));
+            Sha.sha256([PDUtil.stringToBytesUtf8(hash['input']!)]));
         expect(result, hash['expected']);
       });
     });
@@ -65,7 +65,7 @@ void main() {
       String result;
       sha512data.forEach((hash) {
         result = PDUtil.byteToHex(
-            Sha.sha512([PDUtil.stringToBytesUtf8(hash['input'])]));
+            Sha.sha512([PDUtil.stringToBytesUtf8(hash['input']!)]));
 
         expect(result, hash['expected']);
       });

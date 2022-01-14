@@ -34,10 +34,10 @@ class PDUtil {
   ///
   /// @param {List<Uint8List>} bytes
   /// @returns {Uint8List}
-  static Uint8List concat(List<Uint8List> bytes) {
+  static Uint8List concat(List<Uint8List?> bytes) {
     String hex = '';
     bytes.forEach((v) {
-      hex += PDUtil.byteToHex(v);
+      hex += PDUtil.byteToHex(v!);
     });
     return PDUtil.hexToBytes(hex);
   }
@@ -55,7 +55,7 @@ class PDUtil {
 
   /// Convert string to byte array
   static Uint8List stringToBytesUtf8(String str) {
-    return utf8.encode(str);
+    return utf8.encode(str) as Uint8List;
   }
 
   /// Convert byte array to string utf-8
@@ -67,7 +67,7 @@ class PDUtil {
   static String switchEndian(String hexString) {
     String ret = "";
     RegExp(r'..').allMatches(hexString).forEach((match) {
-      ret = match.group(0) + ret;
+      ret = match.group(0)! + ret;
     });
     return ret;
   }

@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('signing.operations.DeListForSaleOperation', () {
-    Map<String, dynamic> fixture;
+    late Map<String, dynamic> fixture;
 
     setUp(() {
       fixture = {
@@ -31,24 +31,24 @@ void main() {
 
     test('can be decode a signed operation', () {
       DeListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as DeListForSaleOperation;
 
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.r)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.r)),
           fixture['r']);
-      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature.s)),
+      expect(PDUtil.byteToHex(PDUtil.encodeBigInt(decoded.signature!.s)),
           fixture['s']);
       expect(decoded.accountSigner.account, fixture['signer']);
       expect(decoded.targetSigner.account, fixture['target']);
       expect(decoded.accountToPay.account, fixture['seller']);
       expect(decoded.price.toStringOpt(), fixture['price'].toString());
-      expect(decoded.fee.toStringOpt(), fixture['fee'].toString());
+      expect(decoded.fee!.toStringOpt(), fixture['fee'].toString());
       expect(decoded.nOperation, fixture['n_operation']);
       expect(decoded.lockedUntilBlock, fixture['lockedUntilBlock']);
-      expect(PDUtil.bytesToUtf8String(decoded.payload), fixture['payload']);
+      expect(PDUtil.bytesToUtf8String(decoded.payload!), fixture['payload']);
     });
     test('can be decode signed operation and encode it again', () {
       DeListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as DeListForSaleOperation;
 
       expect(PDUtil.byteToHex(RawOperationCoder.encodeToBytes(decoded)),
           fixture['raw']);
@@ -79,12 +79,12 @@ void main() {
         ..withFee(Currency(fixture['fee'].toString()))
         ..sign(pk);
 
-      expect(op.signature.r.toString().length > 30, true);
-      expect(op.signature.s.toString().length > 30, true);
+      expect(op.signature!.r.toString().length > 30, true);
+      expect(op.signature!.s.toString().length > 30, true);
     });
     test('can generate correct digest', () {
       DeListForSaleOperation decoded =
-          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw']));
+          RawOperationCoder.decodeFromBytes(PDUtil.hexToBytes(fixture['raw'])) as DeListForSaleOperation;
       expect(PDUtil.byteToHex(decoded.digest()), fixture['digest']);
     });
   });
